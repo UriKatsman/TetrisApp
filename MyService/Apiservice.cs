@@ -13,35 +13,35 @@ namespace MyService
             client = new HttpClient();
         }
 
-
+        //C:\Users\student.HP-6HYJCV2\Downloads\TetrisApp (3)\TetrisApp\MyService\bin\Debug\net8.0
         public async Task<int> DeleteAdmin(int id)
         {
-            return (await client.DeleteAsync(uri + $"/api/Insert/DeleteAdmin/{id}")).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Values/DeleteAdmin/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> DeleteBoardComponents(int id)
         {
-            return (await client.DeleteAsync(uri + $"/api/Insert/DeleteBoardComponents/{id}")).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Values/DeleteBoardComponents/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> DeleteBrickType(int id)
         {
-            return (await client.DeleteAsync(uri + $"/api/Insert/DeleteBrickType/{id}")).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Values/DeleteBrickType/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> DeleteLanguage(int id)
         {
-            return (await client.DeleteAsync(uri + $"/api/Insert/DeleteLanguage/{id}")).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Values/DeleteLanguage/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> DeletePlayer(int id)
         {
-            return (await client.DeleteAsync(uri + $"/api/Insert/DeletePlayer/{id}")).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Values/DeletePlayer/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> DeleteUser(int id)
         {
-            return (await client.DeleteAsync(uri + $"/api/Insert/DeleteUser/{id}")).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Values/DeleteUser/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<AdminList> GetAllAdmins()
@@ -76,62 +76,62 @@ namespace MyService
 
         public async Task<int> InsertAdmin(Admin x)
         {
-            return (await client.PostAsJsonAsync<Admin>(uri + "/api/Insert/InsertAdmin", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<Admin>(uri + "/api/Values/InsertAdmin", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> InsertBoardComponents(BoardComponents x)
         {
-            return (await client.PostAsJsonAsync<BoardComponents>(uri + "/api/Insert/InsertBoardComponents", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<BoardComponents>(uri + "/api/Values/InsertBoardComponents", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> InsertBrickType(BrickType x)
         {
-            return (await client.PostAsJsonAsync<BrickType>(uri + "/api/Insert/InsertBrickType", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<BrickType>(uri + "/api/Values/InsertBrickType", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> InsertLanguage(Language x)
         {
-            return (await client.PostAsJsonAsync<Language>(uri + "/api/Insert/InsertLanguage", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<Language>(uri + "/api/Values/InsertLanguage", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> InsertPlayer(Player x)
         {
-            return (await client.PostAsJsonAsync<Player>(uri + "/api/Insert/InsertPlayer", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<Player>(uri + "/api/Values/InsertPlayer", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> InsertUser(User x)
         {
-            return (await client.PostAsJsonAsync<User>(uri + "/api/Insert/InsertUser", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<User>(uri + "/api/Values/InsertUser", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> UpdateAdmin(Admin x)
         {
-            return (await client.PutAsJsonAsync<Admin>(uri + "/api/Insert/UpdateAdmin", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Admin>(uri + "/api/Values/UpdateAdmin", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> UpdateBoardComponents(BoardComponents x)
         {
-            return (await client.PutAsJsonAsync<BoardComponents>(uri + "/api/Insert/UpdateBoardComponents", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<BoardComponents>(uri + "/api/Values/UpdateBoardComponents", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> UpdateBrickType(BrickType x)
         {
-            return (await client.PutAsJsonAsync<BrickType>(uri + "/api/Insert/UpdateBrickType", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<BrickType>(uri + "/api/Values/UpdateBrickType", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> UpdateLanguage(Language x)
         {
-            return (await client.PutAsJsonAsync<Language>(uri + "/api/Insert/UpdateLanguage", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Language>(uri + "/api/Values/UpdateLanguage", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> UpdatePlayer(Player x)
         {
-            return (await client.PutAsJsonAsync<Player>(uri + "/api/Insert/UpdatePlayer", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Player>(uri + "/api/Values/UpdatePlayer", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<int> UpdateUsern(User x)
         {
-            return (await client.PutAsJsonAsync<User>(uri + "/api/Insert/UpdateUser", x)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<User>(uri + "/api/Values/UpdateUser", x)).IsSuccessStatusCode ? 1 : 0;
         }
     }
 }

@@ -151,8 +151,8 @@ namespace ViewModel
                 BaseDb.connectionString += ThisPath + @"\ViewModel\TetrisNMore.accdb";
                 BaseDb.formated = true;
             }
-            //*/
             // end
+            //*/
 
             connection = new OleDbConnection(connectionString);
             command = new OleDbCommand();
