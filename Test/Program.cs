@@ -2,6 +2,7 @@
 using MyService;
 using System.IO.Pipes;
 using System.Numerics;
+using System.Reflection.Metadata;
 using ViewModel;
 
 
@@ -10,8 +11,7 @@ namespace Test
     public class Program
     {
         public static void Main()
-        {
-
+        {           
             start();
         }
         public static async void start()
