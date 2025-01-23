@@ -6,8 +6,6 @@
         xmlns:local="clr-namespace:TetrisApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="1280" Width="720">
-    <StackPanel
-        Background="Li"
-        />
 
+    <Frame Source="EntrancePage.xaml"/>
 </Window>

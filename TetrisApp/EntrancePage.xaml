@@ -1,0 +1,44 @@
+﻿<Page x:Class="TetrisApp.EntrancePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TetrisApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="1280" d:DesignWidth="720"
+      Title="EntrancePage">
+
+    <Grid Background="LightBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="100" Background="Transparent" Foreground="red" FontWeight="Bold"/>
+        <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="שם משתמש" FontSize="60" Background="Transparent" x:Name="UsernameTXT"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="40" />
+        <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="סיסמא" FontSize="60" Background="Transparent" x:Name="PasswordTXT"/>
+        <TextBox Grid.Row="7" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="PasswordBox" FontSize="40" />
+
+        <Button Grid.Row="9" Grid.Column="2" Content="התחבר" FontSize="40" Height="80" Width="200" x:Name="LogInButton" Click="LogIn"/>
+        <Button Grid.Row="10" Grid.Column="2" Content="אין משתמש? צור משתמש כאן." FontSize="30" Height="80" Width="400" x:Name="SignUpButton" Click="SignUp"/>
+    </Grid>
+</Page>
