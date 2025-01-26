@@ -57,7 +57,8 @@ namespace TetrisApp
 
         private void SignUp(object sender, RoutedEventArgs e)
         {
-
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new SignUpPage());
         }
     }
 }

@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Back.png" />
+    <None Remove="PickAnImage.png" />
     <None Remove="SettingsButton.png" />
   </ItemGroup>
 
@@ -23,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Back.png" />
+    <Resource Include="PickAnImage.png" />
     <Resource Include="SettingsButton.png" />
   </ItemGroup>
 

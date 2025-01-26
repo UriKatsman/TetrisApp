@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TetrisApp"
       mc:Ignorable="d" 
-      d:DesignHeight="1280" d:DesignWidth="720"
+      d:DesignHeight="545" d:DesignWidth="860"
       Title="SignUpPage">
 
     <Grid Background="LightBlue">
@@ -30,18 +30,23 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="100" Background="Transparent" Foreground="red" FontWeight="Bold"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold"/>
         <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
-        <Image Grid.Row="1" Grid.Column="1" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
+        <Image Grid.Row="1" Grid.Column="1" MouseDown="GoBack" Source="/Back.png"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="שם משתמש" FontSize="60" Background="Transparent" x:Name="UsernameTXT"/>
+        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="שם משתמש" FontSize="50" Background="Transparent" x:Name="UsernameTXT"/>
         <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="40" />
-        <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="סיסמא" FontSize="60" Background="Transparent" x:Name="PasswordTXT"/>
+        <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="סיסמא" FontSize="50" Background="Transparent" x:Name="PasswordTXT"/>
         <TextBox Grid.Row="7" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="PasswordBox" FontSize="40" />
+        <StackPanel Grid.Row="8" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="50" Height="50" Margin="0,0,30,0" Click="ChooseImageBtn" >
+                <Image Source="/PickAnImage.png"/>
+            </Button>
+            <TextBlock Text="בחר תמונה" FontSize="40" FontWeight="Bold" x:Name="ChooseImageTxt" />
+        </StackPanel>
+        <Image Grid.Row="9" Grid.Column="2" Stretch="Fill" Height="100" Width="100" x:Name="ProfilePictureImage"/>
+        <TextBlock Grid.Row="11" Grid.Column="2" x:Name="ErrorSigningUpText" Visibility="Hidden" HorizontalAlignment="Center" FontSize="20" Foreground="Red" Text="שם משתמש או סיסמא שוגיים"/>
 
-        <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="Hidden" HorizontalAlignment="Center" FontSize="30" Foreground="Red" Text="שם משתמש או סיסמא שוגיים"/>
-
-        <Button Grid.Row="9" Grid.Column="2" Content="התחבר" FontSize="40" Height="80" Width="200" x:Name="LogInButton" Click="LogIn"/>
-        <Button Grid.Row="10" Grid.Column="2" Content="אין משתמש? צור משתמש כאן." FontSize="30" Height="80" Width="400" x:Name="SignUpButton" Click="SignUp"/>
+        <Button Grid.Row="10" Grid.Column="2" Content="צור משתמש" FontSize="40" Height="50" Width="200" x:Name="SignUpButton" Click="SignUp"/>
     </Grid>
 </Page>

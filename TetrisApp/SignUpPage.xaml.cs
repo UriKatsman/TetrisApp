@@ -24,5 +24,25 @@ namespace TetrisApp
         {
             InitializeComponent();
         }
+
+        private void GoBack(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new EntrancePage());
+        }
+        private void GoToSettings(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SignUp(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ChooseImageBtn(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
