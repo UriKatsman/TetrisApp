@@ -1,4 +1,4 @@
-﻿<Page x:Class="TetrisApp.EntrancePage"
+﻿<Page x:Class="TetrisApp.SignUpPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TetrisApp"
       mc:Ignorable="d" 
       d:DesignHeight="1280" d:DesignWidth="720"
-      Title="EntrancePage">
+      Title="SignUpPage">
 
     <Grid Background="LightBlue">
         <Grid.ColumnDefinitions>
@@ -32,6 +32,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="100" Background="Transparent" Foreground="red" FontWeight="Bold"/>
         <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
+        <Image Grid.Row="1" Grid.Column="1" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
 
         <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="שם משתמש" FontSize="60" Background="Transparent" x:Name="UsernameTXT"/>
         <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="40" />

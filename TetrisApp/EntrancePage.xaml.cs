@@ -1,4 +1,5 @@
 ﻿using Model;
+using MyService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace TetrisApp
     /// </summary>
     public partial class EntrancePage : Page
     {
+        public static User SignedInUser;
         public EntrancePage()
         {
             InitializeComponent();
@@ -32,11 +34,25 @@ namespace TetrisApp
 
         }
 
-        private async Task LogIn(object sender, RoutedEventArgs e)
+        private async void LogIn(object sender, RoutedEventArgs e)
         {
             User GivenUser = new User() { Password = PasswordBox.Text, UserName = UsernameBox.Text };
 
-            
+            Apiservice APIservice = new();
+            List<User> users = await APIservice.GetAllUsers();
+
+            User potentialUser = users.Find(x => x.UserName == GivenUser.UserName && x.Password == GivenUser.Password);
+
+            if (potentialUser != null)
+            {
+                this.ErrorLoggingInText.Visibility = Visibility.Hidden;
+                SignedInUser = potentialUser;
+                MessageBox.Show("Logged In Successfuly");
+            }
+            else
+            {
+                this.ErrorLoggingInText.Visibility = Visibility.Visible;
+            }
         }
 
         private void SignUp(object sender, RoutedEventArgs e)

@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\MyAPI\MyAPI.csproj" />
+    <ProjectReference Include="..\MyService\MyService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
