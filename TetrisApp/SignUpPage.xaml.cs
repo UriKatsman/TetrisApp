@@ -22,14 +22,22 @@ namespace TetrisApp
     /// </summary>
     public partial class SignUpPage : Page
     {
+        private Page PreviousPage;
         private Language ChoosenLanguage;
         public SignUpPage()
         {
+            this.PreviousPage = new EntrancePage();
             InitializeComponent();
 
             SetContentForLangugesComboBox();
         }
+        public SignUpPage(Page PreviousPage)
+        {
+            this.PreviousPage = PreviousPage;
+            InitializeComponent();
 
+            SetContentForLangugesComboBox();
+        }
         private async void SetContentForLangugesComboBox()
         {
             Apiservice api = new();
@@ -39,7 +47,7 @@ namespace TetrisApp
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
             NavigationService nv = NavigationService.GetNavigationService(this);
-            nv.Navigate(new EntrancePage());
+            nv.Navigate(this.PreviousPage);
         }
         private void GoToSettings(object sender, MouseButtonEventArgs e)
         {
@@ -63,7 +71,9 @@ namespace TetrisApp
             else
             {
                 this.ErrorSigningUpText.Visibility = Visibility.Hidden;
-                APIservice.InsertUser(GivenUser);
+
+                await APIservice.InsertPlayer(new Player() {TetrisCurrentScore=0,TetrisHighScore=0, Password = PasswordBox.Text, UserName = UsernameBox.Text, language = this.ChoosenLanguage, ProfilePicture = ""});
+                
                 MessageBox.Show("Account added");
             }
         }
