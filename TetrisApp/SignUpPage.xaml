@@ -25,28 +25,31 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold"/>
         <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
         <Image Grid.Row="1" Grid.Column="1" MouseDown="GoBack" Source="/Back.png"/>
 
         <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="שם משתמש" FontSize="50" Background="Transparent" x:Name="UsernameTXT"/>
-        <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="40" />
+        <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="30" />
         <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="סיסמא" FontSize="50" Background="Transparent" x:Name="PasswordTXT"/>
-        <TextBox Grid.Row="7" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="PasswordBox" FontSize="40" />
-        <StackPanel Grid.Row="8" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <TextBox Grid.Row="7" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="PasswordBox" FontSize="30" />
+        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="3">
+            <ComboBox Width="120" x:Name="LanguagesComboBox" Margin="0,0,30,0" Height="40" FontSize="20" SelectionChanged="LanguageChosen"/>
+            <TextBlock Text="בחר שפה" FontSize="40" FontWeight="Bold" Margin="0,0,30,0"/>
             <Button Width="50" Height="50" Margin="0,0,30,0" Click="ChooseImageBtn" >
                 <Image Source="/PickAnImage.png"/>
             </Button>
             <TextBlock Text="בחר תמונה" FontSize="40" FontWeight="Bold" x:Name="ChooseImageTxt" />
         </StackPanel>
         <Image Grid.Row="9" Grid.Column="2" Stretch="Fill" Height="100" Width="100" x:Name="ProfilePictureImage"/>
-        <TextBlock Grid.Row="11" Grid.Column="2" x:Name="ErrorSigningUpText" Visibility="Hidden" HorizontalAlignment="Center" FontSize="20" Foreground="Red" Text="שם משתמש או סיסמא שוגיים"/>
+        <TextBlock Grid.Row="12" Grid.Column="2" x:Name="ErrorSigningUpText" Visibility="Hidden" HorizontalAlignment="Center" FontSize="20" Foreground="Red" Text="שם משתמש תפוס"/>
 
-        <Button Grid.Row="10" Grid.Column="2" Content="צור משתמש" FontSize="40" Height="50" Width="200" x:Name="SignUpButton" Click="SignUp"/>
+        <Button Grid.Row="11" Grid.Column="2" Content="צור משתמש" FontSize="40" Height="40" Width="200" x:Name="SignUpButton" Click="SignUp"/>
     </Grid>
 </Page>

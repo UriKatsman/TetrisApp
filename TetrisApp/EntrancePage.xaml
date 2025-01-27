@@ -34,13 +34,13 @@
         <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
 
         <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="שם משתמש" FontSize="50" Background="Transparent" x:Name="UsernameTXT"/>
-        <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="40" />
+        <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="30" />
         <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="סיסמא" FontSize="50" Background="Transparent" x:Name="PasswordTXT"/>
-        <TextBox Grid.Row="7" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="PasswordBox" FontSize="40" />
+        <TextBox Grid.Row="7" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="PasswordBox" FontSize="30" />
 
-        <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="Visible" HorizontalAlignment="Center" FontSize="20" Foreground="Red" Text="שם משתמש או סיסמא שגויים"/>
+        <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="hidden" HorizontalAlignment="Center" FontSize="20" Foreground="Red" Text="שם משתמש או סיסמא שגויים"/>
 
-        <Button Grid.Row="9" Grid.Column="2" Content="התחבר" FontSize="40" Height="40" Width="200" x:Name="LogInButton" Click="LogIn"/>
+        <Button Grid.Row="9" Grid.Column="2" Content="התחבר" FontSize="30" Height="40" Width="200" x:Name="LogInButton" Click="LogIn"/>
         <Button Grid.Row="10" Grid.Column="2" Content="אין משתמש? צור משתמש כאן." FontSize="30" Height="40" Width="400" x:Name="SignUpButton" Click="SignUp"/>
     </Grid>
 </Page>
