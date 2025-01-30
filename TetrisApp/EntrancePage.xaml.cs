@@ -46,8 +46,18 @@ namespace TetrisApp
             if (potentialUser != null)
             {
                 this.ErrorLoggingInText.Visibility = Visibility.Hidden;
-                SignedInUser = potentialUser;
-                MessageBox.Show("Logged In Successfuly");
+                EntrancePage.SignedInUser = potentialUser;
+
+
+                if ((await APIservice.GetAllAdmins()).Find(x => x.Id == potentialUser.Id) != null)
+                {
+                    NavigationService nv = NavigationService.GetNavigationService(this);
+                    nv.Navigate(new AdminViewListPage(this));
+                }
+                else
+                { 
+                    //transition to game page
+                }
             }
             else
             {
