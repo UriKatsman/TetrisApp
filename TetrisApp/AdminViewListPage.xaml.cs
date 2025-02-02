@@ -34,10 +34,11 @@ namespace TetrisApp
             this.UsersListView.ItemsSource = users;
 
             
-            foreach (User Item in users)
+            foreach (User Item in this.UsersListView.)
             {
-                //if ()
-            }                
+                Item.
+            }        
+            
         }
         
         public AdminViewListPage()

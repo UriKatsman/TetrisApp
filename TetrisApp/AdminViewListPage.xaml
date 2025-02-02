@@ -45,8 +45,14 @@
                 <GridView>
                     <GridViewColumn Header="User name" Width="220" DisplayMemberBinding="{Binding Path=UserName}" x:Name="UsernameColumn"/>
                     <GridViewColumn Header="Password" Width="220" DisplayMemberBinding="{Binding Path=Password}" x:Name="PasswordColumn"/>
-                    <GridViewColumn Header="Language " Width="220" DisplayMemberBinding="{Binding Path=language}" x:Name="LanguageColumn"/>
-                    <GridViewColumn Header="Is admin " Width="80" DisplayMemberBinding="{Binding Path=language}" x:Name="AdminColumn"/>
+                    <GridViewColumn Header="Language" Width="220" DisplayMemberBinding="{Binding Path=language}" x:Name="LanguageColumn"/>
+                    <GridViewColumn Header="Is Admin" x:Name="isAdminColumn" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsEnabled="False" x:Name="AdminCheckBox"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
