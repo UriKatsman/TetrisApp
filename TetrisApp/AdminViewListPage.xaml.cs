@@ -31,13 +31,18 @@ namespace TetrisApp
             List<User> users = await api.GetAllUsers();
             List<Admin> admins = await api.GetAllAdmins();
 
-            this.UsersListView.ItemsSource = users;
+
+            List<AdminListItemControl> items = new List<AdminListItemControl>();
+
+            foreach (User u in users)
+            {
+                
+                items.Add(new AdminListItemControl(u));
+            }
+            
+            this.UsersListView.ItemsSource = items;
 
             
-            foreach (User Item in this.UsersListView.)
-            {
-                Item.
-            }        
             
         }
         
