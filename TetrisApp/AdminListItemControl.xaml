@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TetrisApp"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="737">
+             d:DesignHeight="100" d:DesignWidth="725">
     <Border BorderBrush="White" BorderThickness="5" Background="LightGray">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -18,7 +18,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Text="PlaceHolderName" x:Name="userUserName" FontSize="20" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="3" Text="PlaceHolderPass" x:Name="userPassword" FontSize="20" VerticalAlignment="Center"/>
-            <CheckBox Grid.Column="4" x:Name="IsAdminCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
+            <CheckBox Grid.Column="4" x:Name="IsAdminCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="True"/>
         </Grid>
     </Border>
 </UserControl>

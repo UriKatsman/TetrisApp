@@ -30,22 +30,36 @@ namespace TetrisApp
 
             List<User> users = await api.GetAllUsers();
             List<Admin> admins = await api.GetAllAdmins();
-
-
+            bool IsAdmin;
             List<AdminListItemControl> items = new List<AdminListItemControl>();
 
             foreach (User u in users)
-            {
-                
+            {                
                 items.Add(new AdminListItemControl(u));
-            }
-            
-            this.UsersListView.ItemsSource = items;
 
+                items.Last().Width = 690;
+                items.Last().HorizontalAlignment = HorizontalAlignment.Center;
+
+                IsAdmin = admins.Find(x => x.Id == items.Last().user.Id) != null;
+                items.Last().AdminCheckBox.IsChecked = IsAdmin;
+
+                if (items.Last().AdminCheckBox.IsChecked == true) 
+                    ;
+            }            
+            
+            this.UsersListBox.ItemsSource = items;
             
             
-        }
-        
+            foreach (AdminListItemControl u in this.UsersListBox.ItemsSource)
+            {                
+                if (u.AdminCheckBox.IsChecked == true)
+                    ;
+            }
+
+
+            //*/
+        }        
+
         public AdminViewListPage()
         {
             this.PreviousPage = new EntrancePage();
@@ -73,14 +87,20 @@ namespace TetrisApp
 
         private void ListViewDelete(object sender, RoutedEventArgs e)
         {
-            User x = (User)UsersListView.SelectedItem;
+            
+            User x = (User)UsersListBox.SelectedItem;
 
             Apiservice api = new();
 
             api.DeleteUser(x.Id);
 
-            UsersListView.ItemsSource = null;
+            UsersListBox.ItemsSource = null;
             UpdateTheListView();
+        }
+
+        private void ListViewUpdate(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

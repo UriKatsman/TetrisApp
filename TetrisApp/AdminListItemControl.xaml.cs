@@ -21,6 +21,8 @@ namespace TetrisApp
     /// </summary>
     public partial class AdminListItemControl : UserControl
     {
+        public User user { get; }
+        public CheckBox AdminCheckBox { get; }
         public AdminListItemControl()
         {
             InitializeComponent();
@@ -28,17 +30,22 @@ namespace TetrisApp
         public AdminListItemControl(AdminListItem ALI)
         {
             InitializeComponent();
+            this.user = ALI.user;
+            this.DataContext = ALI;
             this.IsAdminCheckBox = ALI.CheckBox;
-            this.userUserName.Text = ALI.User.UserName;
-            this.userPassword.Text = ALI.User.Password;
+            this.userUserName.Text = ALI.user.UserName;
+            this.userPassword.Text = ALI.user.Password;
         }
         public AdminListItemControl(User u)
         {
             InitializeComponent();
-            AdminListItem ALI = new AdminListItem(u);
-            this.IsAdminCheckBox = ALI.CheckBox;
-            this.userUserName.Text = ALI.User.UserName;
-            this.userPassword.Text = ALI.User.Password;
+            this.user = u;
+            AdminListItem ALI = new AdminListItem(u);            
+            this.DataContext = ALI;
+            this.AdminCheckBox = new CheckBox();
+            this.IsAdminCheckBox = this.AdminCheckBox;
+            this.userUserName.Text = ALI.user.UserName;
+            this.userPassword.Text = ALI.user.Password;
         }
     }
 }

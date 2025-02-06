@@ -35,28 +35,13 @@
         <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
         <Image Grid.Row="1" Grid.Column="1" MouseDown="GoBack" Source="/Back.png"/>
 
-        <ListView Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="8" x:Name="UsersListView">
-            <ListView.ContextMenu>
+        <ListBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="8" x:Name="UsersListBox">
+            <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Delete" Click="ListViewDelete"/>
+                    <MenuItem Header="Update" Click="ListViewUpdate"/>
                 </ContextMenu>
-            </ListView.ContextMenu>
-            <ListView.View>
-                <GridView>
-                    
-                    <!--
-                    <GridViewColumn Header="User name" Width="220" DisplayMemberBinding="{Binding Path=user.UserName}" x:Name="UsernameColumn"/>
-                    <GridViewColumn Header="Password" Width="220" DisplayMemberBinding="{Binding Path=user.Password}" x:Name="PasswordColumn"/>
-                    <GridViewColumn Header="Language" Width="220" DisplayMemberBinding="{Binding Path=user.language}" x:Name="LanguageColumn"/>
-                    <GridViewColumn Header="Is Admin" x:Name="isAdminColumn" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsEnabled="False" x:Name="AdminCheckBox"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
-                </GridView>
-            </ListView.View>
-        </ListView>
+            </ListBox.ContextMenu>
+        </ListBox>
     </Grid>
 </Page>

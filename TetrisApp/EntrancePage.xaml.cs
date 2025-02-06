@@ -26,12 +26,15 @@ namespace TetrisApp
         public static User SignedInUser;
         public EntrancePage()
         {
-            InitializeComponent();
+            InitializeComponent();                                    
         }
 
         private void GoToSettings(object sender, MouseButtonEventArgs e)
         {
-
+            // to be removed
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new AdminViewListPage(this));
+            //
         }
 
         private async void LogIn(object sender, RoutedEventArgs e)
