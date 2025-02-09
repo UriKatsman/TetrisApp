@@ -32,7 +32,7 @@ namespace TetrisApp
             InitializeComponent();
             this.user = ALI.user;
             this.DataContext = ALI;
-            this.IsAdminCheckBox = ALI.CheckBox;
+            this.AdminCheckBox = this.IsAdminCheckBox;             
             this.userUserName.Text = ALI.user.UserName;
             this.userPassword.Text = ALI.user.Password;
         }
@@ -42,8 +42,7 @@ namespace TetrisApp
             this.user = u;
             AdminListItem ALI = new AdminListItem(u);            
             this.DataContext = ALI;
-            this.AdminCheckBox = new CheckBox();
-            this.IsAdminCheckBox = this.AdminCheckBox;
+            this.AdminCheckBox = this.IsAdminCheckBox;
             this.userUserName.Text = ALI.user.UserName;
             this.userPassword.Text = ALI.user.Password;
         }

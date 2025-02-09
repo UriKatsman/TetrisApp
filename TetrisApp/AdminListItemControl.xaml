@@ -18,7 +18,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="1" Text="PlaceHolderName" x:Name="userUserName" FontSize="20" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="3" Text="PlaceHolderPass" x:Name="userPassword" FontSize="20" VerticalAlignment="Center"/>
-            <CheckBox Grid.Column="4" x:Name="IsAdminCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="True"/>
+            <CheckBox Grid.Column="4" x:Name="IsAdminCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
         </Grid>
     </Border>
 </UserControl>

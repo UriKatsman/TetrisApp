@@ -6,9 +6,11 @@
       xmlns:local="clr-namespace:TetrisApp"
       mc:Ignorable="d" 
       d:DesignHeight="545" d:DesignWidth="860"
+      Background="LightBlue"
       Title="AdminViewListPage">
 
-    <Grid Background="LightBlue">
+
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
@@ -35,13 +37,27 @@
         <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
         <Image Grid.Row="1" Grid.Column="1" MouseDown="GoBack" Source="/Back.png"/>
 
-        <ListBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="8" x:Name="UsersListBox">
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Delete" Click="ListViewDelete"/>
-                    <MenuItem Header="Update" Click="ListViewUpdate"/>
-                </ContextMenu>
-            </ListBox.ContextMenu>
-        </ListBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="8">
+            <ListBox x:Name="UsersListBox">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="ListViewDelete"/>
+                        <MenuItem Header="Update" Click="ListViewUpdate"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </StackPanel>
     </Grid>
+    <!--
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"> 
+            <ListBox x:Name="UsersListBox">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="ListViewDelete"/>
+                        <MenuItem Header="Update" Click="ListViewUpdate"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </StackPanel> -->
+    
 </Page>

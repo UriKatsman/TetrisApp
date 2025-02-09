@@ -38,10 +38,10 @@ namespace TetrisApp
                 items.Add(new AdminListItemControl(u));
 
                 items.Last().Width = 690;
-                items.Last().HorizontalAlignment = HorizontalAlignment.Center;
+                items.Last().HorizontalAlignment = HorizontalAlignment.Center;                
 
                 IsAdmin = admins.Find(x => x.Id == items.Last().user.Id) != null;
-                items.Last().AdminCheckBox.IsChecked = IsAdmin;
+                items.Last().AdminCheckBox.IsChecked = IsAdmin;                
 
                 if (items.Last().AdminCheckBox.IsChecked == true) 
                     ;
@@ -87,8 +87,7 @@ namespace TetrisApp
 
         private void ListViewDelete(object sender, RoutedEventArgs e)
         {
-            
-            User x = (User)UsersListBox.SelectedItem;
+            User x = ((AdminListItemControl)UsersListBox.SelectedItem).user;            
 
             Apiservice api = new();
 
