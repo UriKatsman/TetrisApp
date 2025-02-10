@@ -96,10 +96,27 @@ namespace TetrisApp
             UsersListBox.ItemsSource = null;
             UpdateTheListView();
         }
-
+        private User EditedUser;
         private void ListViewUpdate(object sender, RoutedEventArgs e)
         {
+            this.EditedUser = ((AdminListItemControl)UsersListBox.SelectedItem).user;
 
+            this.UserEditPanel.Visibility = Visibility.Visible;
+            this.UsernameBox.Text = this.EditedUser.UserName;
+            this.PasswordBox.Text = this.EditedUser.Password;
+        }
+
+        private async void ApplyClick(object sender, RoutedEventArgs e)
+        {
+            Apiservice api = new();
+
+            User x = this.EditedUser;
+            User NewUser = new User() {language = x.language, Password=this.PasswordBox.Text, Id=x.Id, ProfilePicture = x.ProfilePicture, UserName = this.UsernameBox.Text};
+
+            await api.UpdateUser(NewUser);
+            UpdateTheListView();
+
+            this.UserEditPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

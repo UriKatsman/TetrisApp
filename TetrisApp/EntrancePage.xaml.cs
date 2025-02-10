@@ -58,8 +58,9 @@ namespace TetrisApp
                     nv.Navigate(new AdminViewListPage(this));
                 }
                 else
-                { 
-                    //transition to game page
+                {
+                    NavigationService nv = NavigationService.GetNavigationService(this);
+                    nv.Navigate(new MainPage(this));
                 }
             }
             else

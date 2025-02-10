@@ -80,6 +80,8 @@ namespace TetrisApp
 
         private void ChooseImageBtn(object sender, RoutedEventArgs e)
         {
+            Apiservice api = new();
+
 
         }
 

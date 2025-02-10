@@ -129,7 +129,7 @@ namespace MyService
             return (await client.PutAsJsonAsync<Player>(uri + "/api/Values/UpdatePlayer", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
-        public async Task<int> UpdateUsern(User x)
+        public async Task<int> UpdateUser(User x)
         {
             return (await client.PutAsJsonAsync<User>(uri + "/api/Values/UpdateUser", x)).IsSuccessStatusCode ? 1 : 0;
         }

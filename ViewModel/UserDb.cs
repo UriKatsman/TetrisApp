@@ -33,7 +33,14 @@ namespace ViewModel
             usr.UserName = reader["username"].ToString();
             usr.Password = reader["password"].ToString();
             usr.ProfilePicture = reader["profilePicture"].ToString();
-            usr.language = LanguageDb.SelectById(int.Parse(reader["language"].ToString()));            
+            usr.language = LanguageDb.SelectById(int.Parse(reader["language"].ToString()));
+
+
+            string imagePath = Path.GetFullPath("\\images\\" + reader["profilePicture"].ToString());
+            string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+            usr.ProfilePicture = base64String;
+            
+            
             base.CreateModel(entity);
             return usr;
         }

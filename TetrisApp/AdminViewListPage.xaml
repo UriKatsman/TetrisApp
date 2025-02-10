@@ -38,7 +38,15 @@
         <Image Grid.Row="1" Grid.Column="1" MouseDown="GoBack" Source="/Back.png"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="8">
-            <ListBox x:Name="UsersListBox">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Visibility="Collapsed" x:Name="UserEditPanel">
+                <TextBlock Text="Username:" FontWeight="Bold" FontSize="14" x:Name="UsernameText"/>
+                <TextBox x:Name="UsernameBox"/>
+                <TextBlock Text="Password:" FontWeight="Bold" FontSize="14" x:Name="PasswordText"/>
+                <TextBox x:Name="PasswordBox"/>
+                <TextBlock  FontWeight="Bold" FontSize="14"/>
+                <Button Width="70" Height="30" Content="Apply" FontWeight="Bold" FontSize="20" x:Name="ApplyBtn" Click="ApplyClick"/>
+            </StackPanel>
+            <ListBox x:Name="UsersListBox" Width="737">
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Delete" Click="ListViewDelete"/>

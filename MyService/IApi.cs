@@ -36,7 +36,7 @@ namespace MyService
 
         public Task<UserList> GetAllUsers();
         public Task<int> DeleteUser(int id);
-        public Task<int> UpdateUsern(User x);
+        public Task<int> UpdateUser(User x);
         public Task<int> InsertUser(User x);
     }
 }
