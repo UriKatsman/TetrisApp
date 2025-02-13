@@ -51,7 +51,7 @@ namespace TetrisApp
         }
         private void GoToSettings(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
 
         private async void SignUp(object sender, RoutedEventArgs e)

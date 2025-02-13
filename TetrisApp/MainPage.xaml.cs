@@ -39,7 +39,8 @@ namespace TetrisApp
 
         private void GoToSettings(object sender, MouseButtonEventArgs e)
         {
-
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new SettingsPage(this));
         }
     }
 }

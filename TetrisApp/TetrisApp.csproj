@@ -12,6 +12,8 @@
     <None Remove="Back.png" />
     <None Remove="PickAnImage.png" />
     <None Remove="SettingsButton.png" />
+    <None Remove="TranslateIcon.png" />
+    <None Remove="VolumeIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,8 @@
     <Resource Include="Back.png" />
     <Resource Include="PickAnImage.png" />
     <Resource Include="SettingsButton.png" />
+    <Resource Include="TranslateIcon.png" />
+    <Resource Include="VolumeIcon.png" />
   </ItemGroup>
 
 </Project>

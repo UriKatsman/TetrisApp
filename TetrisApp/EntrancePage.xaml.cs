@@ -28,7 +28,7 @@ namespace TetrisApp
         {
             InitializeComponent();                                    
         }
-
+        /*
         private void GoToSettings(object sender, MouseButtonEventArgs e)
         {
             // to be removed
@@ -36,6 +36,7 @@ namespace TetrisApp
             nv.Navigate(new AdminViewListPage(this));
             //
         }
+        //*/
 
         private async void LogIn(object sender, RoutedEventArgs e)
         {
