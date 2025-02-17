@@ -35,8 +35,11 @@ namespace ViewModel
             usr.ProfilePicture = reader["profilePicture"].ToString();
             usr.language = LanguageDb.SelectById(int.Parse(reader["language"].ToString()));
 
+            //C:\Users\student.HP-6HYJCV2\Downloads\TetrisApp (3)\TetrisApp\ViewModel\Images\firstProfile.jpg
+            string path=Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
+            + "/../../../../../../TetrisApp/ViewModel/images/");
 
-            string imagePath = Path.GetFullPath("\\images\\" + reader["profilePicture"].ToString());
+            string imagePath = path + reader["profilePicture"].ToString();
             string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
             usr.ProfilePicture = base64String;
             
@@ -113,15 +116,19 @@ namespace ViewModel
             User u = entity as User;
             if (u != null) 
             {
+                //string sqlStr = $"Update userTbl SET " +
+                //                 "[language]=@language,[username]=@username,[password]=@password,[profilePicture]=@profilePicture " +
+                //                 "WHERE ID=@ID";
                 string sqlStr = $"Update userTbl SET " +
-                                 "[language]=@language,[username]=@username,[password]=@password,[profilePicture]=@profilePicture " +
-                                 "WHERE ID=@ID";
+                                "[language]=@language,[username]=@username,[password]=@password " +
+                                "WHERE ID=@ID";
+
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@language",u.language.Id));
                 command.Parameters.Add(new OleDbParameter("@username", u.UserName));
                 command.Parameters.Add(new OleDbParameter("@password", u.Password));
-                command.Parameters.Add(new OleDbParameter("@ProfilePicture", u.ProfilePicture));
+                //command.Parameters.Add(new OleDbParameter("@ProfilePicture", u.ProfilePicture));
                 command.Parameters.Add(new OleDbParameter("@ID", u.Id));
             }
         }

@@ -35,7 +35,7 @@ namespace TetrisApp
             this.AdminCheckBox = this.IsAdminCheckBox;             
             this.userUserName.Text = ALI.user.UserName;
             this.userPassword.Text = ALI.user.Password;
-            this.userLanguage.Text = ALI.user.language.ToString();
+            this.userLanguage.Text = ALI.user.language.LanguageName;
         }
         public AdminListItemControl(User u)
         {
@@ -46,7 +46,7 @@ namespace TetrisApp
             this.AdminCheckBox = this.IsAdminCheckBox;
             this.userUserName.Text = ALI.user.UserName;
             this.userPassword.Text = ALI.user.Password;
-            this.userLanguage.Text = ALI.user.language.ToString();
+            this.userLanguage.Text = ALI.user.language.LanguageName;
         }
     }
 }

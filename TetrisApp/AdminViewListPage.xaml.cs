@@ -23,7 +23,7 @@ namespace TetrisApp
     public partial class AdminViewListPage : Page
     {
         private Page PreviousPage;
-        private async void UpdateTheListView()
+        public async void UpdateTheListView()
         {// מציב נתונים בListView
 
             Apiservice api = new();
