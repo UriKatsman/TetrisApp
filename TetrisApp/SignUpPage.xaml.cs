@@ -58,7 +58,7 @@ namespace TetrisApp
         {            
             Apiservice APIservice = new();
             
-            User GivenUser = new User() { Password = PasswordBox.Text, UserName = UsernameBox.Text, language =this.ChoosenLanguage, ProfilePicture=""};
+            User GivenUser = new User() { Password = PasswordBox.Password, UserName = UsernameBox.Text, language =this.ChoosenLanguage, ProfilePicture=""};
 
             List<User> users = await APIservice.GetAllUsers();
 
@@ -72,7 +72,7 @@ namespace TetrisApp
             {
                 this.ErrorSigningUpText.Visibility = Visibility.Hidden;
 
-                await APIservice.InsertPlayer(new Player() {TetrisCurrentScore=0,TetrisHighScore=0, Password = PasswordBox.Text, UserName = UsernameBox.Text, language = this.ChoosenLanguage, ProfilePicture = ""});
+                await APIservice.InsertPlayer(new Player() {TetrisCurrentScore=0,TetrisHighScore=0, Password = PasswordBox.Password, UserName = UsernameBox.Text, language = this.ChoosenLanguage, ProfilePicture = ""});
                 
                 MessageBox.Show("Account added");
             }

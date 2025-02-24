@@ -25,7 +25,7 @@ namespace TetrisApp
         private Page PreviousPage;
         public async void UpdateTheListView()
         {// מציב נתונים בListView
-
+            
             Apiservice api = new();
 
             List<User> users = await api.GetAllUsers();
@@ -45,8 +45,8 @@ namespace TetrisApp
 
                 if (items.Last().AdminCheckBox.IsChecked == true) 
                     ;
-            }            
-            
+            }
+
             this.UsersListBox.ItemsSource = items;
             
             

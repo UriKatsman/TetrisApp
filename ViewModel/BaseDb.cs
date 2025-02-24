@@ -12,6 +12,9 @@ namespace ViewModel
     public abstract class BaseDb
     {
         private static bool formated = false;
+
+        //protected static string Path =  Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location +"/../../../../../../TetrisApp/ViewModel/TetrisNMore.accdb");
+
         protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
             + "/../../../../../../TetrisApp/ViewModel/TetrisNMore.accdb");
 

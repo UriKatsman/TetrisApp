@@ -26,32 +26,43 @@ namespace TetrisApp
         public SettingsPage(Page PreviousPage)
         {
             InitializeComponent();
-
-            Apiservice api = new();
+            
             this.PreviousPage = PreviousPage;            
             SetContentForLangugesComboBox();
         }
         private async void SetContentForLangugesComboBox()
         {
-            Apiservice api = new();
-            this.LanguagesComboBox.Text = EntrancePage.SignedInUser.language.ToString();
+            Apiservice api = new();            
             this.LanguagesComboBox.ItemsSource = await api.GetAllLanguages();
+
+            int index = 0;
+            for (int i = this.LanguagesComboBox.Items.Count - 1; i >= 0; i--)
+            {
+                if (EntrancePage.SignedInUser.language.Id == ((Language)this.LanguagesComboBox.Items[i]).Id)
+                    index = i;
+            }
+            
+            this.LanguagesComboBox.SelectedIndex = index;
         }
 
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
             SaveChanges();
+            NavigationService nv = NavigationService.GetNavigationService(this);
 
             if (this.PreviousPage is AdminViewListPage)
-                ;
-                //((AdminViewListPage)this.PreviousPage).UpdateTheListView();
-            NavigationService nv = NavigationService.GetNavigationService(this);
+                ((AdminViewListPage)this.PreviousPage).UpdateTheListView();
+            //nv.Navigate(new AdminViewListPage(this.PreviousPage));
+
+
             nv.Navigate(this.PreviousPage);
         }
         private async void SaveChanges()
         {
             Apiservice api = new();
-            EntrancePage.SignedInUser.language = (Language)this.LanguagesComboBox.SelectedItem;
+            List<Language> l= await api.GetAllLanguages();
+            if ((Language)this.LanguagesComboBox.SelectedItem != null)
+                EntrancePage.SignedInUser.language = (Language)this.LanguagesComboBox.SelectedItem;
 
             await api.UpdateUser(EntrancePage.SignedInUser);
         }
