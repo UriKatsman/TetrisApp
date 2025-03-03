@@ -20,6 +20,10 @@ namespace TetrisApp
         {
             InitializeComponent();
         }
-        
+        public static bool IsMoved = false;
+        private void IsMoving(object sender, EventArgs e)
+        {
+            IsMoved = true;
+        }        
     }
 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TetrisApp"
         mc:Ignorable="d"
+        LocationChanged="IsMoving"
         Title="MainWindow" Height="545" Width="860">
 
-    <Frame Source="EntrancePage.xaml"/>
+    <Frame Source="EntrancePage.xaml" />
 </Window>

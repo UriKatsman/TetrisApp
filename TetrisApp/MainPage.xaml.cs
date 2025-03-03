@@ -42,5 +42,11 @@ namespace TetrisApp
             NavigationService nv = NavigationService.GetNavigationService(this);
             nv.Navigate(new SettingsPage(this));
         }
+
+        private void PlayBtn(object sender, RoutedEventArgs e)
+        {
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new GamePage(this));
+        }
     }
 }
