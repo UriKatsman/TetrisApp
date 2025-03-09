@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Model;
+using MyService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,37 +22,78 @@ namespace TetrisApp
     {
         private int[,] board;
         private Page previous;
+        public static Player currentPlayer;
+        public static bool isGaming = false;
         public GamePage(Page previous)
         {
             InitializeComponent();
+            isGaming = true;
             this.previous = previous;
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(0.1);
-            timer.Start();
+            
 
             double CanvasWidth = 266+2/3;
             double CanvasHeight = 300;
             double ratio = CanvasHeight / CanvasWidth;
             int size = 20;
             this.board = new int[size, (int)(size * ratio)];
+            GetBoard();
 
+            
             for (int row = board.GetLength(1) - 1; row >= 0; row--)
             {
                 for (int col = board.GetLength(0) - 1; col >= 0; col--)
                 {
-                    board[col, row] = 8;
+                    if (board[col, row] == null)
+                        board[col, row] = 0;//white
                 }
             }
-            board[0, 0] = 0;
-            board[1, 0] = 1;
-            board[0, 1] = 2;
+            //*/
 
-            //this.PreviewKeyDown += GamePage_PreviewKeyDown;
+            
+            timer.Start();
+            this.KeyDown += GamePage_KeyDown;
+            this.PreviewKeyDown += GamePage_PreviewKeyDown;
             
         }
 
         
+
+        private void GamePage_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show(e.Key.ToString());
+            switch (e.Key)
+            {
+                case Key.A: Left++; break;
+                case Key.D: Left--; break;
+            }
+            Left %= this.board.GetLength(0);
+        }
+
+        private void GamePage_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show(e.Key.ToString());
+            switch (e.Key)
+            {
+                case Key.A: Left++; break;
+                case Key.D: Left--; break;
+            }
+            Left %= this.board.GetLength(0);
+        }
+
+        private async void GetBoard()
+        {
+            Apiservice api = new Apiservice();
+
+            List<BoardComponents> allBricks = await api.GetAllBoardComponents();
+            foreach (BoardComponents brick in allBricks)
+            {
+                if (brick.player.Id == currentPlayer.Id)
+                    board[brick.Col, brick.Row] = brick.brickType.Id;
+            }
+        }
         //---------------
         public static int Left = 0;
         private void KeyPress(object sender, KeyEventArgs e)
@@ -69,7 +112,7 @@ namespace TetrisApp
         {
             this.tick += 1;
             
-            this.board[Left,2] = (new Random()).Next(0, 8);
+            this.board[Left,2] = (new Random()).Next(24,32);
             if (!MainWindow.IsMoved)
                 DrawBoard(this.MainCanvas, this, this.board);
             MainWindow.IsMoved = false;
@@ -103,17 +146,18 @@ namespace TetrisApp
         {
             switch (colorId)
             {
-                case 0: return Brushes.Blue;
-                case 1: return Brushes.Red;
-                case 2: return Brushes.Green;
-                case 3: return Brushes.Yellow;
-                case 4: return Brushes.Orange;
-                case 5: return Brushes.Pink;
-                case 6: return Brushes.Purple;
-                case 7: return Brushes.Cyan;
-                default: return Brushes.Black;
+                case 24: return Brushes.Black;
+                case 25: return Brushes.Red;
+                case 26: return Brushes.Yellow;
+                case 27: return Brushes.Green;
+                case 28: return Brushes.Purple;
+                case 29: return Brushes.Blue;
+                case 30: return Brushes.Cyan;
+                case 31: return Brushes.Pink;
+                default: return Brushes.White;
             }
         }
+
         
     }
 }

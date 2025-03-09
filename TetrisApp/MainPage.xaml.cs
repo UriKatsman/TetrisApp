@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,11 +25,18 @@ namespace TetrisApp
         public MainPage()
         {
             InitializeComponent();
+            SetPlayer();
         }
         public MainPage(Page prev)
         {
             InitializeComponent();
             this.PreviousPage = prev;
+            SetPlayer();
+        }
+        private async void SetPlayer()
+        {
+            Apiservice api = new Apiservice();
+            GamePage.currentPlayer = (await api.GetAllPlayers()).Find(x => x.Id == EntrancePage.SignedInUser.Id);
         }
 
         private void GoBack(object sender, MouseButtonEventArgs e)

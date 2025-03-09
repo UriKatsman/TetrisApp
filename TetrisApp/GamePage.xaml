@@ -23,9 +23,11 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Canvas Grid.Row="1" Grid.Column="2" x:Name="MainCanvas" Width="Auto" Height="Auto">
+        <Border Grid.Row="1" Grid.Column="2" BorderThickness="2" BorderBrush="Gray">
+            <Canvas x:Name="MainCanvas" Width="Auto" Height="Auto">
 
-        </Canvas>
+            </Canvas>
+        </Border>
         <StackPanel Grid.Row="2" Grid.Column="2">
             
         </StackPanel>
