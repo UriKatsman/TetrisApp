@@ -21,6 +21,7 @@ namespace TetrisApp
     public partial class GamePage : Page
     {
         private int[,] board;
+        
         private Page previous;
         public static Player currentPlayer;
         public static bool isGaming = false;
@@ -32,56 +33,9 @@ namespace TetrisApp
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(0.1);
-            
-
-            double CanvasWidth = 266+2/3;
-            double CanvasHeight = 300;
-            double ratio = CanvasHeight / CanvasWidth;
-            int size = 20;
-            this.board = new int[size, (int)(size * ratio)];
-            GetBoard();
-
-            
-            for (int row = board.GetLength(1) - 1; row >= 0; row--)
-            {
-                for (int col = board.GetLength(0) - 1; col >= 0; col--)
-                {
-                    if (board[col, row] == null)
-                        board[col, row] = 0;//white
-                }
-            }
-            //*/
-
-            
-            timer.Start();
-            this.KeyDown += GamePage_KeyDown;
-            this.PreviewKeyDown += GamePage_PreviewKeyDown;
-            
-        }
-
-        
-
-        private void GamePage_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show(e.Key.ToString());
-            switch (e.Key)
-            {
-                case Key.A: Left++; break;
-                case Key.D: Left--; break;
-            }
-            Left %= this.board.GetLength(0);
-        }
-
-        private void GamePage_KeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show(e.Key.ToString());
-            switch (e.Key)
-            {
-                case Key.A: Left++; break;
-                case Key.D: Left--; break;
-            }
-            Left %= this.board.GetLength(0);
-        }
+                      
+            timer.Start();            
+        }              
 
         private async void GetBoard()
         {
@@ -94,25 +48,41 @@ namespace TetrisApp
                     board[brick.Col, brick.Row] = brick.brickType.Id;
             }
         }
-        //---------------
-        public static int Left = 0;
-        private void KeyPress(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show(e.Key.ToString());
-            switch (e.Key)
-            {
-                case Key.A: Left++; break;
-                case Key.D: Left--; break;
-            }
-            Left %= this.board.GetLength(0);
-        }
+        //---------------                
 
         private double tick = 0;
         private void Timer_Tick(object? sender, EventArgs e)
         {
             this.tick += 1;
-            
-            this.board[Left,2] = (new Random()).Next(24,32);
+
+            if (tick == 1)
+            {
+                double CanvasWidth = (double)this.MainCanvas.ActualWidth;
+                double CanvasHeight = (double)this.MainCanvas.ActualHeight;
+                //double CanvasWidth = 266+2/3;
+                //double CanvasHeight = 300;
+                double ratio = CanvasHeight / CanvasWidth;
+                int size = 20;
+                this.board = new int[size, (int)(size * ratio + 0.5)];
+                GetBoard();
+
+                for (int row = board.GetLength(1) - 1; row >= 0; row--)
+                {
+                    for (int col = board.GetLength(0) - 1; col >= 0; col--)
+                    {
+                        if (board[col, row] == null)
+                            board[col, row] = 0;//white
+                        if (row == 0)
+                            board[col, row] = 25;//red
+                        if (col == 0)
+                            board[col, row] = 25;//red
+                    }
+                }
+                //*/
+            }
+
+            this.board[LeftPos,1] = (new Random()).Next(24,32);
+
             if (!MainWindow.IsMoved)
                 DrawBoard(this.MainCanvas, this, this.board);
             MainWindow.IsMoved = false;
@@ -120,15 +90,15 @@ namespace TetrisApp
         }
         private static void DrawBoard(Canvas painting, Page p, int[,] board)
         {
-            int BoardWidth = (int)painting.ActualWidth;
-            int BoardHeight = (int)painting.ActualHeight;
+            double BoardWidth = (double)painting.ActualWidth;
+            double BoardHeight = (double)painting.ActualHeight;
 
-            int tileWidth = BoardWidth / board.GetLength(0);
-            int tileHeight = BoardHeight / board.GetLength(1);
+            double tileWidth = BoardWidth / board.GetLength(0);
+            double tileHeight = BoardHeight / board.GetLength(1);
 
             for (int row = board.GetLength(1) - 1; row >= 0; row--)
             {
-                for (int col = board.GetLength(0) - 1; col >= 0; col--)
+                for (int col = board.GetLength(0) - 1; col >= 0; col--) 
                 {
                     Canvas TileToDraw = new Canvas();
                     TileToDraw.Background = intToBrush(board[col, row]);
@@ -158,6 +128,19 @@ namespace TetrisApp
             }
         }
 
-        
+        public static int LeftPos = 0;
+        private void LeftBtn(object sender, MouseButtonEventArgs e)
+        {
+            this.board[LeftPos, 1] = 0;
+            if (LeftPos > 0)
+                LeftPos--;
+        }
+
+        private void RightBtn(object sender, MouseButtonEventArgs e)
+        {
+            this.board[LeftPos, 1] = 0;
+            if (LeftPos < this.board.GetLength(0)-1)
+                LeftPos++;
+        }
     }
 }

@@ -10,9 +10,13 @@
 
   <ItemGroup>
     <None Remove="Back.png" />
+    <None Remove="DownArrow.png" />
+    <None Remove="LeftArrow.png" />
     <None Remove="PickAnImage.png" />
+    <None Remove="RightArrow.png" />
     <None Remove="SettingsButton.png" />
     <None Remove="TranslateIcon.png" />
+    <None Remove="UpArrow.png" />
     <None Remove="VolumeIcon.png" />
   </ItemGroup>
 
@@ -28,9 +32,13 @@
 
   <ItemGroup>
     <Resource Include="Back.png" />
+    <Resource Include="DownArrow.png" />
+    <Resource Include="LeftArrow.png" />
     <Resource Include="PickAnImage.png" />
+    <Resource Include="RightArrow.png" />
     <Resource Include="SettingsButton.png" />
     <Resource Include="TranslateIcon.png" />
+    <Resource Include="UpArrow.png" />
     <Resource Include="VolumeIcon.png" />
   </ItemGroup>
 
