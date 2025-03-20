@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace TetrisApp
-{    
+{        
     public partial class GamePage : Page
-    {
+    {        
         private int[,] board;
         
         private Page previous;
