@@ -35,6 +35,9 @@ namespace TetrisApp
             timer.Interval = TimeSpan.FromSeconds(0.1);
                       
             timer.Start();            
+
+            
+
         }              
 
         private async void GetBoard()
@@ -66,22 +69,25 @@ namespace TetrisApp
                 this.board = new int[size, (int)(size * ratio + 0.5)];
                 GetBoard();
 
-                for (int row = board.GetLength(1) - 1; row >= 0; row--)
+                for (int i = 0; i < Bricks.L.grid.GetLength(0); i++)
                 {
-                    for (int col = board.GetLength(0) - 1; col >= 0; col--)
+                    for (int k = 0; i < Bricks.L.grid.GetLength(1); i++)
                     {
-                        if (board[col, row] == null)
-                            board[col, row] = 0;//white
-                        if (row == 0)
-                            board[col, row] = 25;//red
-                        if (col == 0)
-                            board[col, row] = 25;//red
+                        board[i, k] = Bricks.L.grid[i, k];
+                    }
+                }
+
+                for (int i = 0; i < Bricks.L.grid.GetLength(0); i++)
+                {
+                    for (int k = 0; i < Bricks.L.grid.GetLength(1); i++)
+                    {
+                        board[i + 3, k] = Bricks.L.rotateRight.grid[i, k];
                     }
                 }
                 //*/
             }
 
-            this.board[LeftPos,1] = (new Random()).Next(24,32);
+//            this.board[LeftPos,1] = (new Random()).Next(24,32);
 
             if (!MainWindow.IsMoved)
                 DrawBoard(this.MainCanvas, this, this.board);

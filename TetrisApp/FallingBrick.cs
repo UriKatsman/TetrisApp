@@ -28,7 +28,8 @@ namespace TetrisApp
                 return;
             Singleton = true;
 
-            L = new FallingBrick();
+            L = new FallingBrick() {grid = new int[,] { {1,2,3}, {8,9,4}, {7,6,5} } };
+
 
             L.rotateRight = RotateRight(L);
         }
@@ -37,8 +38,8 @@ namespace TetrisApp
         {
             //creates a new, blank grid
             int[,] board = new int[brick.grid.GetLength(0), brick.grid.GetLength(1)];
-            int length = brick.grid.GetLength(0);
-            int temp;
+            int length = brick.grid.GetLength(0) - 1;
+            int[,] origin = brick.grid;
             ////copies the grid
             //for (int col = 0; col < brick.grid.GetLength(0); col++)
             //{
@@ -48,36 +49,39 @@ namespace TetrisApp
             //    }
             //}
 
+
             // rotates
-            for (int layer = 0; layer < length / 2; layer++)
+            for (int layer = 0; layer < (length + 2)/ 2; layer++)
             {
-                int[] RowOrColumnBeingReplaced = new int[length - layer * 2];
-
-                // fills in the array
-                for (int i = 0; i < length - layer * 2; i++)
+                // top to right
+                for (int i = layer; i < (length + 1) - layer; i++)
                 {
-                    RowOrColumnBeingReplaced[i] = brick.grid[length - layer, layer + i];
+                    board[length - i - layer, length - layer] = origin[layer, i + layer ];
                 }
-                // overrides the grid 
-                for (int i = 0; i < length - layer * 2; i++)
+                // right to bottom
+                for (int i = layer; i < (length + 1) - layer; i++)
                 {
-                    board[length - layer, layer + i] = brick.grid[layer + i, layer];
+                    board[length - layer, length - i - layer] = origin[i + layer,length - layer];
                 }
-
-
-                // makes use of the array
-                for (int i = 0; i < length - layer * 2; i++)
+                // bottom to left
+                for (int i = layer; i < (length + 1) - layer; i++)
                 {
-                    temp = brick.grid[layer + i, length - layer];
-                    //board[layer + i, length - layer] = RowOrColumnBeingReplaced[];
+                    board[length - i - layer, layer] = origin[length - layer, length - i - layer];
                 }
-                
+                // left to top
+                for (int i = layer; i < (length + 1) - layer; i++)
+                {
+                    board[layer, layer + i] = origin[length - i - layer, layer];
+                }
             }
-            
+            if (length % 2 == 1)
+            {
+                board[length / 2 + 1, length / 2 + 1] = origin[length / 2 + 1, length / 2 + 1];
+            }
 
             FallingBrick ans = new FallingBrick() { grid = board, rotateRight = null, rotateLeft = brick };
             brick.rotateRight = ans;
-            return null;
+            return ans;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace TetrisApp
         public MainWindow()
         {
             InitializeComponent();
+            new Bricks();
         }
         public static bool IsMoved = false;
         private void IsMoving(object sender, EventArgs e)
