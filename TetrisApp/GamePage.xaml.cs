@@ -24,19 +24,15 @@ namespace TetrisApp
         
         private Page previous;
         public static Player currentPlayer;
-        public static bool isGaming = false;
         public GamePage(Page previous)
         {
             InitializeComponent();
-            isGaming = true;
             this.previous = previous;
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(0.1);
                       
-            timer.Start();            
-
-            
+            timer.Start();                        
 
         }              
 
@@ -54,6 +50,11 @@ namespace TetrisApp
         //---------------                
 
         private double tick = 0;
+
+        //    <----The Game Brick---->
+        private GameBrick Brick;
+        //    <----The Game Brick---->
+
         private void Timer_Tick(object? sender, EventArgs e)
         {
             this.tick += 1;
@@ -67,27 +68,22 @@ namespace TetrisApp
                 double ratio = CanvasHeight / CanvasWidth;
                 int size = 20;
                 this.board = new int[size, (int)(size * ratio + 0.5)];
+                this.Brick = new GameBrick();
+                this.Brick.posX = BricksGets.rng.Next(0,board.GetLength(0)-Brick.grid.GetLength(0));
                 GetBoard();
-
-                for (int i = 0; i < Bricks.L.grid.GetLength(0); i++)
-                {
-                    for (int k = 0; i < Bricks.L.grid.GetLength(1); i++)
-                    {
-                        board[i, k] = Bricks.L.grid[i, k];
-                    }
-                }
-
-                for (int i = 0; i < Bricks.L.grid.GetLength(0); i++)
-                {
-                    for (int k = 0; i < Bricks.L.grid.GetLength(1); i++)
-                    {
-                        board[i + 3, k] = Bricks.L.rotateRight.grid[i, k];
-                    }
-                }
                 //*/
             }
-
-//            this.board[LeftPos,1] = (new Random()).Next(24,32);
+            DrawBoard(this.MainCanvas, this, this.board);
+            this.Brick = new GameBrick();
+            this.Brick.posX = BricksGets.rng.Next(0, board.GetLength(0) - Brick.grid.GetLength(0));
+            this.Brick.posY = board.GetLength(1) - Brick.grid.GetLength(1);
+            for (int i = 0; i < Brick.grid.GetLength(0); i++)
+            {
+                for (int k = 0; k < Brick.grid.GetLength(1); k++)
+                {
+                    board[i + Brick.posX, k + Brick.posY] = Brick.grid[i, k];
+                }
+            }            
 
             if (!MainWindow.IsMoved)
                 DrawBoard(this.MainCanvas, this, this.board);
