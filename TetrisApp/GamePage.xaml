@@ -27,8 +27,9 @@
 
             </Canvas>
         </Border>
-        <StackPanel Grid.Row="2" Grid.Column="2">
-            
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Source="/RotateLeft.png" MouseDown="LRBtn"/>
+            <Image Source="/RotateRight.png" MouseDown="RRBtn"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Image Source="/LeftArrow.png" MouseDown="LeftBtn"/>

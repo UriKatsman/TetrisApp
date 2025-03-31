@@ -14,6 +14,8 @@
     <None Remove="LeftArrow.png" />
     <None Remove="PickAnImage.png" />
     <None Remove="RightArrow.png" />
+    <None Remove="RotateLeft.png" />
+    <None Remove="RotateRight.png" />
     <None Remove="SettingsButton.png" />
     <None Remove="TranslateIcon.png" />
     <None Remove="UpArrow.png" />
@@ -36,6 +38,8 @@
     <Resource Include="LeftArrow.png" />
     <Resource Include="PickAnImage.png" />
     <Resource Include="RightArrow.png" />
+    <Resource Include="RotateLeft.png" />
+    <Resource Include="RotateRight.png" />
     <Resource Include="SettingsButton.png" />
     <Resource Include="TranslateIcon.png" />
     <Resource Include="UpArrow.png" />

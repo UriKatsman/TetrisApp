@@ -22,7 +22,8 @@ namespace TetrisApp
         public int posY;
         public int[,] grid;
         public int ColorID;
-
+        public int rightBorderDistance;
+        public int leftBorderDistance;
 
         public GameBrick(int x = 0, int y = 0, FallingBrick shape = null, int ChoosenColor = 0)
         {
@@ -38,7 +39,43 @@ namespace TetrisApp
                 this.brick = shape;
             this.grid = this.brick.grid;
             ColorGrid();
-        }        
+        }
+
+        private int GetLeftBorderDistnace()
+        {
+            // scans left to right
+            for (int k = 0; k < this.grid.GetLength(1); k++)
+            {
+                // goes down the column
+                for (int i = 0; i < this.grid.GetLength(0); i++)
+                {
+                    if (this.grid[i, k] != 0)
+                        return k;
+                }
+            }
+
+            return this.grid.GetLength(1);
+        }
+        private int GetRightBorderDistnace()
+        {
+            // scans left to right
+            for (int k = this.grid.GetLength(1) - 1; k >= 0; k--) 
+            {
+                // goes down the column
+                for (int i = 0; i < this.grid.GetLength(0); i++)
+                {
+                    if (this.grid[i, k] != 0)
+                        return k;
+                }
+            }
+
+            return this.grid.GetLength(1);
+        }
+        private void UpdateBorderLengths()
+        {
+            this.rightBorderDistance = GetRightBorderDistnace();
+            this.leftBorderDistance = GetLeftBorderDistnace();
+        }
         private void ColorGrid()
         {
             for (int i = grid.GetLength(0) - 1; i >= 0; i--)
@@ -49,12 +86,26 @@ namespace TetrisApp
         public void RotateRight()
         {
             this.brick = this.brick.rotateRight;
+            //this.grid = this.brick.rotateRight.grid;
+            ReplaceGrid(this.brick.rotateRight.grid);
             ColorGrid();
+            UpdateBorderLengths();
         }
         public void RotateLeft()
         {
             this.brick = this.brick.rotateLeft;
+            //this.grid = this.brick.rotateLeft.grid;
+            ReplaceGrid(this.brick.rotateLeft.grid);
             ColorGrid();
+            UpdateBorderLengths();
+        }
+        private void ReplaceGrid(int[,] NewGrid)
+        {
+            for (int i = 0; i < this.grid.GetLength(0); i++)
+            {
+                for (int k = 0; k < this.grid.GetLength(1); k++)
+                    this.grid[i, k] = NewGrid[i, k];
+            }
         }
 
         private void PicksColorInRandom()
@@ -138,10 +189,14 @@ namespace TetrisApp
         {
             This.rotateRight = RotateRight(This);
             This.rotateRight.rotateRight = RotateRight(This.rotateRight);
-            This.rotateRight.rotateRight.rotateRight = RotateRight(This.rotateRight.rotateRight);
+            This.rotateRight.rotateRight.rotateRight = RotateRight(This.rotateRight.rotateRight);            
+            This.rotateRight.rotateRight.rotateRight.rotateRight = RotateRight(This.rotateRight.rotateRight.rotateRight);
+            This.rotateRight.rotateRight.rotateRight.rotateRight.rotateRight = This.rotateRight;
+
             This.rotateLeft = This.rotateRight.rotateRight.rotateRight;
             This.rotateLeft.rotateLeft = This.rotateRight.rotateRight;
             This.rotateLeft.rotateLeft.rotateLeft = This.rotateRight;
+            This.rotateLeft.rotateLeft.rotateLeft.rotateLeft = This;
             return This;
         }
         private static FallingBrick RotateRight(FallingBrick brick)

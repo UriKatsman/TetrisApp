@@ -20,8 +20,9 @@ namespace TetrisApp
 {        
     public partial class GamePage : Page
     {        
-        private int[,] board;
-        
+        private int[,] DrawnBoard;
+        private int[,] BackBoard;
+
         private Page previous;
         public static Player currentPlayer;
         public GamePage(Page previous)
@@ -44,7 +45,7 @@ namespace TetrisApp
             foreach (BoardComponents brick in allBricks)
             {
                 if (brick.player.Id == currentPlayer.Id)
-                    board[brick.Col, brick.Row] = brick.brickType.Id;
+                    DrawnBoard[brick.Col, brick.Row] = brick.brickType.Id;
             }
         }
         //---------------                
@@ -61,37 +62,66 @@ namespace TetrisApp
 
             if (tick == 1)
             {
+                // finds the correct dimentions of the canvas/arrays
                 double CanvasWidth = (double)this.MainCanvas.ActualWidth;
-                double CanvasHeight = (double)this.MainCanvas.ActualHeight;
-                //double CanvasWidth = 266+2/3;
-                //double CanvasHeight = 300;
+                double CanvasHeight = (double)this.MainCanvas.ActualHeight;                
                 double ratio = CanvasHeight / CanvasWidth;
+                // width of the arrays
                 int size = 20;
-                this.board = new int[size, (int)(size * ratio + 0.5)];
-                this.Brick = new GameBrick();
-                this.Brick.posX = BricksGets.rng.Next(0,board.GetLength(0)-Brick.grid.GetLength(0));
+                // creation of the arrays
+                this.DrawnBoard = new int[size, (int)(size * ratio + 0.5)];
+                this.BackBoard = new int[size, (int)(size * ratio + 0.5)];
+                // withdrawing the stored information about the board from the last game
                 GetBoard();
-                //*/
+
+                // testing -> creates a random brick every game tick
+                this.Brick = new GameBrick();
+                this.Brick.posX = BricksGets.rng.Next(0, DrawnBoard.GetLength(0) - Brick.grid.GetLength(0));
+                this.Brick.posY = DrawnBoard.GetLength(1) - Brick.grid.GetLength(1);
             }
-            DrawBoard(this.MainCanvas, this, this.board);
-            this.Brick = new GameBrick();
-            this.Brick.posX = BricksGets.rng.Next(0, board.GetLength(0) - Brick.grid.GetLength(0));
-            this.Brick.posY = board.GetLength(1) - Brick.grid.GetLength(1);
+            
+                             
+            // updates the array responsible for what the player sees
+            BrickBackgroundGridsMerge();
+            
+            // makes sure to not update the screen while the screen is moved
+            if (!MainWindow.IsMoved)
+                // updates the screen's display
+                DrawBoard(this.MainCanvas, this, this.DrawnBoard);
+            MainWindow.IsMoved = false;
+            //*/
+        }
+        private void BrickBackgroundGridsMerge()
+        {// updates the array responsible for what the player sees
+            for (int i = 0; i < BackBoard.GetLength(0); i++)
+            {
+                for (int k = 0; k < BackBoard.GetLength(1); k++)
+                {
+                    DrawnBoard[i, k] = BackBoard[i, k];
+                }
+            }
             for (int i = 0; i < Brick.grid.GetLength(0); i++)
             {
                 for (int k = 0; k < Brick.grid.GetLength(1); k++)
                 {
-                    board[i + Brick.posX, k + Brick.posY] = Brick.grid[i, k];
+                    DrawnBoard[i + Brick.posX, k + Brick.posY] = Brick.grid[i, k];
                 }
-            }            
-
-            if (!MainWindow.IsMoved)
-                DrawBoard(this.MainCanvas, this, this.board);
-            MainWindow.IsMoved = false;
-            //*/
+            }
+        }
+        private void MoveBrickToBackground()
+        {
+            for (int i = 0; i < Brick.grid.GetLength(0); i++)
+            {
+                for (int k = 0; k < Brick.grid.GetLength(1); k++)
+                {
+                    BackBoard[i + Brick.posX, k + Brick.posY] = Brick.grid[i, k];
+                }
+            }
         }
         private static void DrawBoard(Canvas painting, Page p, int[,] board)
         {
+            painting.Children.Clear();
+            
             double BoardWidth = (double)painting.ActualWidth;
             double BoardHeight = (double)painting.ActualHeight;
 
@@ -130,19 +160,26 @@ namespace TetrisApp
             }
         }
 
-        public static int LeftPos = 0;
         private void LeftBtn(object sender, MouseButtonEventArgs e)
         {
-            this.board[LeftPos, 1] = 0;
-            if (LeftPos > 0)
-                LeftPos--;
+            if (this.Brick.posX > 0 - this.Brick.leftBorderDistance) 
+                this.Brick.posX--;
         }
 
         private void RightBtn(object sender, MouseButtonEventArgs e)
         {
-            this.board[LeftPos, 1] = 0;
-            if (LeftPos < this.board.GetLength(0)-1)
-                LeftPos++;
+            if (this.Brick.posX < this.DrawnBoard.GetLength(0) - this.Brick.grid.GetLength(0) + this.Brick.rightBorderDistance) 
+                this.Brick.posX++;
+        }
+
+        private void LRBtn(object sender, MouseButtonEventArgs e)
+        {
+            this.Brick.RotateLeft();
+        }
+
+        private void RRBtn(object sender, MouseButtonEventArgs e)
+        {
+            this.Brick.RotateRight();
         }
     }
 }
