@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Back.png" />
+    <None Remove="DownArrow.png" />
+    <None Remove="LeftArrow.png" />
+    <None Remove="PickAnImage.png" />
+    <None Remove="RightArrow.png" />
+    <None Remove="RotateLeft.png" />
+    <None Remove="RotateRight.png" />
+    <None Remove="SettingsButton.png" />
+    <None Remove="TranslateIcon.png" />
+    <None Remove="UpArrow.png" />
+    <None Remove="VolumeIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\MyAPI\MyAPI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MyService">
+      <HintPath>..\MyService\bin\Debug\net8.0\MyService.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Back.png" />
+    <Resource Include="DownArrow.png" />
+    <Resource Include="LeftArrow.png" />
+    <Resource Include="PickAnImage.png" />
+    <Resource Include="RightArrow.png" />
+    <Resource Include="RotateLeft.png" />
+    <Resource Include="RotateRight.png" />
+    <Resource Include="SettingsButton.png" />
+    <Resource Include="TranslateIcon.png" />
+    <Resource Include="UpArrow.png" />
+    <Resource Include="VolumeIcon.png" />
+  </ItemGroup>
+
+</Project>

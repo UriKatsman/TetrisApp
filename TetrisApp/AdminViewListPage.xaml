@@ -1,0 +1,59 @@
+﻿<Page x:Class="TetrisApp.AdminViewListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TetrisApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="545" d:DesignWidth="860"
+      Background="LightBlue"
+      Title="AdminViewListPage">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial"/>
+        <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
+        <Image Grid.Row="1" Grid.Column="1" MouseDown="GoBack" Source="/Back.png"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="8">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Visibility="Collapsed" x:Name="UserEditPanel">
+                <TextBlock Text="Username:" FontWeight="Bold" FontSize="14" x:Name="UsernameText"/>
+                <TextBox x:Name="UsernameBox"/>
+                <TextBlock Text="Password:" FontWeight="Bold" FontSize="14" x:Name="PasswordText"/>
+                <TextBox x:Name="PasswordBox"/>
+                <TextBlock  FontWeight="Bold" FontSize="14"/>
+                <Button Width="70" Height="30" Content="Apply" FontWeight="Bold" FontSize="20" x:Name="ApplyBtn" Click="ApplyClick"/>
+            </StackPanel>
+            <ListBox x:Name="UsersListBox" Width="737">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="ListViewDelete"/>
+                        <MenuItem Header="Update" Click="ListViewUpdate"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Page>

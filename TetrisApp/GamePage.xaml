@@ -1,0 +1,63 @@
+﻿<Page x:Class="TetrisApp.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TetrisApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GamePage">
+
+    <Grid Background="LightBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="ScoreTXT" Grid.Row="0" Grid.Column="3" Text="Score: " FontWeight="Bold" FontSize="24" TextAlignment="Center"/>
+        <Border Grid.Row="1" Grid.Column="3" BorderThickness="2" BorderBrush="Gray" Grid.RowSpan="2">
+            <Canvas x:Name="MainCanvas" Width="Auto" Height="Auto" Background="White">
+
+            </Canvas>
+        </Border>
+        <Image Source="/RotateLeft.png" MouseDown="LRBtn" Grid.Row="2" Grid.Column="2"/>
+        <Image Source="/RotateRight.png" MouseDown="RRBtn" Grid.Row="2" Grid.Column="4"/>
+        <Image Source="/LeftArrow.png" MouseDown="LeftBtn" Grid.Row="3" Grid.Column="2"/>
+        <Image Source="/RightArrow.png" MouseDown="RightBtn" Grid.Row="3" Grid.Column="4"/>
+        <StackPanel Grid.Row="4" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Source="/DownArrow.png" MouseDown="DownBtn" x:Name="DownButton"/>
+            
+        </StackPanel>
+        <Grid x:Name="GameOverScreen" Visibility="Visible" Grid.ColumnSpan="7" Grid.RowSpan="4" Opacity="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Background="LightBlue" Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="5">
+                <StackPanel >
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Game Over!" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial" Grid.ColumnSpan="3"/>
+                    <TextBlock x:Name="FinalScore" Text="Score: 0" FontWeight="Bold" TextAlignment="Center" FontSize="36" HorizontalAlignment="Center" />
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="60" Background="Red" Click="Button_Click">
+                        <TextBlock Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
