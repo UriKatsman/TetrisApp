@@ -75,50 +75,40 @@ namespace TetrisApp
             this.Brick.posY = DrawnBoard.GetLength(1) - Brick.grid.GetLength(1);
             amountOfTicksPerIteration = 3;
 
+
             this.GameOver = false;
-            
-            UpdateScreen();
+            this.GameOverScreen.Opacity = 0;
+            UpdateScreen();            
         }
         private async void GetBoard()
-        {            
+        {
+            this.allBricks.Clear();
             List<BoardComponents> allBricks = await api.GetAllBoardComponents();
             foreach (BoardComponents brick in allBricks)
             {
                 if (brick.player.Id == currentPlayer.Id)
                 {
-                    DrawnBoard[brick.Col, brick.Row] = brick.brickType.Id;
+                    BackBoard[brick.Col, brick.Row] = brick.brickType.Id;
                     this.allBricks.Add(brick);
                 }
             }
         }
         
-        private void SaveBoard()
-        {
-            GetEveryonesBoards();
+        private async void SaveBoard()
+        {            
+            this.everyonesBricks = await api.GetAllBoardComponents();
             List<BoardComponents> OldLayout = everyonesBricks.FindAll(x => x.player.Id == currentPlayer.Id);
 
             foreach (BoardComponents b in OldLayout)
             {
-                RemoveBoardComponent(b.Id);
+                await api.DeleteBoardComponents(b.Id);
             }
-                        
+            
             foreach (BoardComponents b in this.allBricks)
             {
-                AddBoardComponent(b);
+                await api.InsertBoardComponents(b);
             }
-        }
-        private async void GetEveryonesBoards()
-        {
-            this.everyonesBricks = await api.GetAllBoardComponents();
-        }
-        private async void RemoveBoardComponent(int id)
-        {
-            await api.DeleteBoardComponents(id);
-        }
-        private async void AddBoardComponent(BoardComponents b)
-        {
-            await api.InsertBoardComponents(b);
-        }
+        }        
         private void CollapseRows()
         {
             int RowCount = 0;
@@ -181,7 +171,7 @@ namespace TetrisApp
                     await api.UpdatePlayer(currentPlayer);
                     this.GameOver = true;
 
-                    this.GameOverScreen.Visibility = Visibility.Visible;
+                    this.GameOverScreen.Opacity = 1;
 
                     break;
                 }
@@ -199,7 +189,7 @@ namespace TetrisApp
                 }
             }
         }
-        private async void Timer_Tick(object? sender, EventArgs e)
+        private void Timer_Tick(object? sender, EventArgs e)
         {
             if (this.GameOver)
                 return;
@@ -457,6 +447,7 @@ namespace TetrisApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.GameOverScreen.Opacity = 0;
             NavigationService nv = NavigationService.GetNavigationService(this);
             nv.Navigate(this.previous);
         }

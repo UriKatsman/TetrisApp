@@ -32,22 +32,30 @@ namespace TetrisApp
         }
         private async void SetContentForLangugesComboBox()
         {
-            Apiservice api = new();            
-            this.LanguagesComboBox.ItemsSource = await api.GetAllLanguages();
+            Apiservice api = new();    
+            List<Language> languages = await api.GetAllLanguages();
+            this.LanguagesComboBox.ItemsSource =languages;
+
 
             int index = 0;
-            for (int i = this.LanguagesComboBox.Items.Count - 1; i >= 0; i--)
+            if (EntrancePage.SignedInUser == null)
             {
-                if (EntrancePage.SignedInUser.language.Id == ((Language)this.LanguagesComboBox.Items[i]).Id)
-                    index = i;
+                index = 0;
             }
+            else
+                for (int i = this.LanguagesComboBox.Items.Count - 1; i >= 0; i--)
+                {
+                    if (EntrancePage.SignedInUser.language.Id == ((Language)this.LanguagesComboBox.Items[i]).Id)
+                        index = i;
+                }
             
             this.LanguagesComboBox.SelectedIndex = index;
         }
 
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
-            SaveChanges();
+            if (EntrancePage.SignedInUser != null)
+                SaveChanges();
             NavigationService nv = NavigationService.GetNavigationService(this);
 
             if (this.PreviousPage is AdminViewListPage)

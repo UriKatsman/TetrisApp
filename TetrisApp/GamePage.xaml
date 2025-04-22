@@ -38,7 +38,7 @@
             <Image Source="/DownArrow.png" MouseDown="DownBtn" x:Name="DownButton"/>
             
         </StackPanel>
-        <Grid x:Name="GameOverScreen" Visibility="Collapsed" Grid.ColumnSpan="7" Grid.RowSpan="4" Background="Gray" Opacity="0.5">
+        <Grid x:Name="GameOverScreen" Visibility="Visible" Grid.ColumnSpan="7" Grid.RowSpan="4" Opacity="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="1.5*"/>
@@ -49,13 +49,15 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Background="LightBlue" Grid.Row="1" Grid.Column="1">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Game Over!" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial" Grid.ColumnSpan="3"/>
-                <TextBlock x:Name="FinalScore" Text="Score: 0" FontWeight="Bold" TextAlignment="Center" FontSize="36" HorizontalAlignment="Center" />
-                <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="60" Background="Red" Click="Button_Click">
-                    <TextBlock Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
-                </Button>
-            </StackPanel>
+            <Border Background="LightBlue" Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="5">
+                <StackPanel >
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Game Over!" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial" Grid.ColumnSpan="3"/>
+                    <TextBlock x:Name="FinalScore" Text="Score: 0" FontWeight="Bold" TextAlignment="Center" FontSize="36" HorizontalAlignment="Center" />
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="60" Background="Red" Click="Button_Click">
+                        <TextBlock Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
+                    </Button>
+                </StackPanel>
+            </Border>
         </Grid>
     </Grid>
 </Page>
