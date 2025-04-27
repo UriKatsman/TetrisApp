@@ -37,7 +37,7 @@ namespace TetrisApp
             {                
                 items.Add(new AdminListItemControl(u));
 
-                items.Last().Width = 690;
+                items.Last().Width = this.UsersListBox.Width - 15;
                 items.Last().HorizontalAlignment = HorizontalAlignment.Center;                
 
                 IsAdmin = admins.Find(x => x.Id == items.Last().user.Id) != null;

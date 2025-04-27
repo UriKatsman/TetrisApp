@@ -8,7 +8,67 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GamePage">
 
-    <Grid Background="LightBlue">
+    <Page.Resources>
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E3B70" Offset="0.0"/>
+            <GradientStop Color="#2E5AA7" Offset="0.5"/>
+            <GradientStop Color="#4B7ED4" Offset="1.0"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="GameScoreText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="#0A1A3F" BlurRadius="3" Opacity="0.7"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GameButtonStyle" TargetType="Border">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Background" Value="#64A7F7"/>
+            <Setter Property="Opacity" Value="0.9"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="#0A1A3F" BlurRadius="3" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GameOverButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#4B7ED4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3563B3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#1E3B70"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource BackgroundGradient}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="6*"/>
@@ -24,39 +84,73 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="ScoreTXT" Grid.Row="0" Grid.Column="3" Text="Score: " FontWeight="Bold" FontSize="24" TextAlignment="Center"/>
-        <Border Grid.Row="1" Grid.Column="3" BorderThickness="2" BorderBrush="Gray" Grid.RowSpan="2">
-            <Canvas x:Name="MainCanvas" Width="Auto" Height="Auto" Background="White">
 
-            </Canvas>
+        <!-- Score Display -->
+        <Border Grid.Row="0" Grid.Column="3" Background="#2E5AA7" CornerRadius="10" Margin="5" Opacity="0.9">
+            <TextBlock x:Name="ScoreTXT" Text="Score: " Style="{StaticResource GameScoreText}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
-        <Image Source="/RotateLeft.png" MouseDown="LRBtn" Grid.Row="2" Grid.Column="2"/>
-        <Image Source="/RotateRight.png" MouseDown="RRBtn" Grid.Row="2" Grid.Column="4"/>
-        <Image Source="/LeftArrow.png" MouseDown="LeftBtn" Grid.Row="3" Grid.Column="2"/>
-        <Image Source="/RightArrow.png" MouseDown="RightBtn" Grid.Row="3" Grid.Column="4"/>
-        <StackPanel Grid.Row="4" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Image Source="/DownArrow.png" MouseDown="DownBtn" x:Name="DownButton"/>
-        </StackPanel>
-        <Grid x:Name="GameOverScreen" Visibility="Visible" Grid.ColumnSpan="7" Grid.RowSpan="4" Opacity="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Border Background="LightBlue" Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="5">
-                <StackPanel >
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Game Over!" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial" Grid.ColumnSpan="3"/>
-                    <TextBlock x:Name="FinalScore" Text="Score: 0" FontWeight="Bold" TextAlignment="Center" FontSize="36" HorizontalAlignment="Center" />
-                    <Button x:Name="GoBackBtn" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="60" Background="Red" Click="Button_Click">
-                        <TextBlock Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
-                    </Button>
-                </StackPanel>
-            </Border>
+
+        <!-- Main Game Board -->
+        <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" BorderThickness="3" BorderBrush="#A2C0F7" CornerRadius="10" Background="White" Margin="5">
+            <Canvas x:Name="MainCanvas" Width="Auto" Height="Auto"/>
+        </Border>
+
+        <!-- Game Controls -->
+        <!-- Rotate Left Button -->        
+        <Image Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" MouseDown="LRBtn" Source="/RotateLeft.png"/>
+        <!-- Rotate Right Button -->        
+        <Image Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" MouseDown="RRBtn" Source="/RotateRight.png"/>
+        <!-- Left Button -->        
+        <Image Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" MouseDown="LeftBtn" Source="/LeftArrow.png"/>
+        <!-- Right Button -->        
+        <Image Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" MouseDown="RightBtn" Source="/RightArrow.png"/>
+
+        <!-- Down Button -->        
+        <Image Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" x:Name="DownButton" MouseDown="DownBtn" Source="/DownArrow.png"/>
+
+        <!-- Game Over Screen -->
+        <Grid x:Name="GameOverScreen" Visibility="Collapsed" Grid.ColumnSpan="7" Grid.RowSpan="4" Opacity="0">
+            <Rectangle Fill="#1E3B70" Opacity="0.7"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Column="1" Grid.Row="1" Background="#2E5AA7" BorderBrush="#A2C0F7" 
+                        BorderThickness="3" CornerRadius="15">
+                    <StackPanel Margin="20">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                   Text="Game Over!" FontSize="50" Foreground="White" 
+                                   FontWeight="Bold" FontFamily="Arial" Margin="0,10,0,20">
+                            <TextBlock.Effect>
+                                <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+
+                        <TextBlock x:Name="FinalScore" Text="Score: 0" FontWeight="Bold" 
+                                   TextAlignment="Center" FontSize="36" HorizontalAlignment="Center" 
+                                   Foreground="#DCE8FF" Margin="0,0,0,30"/>
+
+                        <Button x:Name="GoBackBtn" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Width="200" Style="{StaticResource GameOverButtonStyle}" Click="Button_Click">
+                            <TextBlock Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </Grid>
+
+        <!-- Decorative Elements -->
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="1" Grid.Column="5" Fill="#3563B3" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="2" Grid.Column="6" Fill="#A2C0F7" Width="15" Height="60" VerticalAlignment="Bottom" Opacity="0.4"/>
+        <Rectangle Grid.Row="3" Grid.Column="0" Fill="#64A7F7" Width="40" Height="15" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
     </Grid>
 </Page>

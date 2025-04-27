@@ -47,6 +47,7 @@ namespace TetrisApp
             InitializeComponent();
             this.api = new Apiservice();            
             this.previous = previous;
+            this.MoveCount = 0;
                       
             this.Loaded += GamePage_Loaded;
             this.GoBackBtn.IsEnabled = false;
@@ -82,6 +83,7 @@ namespace TetrisApp
             this.Brick.posX = BricksGets.rng.Next(0, DrawnBoard.GetLength(0) - Brick.grid.GetLength(0));
             this.Brick.posY = DrawnBoard.GetLength(1) - Brick.grid.GetLength(1);
             amountOfTicksPerIteration = 3;
+            this.MoveCount = 0;
 
             await GetBoard();
             this.GameOver = false;
@@ -114,6 +116,7 @@ namespace TetrisApp
             this.Brick.posX = BricksGets.rng.Next(0, DrawnBoard.GetLength(0) - Brick.grid.GetLength(0));
             this.Brick.posY = DrawnBoard.GetLength(1) - Brick.grid.GetLength(1);
             amountOfTicksPerIteration = 3;
+            this.MoveCount = 0;
 
             await GetBoard();
             this.GameOverScreen.Opacity = 0;
@@ -139,8 +142,7 @@ namespace TetrisApp
         }        
 
         private async void SaveBoard()
-        {
-            
+        {            
             this.everyonesBricks = await api.GetAllBoardComponents();
             List<BoardComponents> OldLayout = everyonesBricks.FindAll(x => x.player.Id == currentPlayer.Id);
             List<BoardComponents> currentLayout = new List<BoardComponents>();
@@ -222,7 +224,7 @@ namespace TetrisApp
                     this.GameOverScreen.Opacity = 1;
                     this.GoBackBtn.IsEnabled = true;
 
-                    break;
+                    return;
                 }
             }            
         }
@@ -238,6 +240,7 @@ namespace TetrisApp
                 }
             }
         }
+        private int MoveCount;
         private void Timer_Tick(object? sender, EventArgs e)
         {
             if (this.GameOver)
@@ -257,9 +260,7 @@ namespace TetrisApp
                     MoveBrickToBackground();
                     LossDetection();
                     CollapseRows();
-                    
-                    
-                    SaveBoard();
+                                        
 
                     this.Brick = new GameBrick();
                     CopyBrickGrid();
@@ -268,9 +269,13 @@ namespace TetrisApp
                 }
                 else
                     this.Brick.posY--;
-                this.tick = 0;                
+                this.tick = 0;
+                this.MoveCount++;
             }
-            
+            if (this.MoveCount % 10 == 0)
+            {
+                SaveBoard();
+            }
             
             if (MainWindow.IsMoved == false)
             {

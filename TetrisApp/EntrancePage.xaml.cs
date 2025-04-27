@@ -33,10 +33,12 @@ namespace TetrisApp
 
         private void EntrancePage_Loaded(object sender, RoutedEventArgs e)
         {
+            /*
             if (SignedInUser != null)
                 TranslatePage(SignedInUser.language);
             else
                 TranslatePage(new Language() {LanguageName= "Hebrew" });
+            //*/
         }
 
         public void TranslatePage(Language To)

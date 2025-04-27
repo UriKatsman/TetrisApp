@@ -138,7 +138,7 @@ namespace ViewModel
             try
             {
                 command.Connection = connection;
-                //if (connection.State != ConnectionState.Open)
+                if (connection.State != ConnectionState.Open)
                     connection.Open();
                 trans = connection.BeginTransaction();
                 command.Transaction = trans;
