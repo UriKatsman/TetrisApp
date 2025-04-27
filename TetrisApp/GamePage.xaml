@@ -36,7 +36,6 @@
         <Image Source="/RightArrow.png" MouseDown="RightBtn" Grid.Row="3" Grid.Column="4"/>
         <StackPanel Grid.Row="4" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Image Source="/DownArrow.png" MouseDown="DownBtn" x:Name="DownButton"/>
-            
         </StackPanel>
         <Grid x:Name="GameOverScreen" Visibility="Visible" Grid.ColumnSpan="7" Grid.RowSpan="4" Opacity="0">
             <Grid.ColumnDefinitions>
@@ -53,7 +52,7 @@
                 <StackPanel >
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Game Over!" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial" Grid.ColumnSpan="3"/>
                     <TextBlock x:Name="FinalScore" Text="Score: 0" FontWeight="Bold" TextAlignment="Center" FontSize="36" HorizontalAlignment="Center" />
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="60" Background="Red" Click="Button_Click">
+                    <Button x:Name="GoBackBtn" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="60" Background="Red" Click="Button_Click">
                         <TextBlock Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
                     </Button>
                 </StackPanel>

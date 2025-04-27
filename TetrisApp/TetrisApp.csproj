@@ -28,13 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
-    <ProjectReference Include="..\MyAPI\MyAPI.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="MyService">
-      <HintPath>..\MyService\bin\Debug\net8.0\MyService.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\MyService\MyService.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

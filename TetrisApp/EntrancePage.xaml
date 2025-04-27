@@ -8,7 +8,84 @@
       d:DesignHeight="545" d:DesignWidth="860"
       Title="EntrancePage">
 
-    <Grid Background="LightBlue">
+    <Page.Resources>
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E3B70" Offset="0.0"/>
+            <GradientStop Color="#2E5AA7" Offset="0.5"/>
+            <GradientStop Color="#4B7ED4" Offset="1.0"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Background" Value="#E6F0FF"/>
+            <Setter Property="Foreground" Value="#1E3B70"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10"
+                                BorderBrush="#A2C0F7"
+                                BorderThickness="2">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#4B7ED4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3563B3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#1E3B70"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TetrisTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="70"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="#DCE8FF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource BackgroundGradient}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
@@ -30,21 +107,50 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial"/>
-        <Image Grid.Row="1" Grid.Column="3" Source="/SettingsButton.png" MouseDown="GoToSettings"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="שם משתמש" FontSize="50" Background="Transparent" x:Name="UsernameTXT" FontFamily="Arial"/>
-        <TextBox Grid.Row="5" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="UsernameBox" FontSize="30" FontFamily="Arial" />
-        <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="סיסמא" FontSize="50" Background="Transparent" x:Name="PasswordTXT" FontFamily="Arial"/>
-        <TextBox Grid.Row="7" Grid.Column="2" Width="400" Height="40" Background="White" x:Name="PasswordBox" FontSize="30" FontFamily="Arial" />
+        <!-- Tetris Blocks Background Elements (Decorative) -->
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="30" Height="30" HorizontalAlignment="Left" Opacity="0.6"/>
+        <Rectangle Grid.Row="3" Grid.Column="3" Fill="#3563B3" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80" VerticalAlignment="Bottom" Opacity="0.4"/>
+        <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7" Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
 
-        <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="hidden" HorizontalAlignment="Center" FontSize="20" Foreground="Red" Text="שם משתמש או סיסמא שגויים" FontFamily="Arial"/>
+        <!-- Main Logo/Title -->
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
+            <TextBlock Text="TETRIS" Style="{StaticResource TetrisTitle}" />
+        </Border>
 
-        <Button Grid.Row="9" Grid.Column="2" FontSize="30" Height="40" Width="200" x:Name="LogInButton" Click="LogIn" FontFamily="Arial">
-            <Viewbox Stretch="Uniform">
-                <TextBlock Text="{Binding ButtonText}" TextWrapping="Wrap" TextAlignment="Center" />
-            </Viewbox>
-        </Button>
-        <Button Grid.Row="10" Grid.Column="2" Content="אין משתמש? צור משתמש כאן." FontSize="30" Height="40" Width="400" x:Name="SignUpButton" Click="SignUp" FontFamily="Arial"/>
+        <!-- Settings Button -->
+        <!--<Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
+            <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
+        </Border>-->
+
+        <!-- Form Elements -->
+        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                   Text="שם משתמש" Style="{StaticResource LabelStyle}" x:Name="UsernameTXT"/>
+
+        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource ModernTextBox}" x:Name="UsernameBox"/>
+
+        <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                   Text="סיסמא" Style="{StaticResource LabelStyle}" x:Name="PasswordTXT"/>
+
+        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource ModernTextBox}" x:Name="PasswordBox"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="Hidden" 
+                   HorizontalAlignment="Center" FontSize="22" Foreground="#FF6B6B" Text="שם משתמש או סיסמא שגויים" 
+                   FontFamily="Arial" FontWeight="SemiBold"/>
+
+        <!-- Buttons -->
+        <Button Grid.Row="9" Content="הכנס" Grid.Column="2" Style="{StaticResource ModernButton}" Width="220" x:Name="LogInButton" Click="LogIn" FontWeight="Bold"/>
+
+        <Button Grid.Row="10" Grid.Column="2" Content="אין משתמש? צור משתמש כאן." Width="420" 
+                Style="{StaticResource ModernButton}" Background="#2E5AA7" x:Name="SignUpButton" Click="SignUp"/>
+
+        <!-- Animated Tetris Block (Optional - add animation code separately) -->
+        <Canvas Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="5">
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3" Canvas.Left="50" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3" Canvas.Left="70" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3" Canvas.Left="90" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3" Canvas.Left="70" Canvas.Top="0"/>
+        </Canvas>
     </Grid>
 </Page>

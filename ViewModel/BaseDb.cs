@@ -13,11 +13,9 @@ namespace ViewModel
     {
         private static bool formated = false;
 
-        //protected static string Path =  Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location +"/../../../../../../TetrisApp/ViewModel/TetrisNMore.accdb");
-
-        protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + "C:\\Users\\student.HP-6HYJCV2\\Downloads\\TetrisApp-main\\TetrisApp-main\\ViewModel\\TetrisNMore.accdb";
-
-        //C:\Users\urika\Desktop\TetrisApp-master\TetrisApp-master\ViewModel\TetrisNMore.accdb
+        protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
+            + "/../../../../../ViewModel/TetrisNMore.accdb");
+        
 
         protected OleDbConnection connection;
         protected OleDbCommand command;

@@ -49,7 +49,7 @@ namespace TetrisApp
             this.previous = previous;
                       
             this.Loaded += GamePage_Loaded;
-                 
+            this.GoBackBtn.IsEnabled = false;
         }
 
         private void GamePage_Loaded(object sender, RoutedEventArgs e)
@@ -86,6 +86,7 @@ namespace TetrisApp
             await GetBoard();
             this.GameOver = false;
             this.GameOverScreen.Opacity = 0;
+            this.GoBackBtn.IsEnabled=false;
             UpdateScreen();
             this.isInitiated = true;
         }
@@ -115,7 +116,8 @@ namespace TetrisApp
             amountOfTicksPerIteration = 3;
 
             await GetBoard();
-            this.GameOverScreen.Opacity = 0;            
+            this.GameOverScreen.Opacity = 0;
+            this.GoBackBtn.IsEnabled = false;
             UpdateScreen();
             this.isInitiated = true;
         }
@@ -134,9 +136,8 @@ namespace TetrisApp
                     this.allBricks.Add(brick);
                 }
             }
-        }
-        
-        
+        }        
+
         private async void SaveBoard()
         {
             
@@ -219,6 +220,7 @@ namespace TetrisApp
                     this.GameOver = true;
                     
                     this.GameOverScreen.Opacity = 1;
+                    this.GoBackBtn.IsEnabled = true;
 
                     break;
                 }
