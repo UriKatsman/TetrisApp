@@ -2,6 +2,7 @@
 using MyService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -144,6 +145,7 @@ namespace TetrisApp
         private async void SaveBoard()
         {            
             this.everyonesBricks = await api.GetAllBoardComponents();
+            Debug.WriteLine("this.everyonesBricks.Count (at SaveBoard attempt) = " + this.everyonesBricks.Count);
             List<BoardComponents> OldLayout = everyonesBricks.FindAll(x => x.player.Id == currentPlayer.Id);
             List<BoardComponents> currentLayout = new List<BoardComponents>();
             foreach (BoardComponents b in this.allBricks)
@@ -260,7 +262,9 @@ namespace TetrisApp
                     MoveBrickToBackground();
                     LossDetection();
                     CollapseRows();
-                                        
+
+                    SaveBoard();
+
 
                     this.Brick = new GameBrick();
                     CopyBrickGrid();
@@ -274,7 +278,7 @@ namespace TetrisApp
             }
             if (this.MoveCount % 10 == 0)
             {
-                SaveBoard();
+                //SaveBoard();
             }
             
             if (MainWindow.IsMoved == false)

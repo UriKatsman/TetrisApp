@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ViewModel;
+//C:\Users\student.HP-6HYJCV2\source\repos\TetrisApp3\ViewModel\BaseDb.cs
+//C: \Users\student.HP - 6HYJCV2\AppData\Local\SourceServer\4fa36f4581b56fbdc4426b4f2c3a127815a8bd31dd9a7ffe51e21841345fe399\ViewModel\BaseDb.cs
 namespace ViewModel
 {
     public abstract class BaseDb
@@ -128,36 +131,41 @@ namespace ViewModel
             connection = new OleDbConnection(connectionString);
             command = new OleDbCommand();
             command.Connection = connection;
+            command.CommandTimeout = 600;
         }
 
-        public int SaveChanges()
+        public async Task<int> SaveChanges()
         {
-            OleDbTransaction trans = null;
+          
             int records_affected = 0;
 
             try
             {
                 command.Connection = connection;
-                if (connection.State != ConnectionState.Open)
+                //if (connection.State != ConnectionState.Open)
+                try
+                {
                     connection.Open();
-                trans = connection.BeginTransaction();
-                command.Transaction = trans;
+                }
+                catch (Exception e) { Debug.Write(e.Message); }
+                
+                
                 
                 foreach (var entity in inserted)
                 {
                     command.Parameters.Clear();
                     entity.CreateSql(entity.Entity, command); //cmd.CommandText = CreateInsertSQL(entity.Entity);
-                    records_affected += command.ExecuteNonQuery();
+                    records_affected +=await command.ExecuteNonQueryAsync();
 
                     command.CommandText = "Select @@Identity";
-                    entity.Entity.Id = (int)command.ExecuteScalar();
+                    entity.Entity.Id = (int)(await command.ExecuteScalarAsync());
                 }
                 
                 foreach (var entity in updated)
                 {
                     command.Parameters.Clear();
                     entity.CreateSql(entity.Entity, command); //cmd.CommandText = CreateUpdateSQL(entity.Entity);
-                    records_affected += command.ExecuteNonQuery();
+                    records_affected += await command.ExecuteNonQueryAsync();
                 }
                 
 
@@ -166,14 +174,16 @@ namespace ViewModel
                     command.Parameters.Clear();
                     entity.CreateSql(entity.Entity, command);
 
-                    records_affected += command.ExecuteNonQuery();
+                    records_affected += await command.ExecuteNonQueryAsync();
                 }
 
-                trans.Commit();
+               
             }
             catch (Exception ex)
             {
-                trans.Rollback();
+                var eee = ex;
+                var xx = connection;
+                
                 System.Diagnostics.Debug.WriteLine(ex.Message + "\n SQL:" + command.CommandText);
             }
             finally

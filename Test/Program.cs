@@ -24,7 +24,7 @@ namespace Test
             await apiservice.DeleteAdmin(id);
             Console.WriteLine(Admins.Count);
 
-            Admin a1 = new Admin() { language = LanguageDb.SelectById(1), UserName = "mebunan", Password = "shambanana", ProfilePicture = "", AmountBanned = 5 };
+            Admin a1 = new Admin() { language = LanguageDb.SelectById(1), UserName = "mebunan", Password = "shambanana", AmountBanned = 5 };
             await apiservice.InsertAdmin(a1);
             Admin myAdmin = Admins.First();
             myAdmin.UserName = "LO";
