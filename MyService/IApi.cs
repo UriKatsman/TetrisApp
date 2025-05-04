@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel;
 
 namespace MyService
 {
@@ -18,6 +19,11 @@ namespace MyService
         public Task<int> DeleteBoardComponents(int id);
         public Task<int> UpdateBoardComponents(BoardComponents x);
         public Task<int> InsertBoardComponents(BoardComponents x);
+
+        public Task<FriendshipList> GetAllFriendships();
+        public Task<int> DeleteFriendship(int id);
+        public Task<int> UpdateFriendship(Friendship x);
+        public Task<int> InsertFriendship(Friendship x);
 
         public Task<BrickTypeList> GetAllBrickTypes();
         public Task<int> DeleteBrickType(int id);

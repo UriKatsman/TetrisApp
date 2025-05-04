@@ -14,8 +14,9 @@ namespace ViewModel
         protected override Base CreateModel(Base entity)
         {
             Friendship b = entity as Friendship;
-            b.player1 = PlayerDb.SelectById(int.Parse(reader["player1"].ToString()));
-            b.player1 = PlayerDb.SelectById(int.Parse(reader["player2"].ToString()));
+            b.player1 = PlayerDb.SelectById(int.Parse(reader["Player1"].ToString()));
+            b.player2 = PlayerDb.SelectById(int.Parse(reader["Player2"].ToString()));
+            b.isAccepted = bool.Parse(reader["isAccepted"].ToString());
             return base.CreateModel(entity);
         }
 
@@ -54,11 +55,12 @@ namespace ViewModel
             Friendship u = entity as Friendship;
             if (u != null)
             {
-                string sqlStr = $"INSERT INTO Friendship ([player1],[player2]) values (@player1,@player2)";
+                string sqlStr = $"INSERT INTO Friendship ([player1],[player2],[isAccepted]) values (@player1,@player2,@isAccepted)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@player1", u.player1));
                 command.Parameters.Add(new OleDbParameter("@player2", u.player2));
+                command.Parameters.Add(new OleDbParameter("@isAccepted", u.isAccepted));
 
             }
         }
@@ -77,12 +79,13 @@ namespace ViewModel
             if (u != null)
             {
                 string sqlStr = $"Update Friendship SET " +
-                                 "[player1]=@player1, [player2]=@player2 " +
+                                 "[player1]=@player1, [player2]=@player2, [isAccepted]=@isAccepted " +
                                  "WHERE ID=@ID";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@player1", u.player1));
                 command.Parameters.Add(new OleDbParameter("@player2", u.player2));
+                command.Parameters.Add(new OleDbParameter("@isAccepted", u.isAccepted));
                 command.Parameters.Add(new OleDbParameter("@ID", u.Id));
             }
         }

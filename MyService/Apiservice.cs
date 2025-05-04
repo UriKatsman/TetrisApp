@@ -19,7 +19,10 @@ namespace MyService
         {
             return (await client.DeleteAsync(uri + $"/api/Values/DeleteAdmin/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
-
+        public async Task<int> DeleteFriendship(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Values/DeleteFriendship/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
         public async Task<int> DeleteBoardComponents(int id)
         {
             return (await client.DeleteAsync(uri + $"/api/Values/DeleteBoardComponents/{id}")).IsSuccessStatusCode ? 1 : 0;
@@ -49,7 +52,10 @@ namespace MyService
         {
             return await client.GetFromJsonAsync<AdminList>(uri + "/api/Values/AdminSelector");
         }
-
+        public async Task<FriendshipList> GetAllFriendships()
+        {
+            return await client.GetFromJsonAsync<FriendshipList>(uri + "/api/Values/FriendshipSelector");
+        }
         public async Task<BoardComponentsList> GetAllBoardComponents()
         {
             return await client.GetFromJsonAsync<BoardComponentsList>(uri + "/api/Values/BoardComponentsSelector");
@@ -80,34 +86,14 @@ namespace MyService
             return (await client.PostAsJsonAsync<Admin>(uri + "/api/Values/InsertAdmin", x)).IsSuccessStatusCode ? 1 : 0;
         }
 
+        public async Task<int> InsertFriendship(Friendship x)
+        {
+            return (await client.PostAsJsonAsync<Friendship>(uri + "/api/Values/InsertFriendship", x)).IsSuccessStatusCode ? 1 : 0;
+        }
         public async Task<int> InsertBoardComponents(BoardComponents x)
         {
             var response = (await client.PostAsJsonAsync<BoardComponents>(uri + "/api/Values/InsertBoardComponents", x)).IsSuccessStatusCode ? 1 : 0;
-            return response;
-            /*
-            try
-            {
-                Console.WriteLine("About to make POST request");
-                var response = await client.PostAsJsonAsync<BoardComponents>("http://localhost:5213/api/Values/InsertBoardComponents", x);
-                Console.WriteLine($"Response received: {response.StatusCode}");
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    // Get the error response content
-                    string errorContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Error response: {errorContent}");
-                    return 0;
-                }
-
-                return 1;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception in InsertBoardComponents: {ex.Message}");
-                Console.WriteLine($"Stack trace: {ex.StackTrace}");
-                throw;
-            }
-            //*/
+            return response;            
         }
 
         public async Task<int> InsertBrickType(BrickType x)
@@ -134,7 +120,10 @@ namespace MyService
         {
             return (await client.PutAsJsonAsync<Admin>(uri + "/api/Values/UpdateAdmin", x)).IsSuccessStatusCode ? 1 : 0;
         }
-
+        public async Task<int> UpdateFriendship(Friendship x)
+        {
+            return (await client.PutAsJsonAsync<Friendship>(uri + "/api/Values/UpdateFriendship", x)).IsSuccessStatusCode ? 1 : 0;
+        }
         public async Task<int> UpdateBoardComponents(BoardComponents x)
         {
             return (await client.PutAsJsonAsync<BoardComponents>(uri + "/api/Values/UpdateBoardComponents", x)).IsSuccessStatusCode ? 1 : 0;

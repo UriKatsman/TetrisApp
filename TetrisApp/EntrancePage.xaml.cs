@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LibreTranslate.Net;
 
 
 namespace TetrisApp
@@ -43,32 +44,38 @@ namespace TetrisApp
 
         public void TranslatePage(Language To)
         {
-            if (To == null)
-                return;
-            switch (To.LanguageName)
-            {
-                case "English":
-                    this.UsernameTXT.Text = "Username";
-                    this.PasswordTXT.Text = "Password";
-                    this.LogInButton.Content = "Log in";
-                    this.SignUpButton.Content = "Don't have an account? create one here.";
-                    this.ErrorLoggingInText.Text = "";
-                    break;
-                case "Hebrew":
-                    this.UsernameTXT.Text = "שם משתמש";
-                    this.PasswordTXT.Text = "סיסמא";
-                    this.LogInButton.Content = "התחבר";
-                    this.SignUpButton.Content = "אין משתמש? צור משתמש כאן.";
-                    this.ErrorLoggingInText.Text = "";
-                    break;
-                case "German":
-                    this.UsernameTXT.Text = "Benutzername";
-                    this.PasswordTXT.Text = "Passwort";
-                    this.LogInButton.Content = "Einloggen";
-                    this.SignUpButton.Content = "Sie haben noch kein Konto? Erstellen Sie hier eins.";
-                    this.ErrorLoggingInText.Text = "";
-                    break;                
-            }
+            //var translator = new LibreTranslate();
+
+
+
+
+
+            //if (To == null)
+            //    return;
+            //switch (To.LanguageName)
+            //{
+            //    case "English":
+            //        this.UsernameTXT.Text = "Username";
+            //        this.PasswordTXT.Text = "Password";
+            //        this.LogInButton.Content = "Log in";
+            //        this.SignUpButton.Content = "Don't have an account? create one here.";
+            //        this.ErrorLoggingInText.Text = "";
+            //        break;
+            //    case "Hebrew":
+            //        this.UsernameTXT.Text = "שם משתמש";
+            //        this.PasswordTXT.Text = "סיסמא";
+            //        this.LogInButton.Content = "התחבר";
+            //        this.SignUpButton.Content = "אין משתמש? צור משתמש כאן.";
+            //        this.ErrorLoggingInText.Text = "";
+            //        break;
+            //    case "German":
+            //        this.UsernameTXT.Text = "Benutzername";
+            //        this.PasswordTXT.Text = "Passwort";
+            //        this.LogInButton.Content = "Einloggen";
+            //        this.SignUpButton.Content = "Sie haben noch kein Konto? Erstellen Sie hier eins.";
+            //        this.ErrorLoggingInText.Text = "";
+            //        break;                
+            //}
                   
         }
         private void GoToSettings(object sender, MouseButtonEventArgs e)
@@ -102,8 +109,11 @@ namespace TetrisApp
                 }
                 else
                 {
+                    //NavigationService nv = NavigationService.GetNavigationService(this);
+                    //nv.Navigate(new MainPage(this));
+
                     NavigationService nv = NavigationService.GetNavigationService(this);
-                    nv.Navigate(new MainPage(this));
+                    nv.Navigate(new FriendsPage());
                 }
             }
             else

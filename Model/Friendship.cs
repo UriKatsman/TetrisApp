@@ -10,10 +10,11 @@ namespace Model
     {
         public Player player1;
         public Player player2;
+        public bool isAccepted;
 
         public override string ToString()
         {
-            return this.player1 + " + " + this.player2;
+            return this.player1 + " + " + this.player2 + " "+ this.isAccepted;
         }
     }
 }
