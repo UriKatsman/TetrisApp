@@ -8,9 +8,9 @@ namespace Model
 {
     public class Friendship : Base
     {
-        public Player player1;
-        public Player player2;
-        public bool isAccepted;
+        public Player player1 { get; set; }
+        public Player player2 { get; set; }
+        public bool isAccepted { get; set; }
 
         public override string ToString()
         {

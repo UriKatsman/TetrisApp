@@ -11,7 +11,7 @@ namespace MyService
         {
             uri = "http://localhost:5213";
             client = new HttpClient();
-            client.Timeout = new TimeSpan(0,10,0);
+            //client.Timeout = new TimeSpan(0,10,0);
         }
 
         //C:\Users\student.HP-6HYJCV2\Downloads\TetrisApp (3)\TetrisApp\MyService\bin\Debug\net8.0

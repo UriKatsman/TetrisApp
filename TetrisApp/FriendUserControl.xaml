@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:TetrisApp"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="500">
+             d:DesignHeight="100" d:DesignWidth="700">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -15,6 +15,6 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Text="FriendName" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="FriendNameTXT" FontSize="30"/>
         <TextBlock Grid.Column="1" Text="1000" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="FriendScoreTXT" FontSize="40"/>
-        <materialDesign:PackIcon Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Remove" Width="50" Height="50" Foreground="Red" MouseDown="RemoveFriend"/>
+        <materialDesign:PackIcon x:Name="Xbtn" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Remove" Width="50" Height="50" Foreground="Red"/>
     </Grid>
 </UserControl>

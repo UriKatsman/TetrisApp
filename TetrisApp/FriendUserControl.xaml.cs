@@ -22,17 +22,25 @@ namespace TetrisApp
     public partial class FriendUserControl : UserControl
     {
         public Player p;
-        public FriendUserControl(Player p, string username, int HighScore)
+        private Page page;
+        public FriendUserControl(Player p, string username, int HighScore, Page page)
         {
             InitializeComponent();
             this.p = p;
+            this.page = page;
             this.FriendNameTXT.Text = username;
             this.FriendScoreTXT.Text = HighScore.ToString();
+            this.DataContext = p;            
+            this.Xbtn.MouseDown += Xbtn_MouseDown;
         }
 
-        private void RemoveFriend(object sender, MouseButtonEventArgs e)
+        private void Xbtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (page is FriendsPage)
+            {
+                FriendsPage fPage = page as FriendsPage;
+                fPage.Del_Friend(this);
+            }
         }
     }
 }

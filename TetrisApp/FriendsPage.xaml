@@ -124,7 +124,7 @@
                 <TextBox x:Name="AddFriendTextBox" FontWeight="Bold"/>
             </Border>
             <Border Grid.Column="2" BorderThickness="5">
-                <Button Background="White">
+                <Button Background="White" Click="SendRequest">
                     <TextBlock x:Name="AddButtonTXT" Text="Send Friend Request" FontWeight="Bold"/>
                 </Button>
             </Border>

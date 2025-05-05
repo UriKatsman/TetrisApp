@@ -27,6 +27,14 @@ namespace MyAPI.Controllers
             return lList;
         }
         [HttpGet]
+        [ActionName("FriendshipSelector2")]
+        public Friendship SelectAllFriendships2()
+        {
+            FriendshipDb lDB = new FriendshipDb();
+            FriendshipList lList = lDB.SelectAll();
+            return lList.First();
+        }
+        [HttpGet]
         [ActionName("AdminSelector")]
         public AdminList SelectAllAdmin()
         {
