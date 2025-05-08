@@ -26,6 +26,7 @@ namespace TetrisApp
         {
             InitializeComponent();
             SetPlayer();
+            this.Loaded += MainPage_Loaded;
         }
         public MainPage(Page prev)
         {
