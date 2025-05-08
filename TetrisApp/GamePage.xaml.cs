@@ -23,8 +23,6 @@ namespace TetrisApp
     public partial class GamePage : Page
     {
         //stores the bricks in use
-        private List<BoardComponents> allBricks;
-        private List<BoardComponents> everyonesBricks;
         private List<BrickType> AllColors;
 
         private Apiservice api;
@@ -48,10 +46,10 @@ namespace TetrisApp
             InitializeComponent();
             this.api = new Apiservice();            
             this.previous = previous;
-            this.MoveCount = 0;
-                      
-            this.Loaded += GamePage_Loaded;
+            this.GameOverScreen.Visibility = Visibility.Collapsed;
             this.GoBackBtn.IsEnabled = false;
+
+            this.Loaded += GamePage_Loaded;
         }
 
         private void GamePage_Loaded(object sender, RoutedEventArgs e)
@@ -84,82 +82,15 @@ namespace TetrisApp
             this.Brick.posX = BricksGets.rng.Next(0, DrawnBoard.GetLength(0) - Brick.grid.GetLength(0));
             this.Brick.posY = DrawnBoard.GetLength(1) - Brick.grid.GetLength(1);
             amountOfTicksPerIteration = 3;
-            this.MoveCount = 0;
 
-            await GetBoard();
             this.GameOver = false;
             this.GameOverScreen.Opacity = 0;
             this.GoBackBtn.IsEnabled=false;
             UpdateScreen();
             this.isInitiated = true;
-        }
-        public async Task initiateGameConditions()
-        {
-            if (this.isInitiated)
-                return;
-            InitializeComponent();
-            // finds the correct dimentions of the canvas/arrays
-            //double CanvasWidth = (double)this.MainCanvas.ActualWidth;
-            //double CanvasHeight = (double)this.MainCanvas.ActualHeight;
-            double CanvasWidth = 196.0;
-            double CanvasHeight = 346.0;
-            double ratio = CanvasHeight / CanvasWidth;
-            // width of the arrays
-            int size = 10;
-            // creation of the arrays
-            this.DrawnBoard = new int[size, (int)(size * ratio + 0.5)];
-            this.BackBoard = new int[size, (int)(size * ratio + 0.5)];
-            // withdrawing the stored information about the board from the last game            
-            this.ScoreTXT.Text = "Score: " + currentPlayer.TetrisCurrentScore.ToString();
-
-            this.Brick = new GameBrick();
-            CopyBrickGrid();
-            this.Brick.posX = BricksGets.rng.Next(0, DrawnBoard.GetLength(0) - Brick.grid.GetLength(0));
-            this.Brick.posY = DrawnBoard.GetLength(1) - Brick.grid.GetLength(1);
-            amountOfTicksPerIteration = 3;
-            this.MoveCount = 0;
-
-            await GetBoard();
-            this.GameOverScreen.Opacity = 0;
-            this.GoBackBtn.IsEnabled = false;
-            UpdateScreen();
-            this.isInitiated = true;
-        }
-
-        public async Task GetBoard()
-        {
-            Apiservice api = new();
-            this.allBricks = new List<BoardComponents>();
-            this.AllColors = await api.GetAllBrickTypes();
-            List<BoardComponents> allBricks = await api.GetAllBoardComponents();            
-            foreach (BoardComponents brick in allBricks)
-            {
-                if (brick.player.Id == currentPlayer.Id)
-                {
-                    BackBoard[brick.Col, brick.Row] = brick.brickType.Id;
-                    this.allBricks.Add(brick);
-                }
-            }
         }        
 
-        private async void SaveBoard()
-        {            
-            this.everyonesBricks = await api.GetAllBoardComponents();
-            Debug.WriteLine("this.everyonesBricks.Count (at SaveBoard attempt) = " + this.everyonesBricks.Count);
-            List<BoardComponents> OldLayout = everyonesBricks.FindAll(x => x.player.Id == currentPlayer.Id);
-            List<BoardComponents> currentLayout = new List<BoardComponents>();
-            foreach (BoardComponents b in this.allBricks)
-                currentLayout.Add(b);
-            foreach (BoardComponents b in OldLayout)
-            {
-                await api.DeleteBoardComponents(b.Id);
-            }
-            
-            foreach (BoardComponents b in currentLayout)
-            {
-                await api.InsertBoardComponents(b);
-            }
-        }        
+         
         private void CollapseRows()
         {
             int RowCount = 0;
@@ -173,28 +104,14 @@ namespace TetrisApp
                         break;
                                        
                     if (k == this.BackBoard.GetLength(0) - 1)
-                    {
-                        // updateds database
-                        // left to right
-                        for (int j = 0; j < this.BackBoard.GetLength(0); j++)
-                        {
-                            BoardComponents b = this.allBricks.Find(x => x.Col == j && x.Row == i);
-                            this.allBricks.Remove(b);
-                        }
+                    {                        
                         RowCount++;
                         // bottom to top
                         for (int j = i; j < this.BackBoard.GetLength(1) - 1; j++)
                         {
                             // left to right
                             for (int l = 0; l < this.BackBoard.GetLength(0); l++)
-                            {
-                                // update database
-                                if (this.BackBoard[l, j+1] != 0)
-                                {
-                                    BoardComponents b1 = this.allBricks.Find(x => x.Col == l && x.Row == j + 1);
-                                    b1.Row = j;
-                                }
-
+                            {                                
                                 this.BackBoard[l, j] = this.BackBoard[l, j + 1];                                
                             }
                         }
@@ -223,7 +140,7 @@ namespace TetrisApp
                     await api.UpdatePlayer(currentPlayer);
                     this.GameOver = true;
                     
-                    this.GameOverScreen.Opacity = 1;
+                    this.GameOverScreen.Visibility = Visibility.Visible;
                     this.GoBackBtn.IsEnabled = true;
 
                     return;
@@ -242,7 +159,6 @@ namespace TetrisApp
                 }
             }
         }
-        private int MoveCount;
         private void Timer_Tick(object? sender, EventArgs e)
         {
             if (this.GameOver)
@@ -252,7 +168,7 @@ namespace TetrisApp
             {
                 this.tick += 1;
             }
-            //initiateGame();
+            initiateGame();
 
 
             if (this.tick % amountOfTicksPerIteration == 0)
@@ -263,9 +179,6 @@ namespace TetrisApp
                     LossDetection();
                     CollapseRows();
 
-                    SaveBoard();
-
-
                     this.Brick = new GameBrick();
                     CopyBrickGrid();
                     this.Brick.posX = BricksGets.rng.Next(0, DrawnBoard.GetLength(0) - Brick.grid.GetLength(0));
@@ -274,11 +187,6 @@ namespace TetrisApp
                 else
                     this.Brick.posY--;
                 this.tick = 0;
-                this.MoveCount++;
-            }
-            if (this.MoveCount % 10 == 0)
-            {
-                //SaveBoard();
             }
             
             if (MainWindow.IsMoved == false)
@@ -398,17 +306,7 @@ namespace TetrisApp
                 {
                     if (this.BrickGrid[i, k] != 0)
                     {
-                        BackBoard[i + Brick.posX, k + Brick.posY] = this.Brick.ColorID;
-                        // update database
-                        BoardComponents b = new BoardComponents()
-                        {
-                            Col = i + Brick.posX,
-                            Row = k + Brick.posY,
-                            player = currentPlayer,
-                            //brickType = new BrickType() { Id = this.Brick.ColorID}
-                            brickType = this.AllColors.Find(x => x.Id == this.Brick.ColorID)
-                        };
-                        this.allBricks.Add(b);                        
+                        BackBoard[i + Brick.posX, k + Brick.posY] = this.Brick.ColorID;                                            
                     }
                 }
             }

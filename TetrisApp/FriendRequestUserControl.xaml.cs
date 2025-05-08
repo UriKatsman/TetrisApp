@@ -17,28 +17,38 @@ using System.Windows.Shapes;
 namespace TetrisApp
 {
     /// <summary>
-    /// Interaction logic for FriendUserControl.xaml
+    /// Interaction logic for FriendRequestUserControl.xaml
     /// </summary>
-    public partial class FriendUserControl : UserControl
+    public partial class FriendRequestUserControl : UserControl
     {
         public Friendship friendship;
         private Page page;
-        public FriendUserControl(Player p, Friendship f, Page page)
+        public Player p;
+        public FriendRequestUserControl(Player p, Friendship f, Page page)
         {
             InitializeComponent();
-            this.page = page;
-            this.FriendNameTXT.Text = p.UserName;
-            this.FriendScoreTXT.Text = p.TetrisHighScore.ToString();
+            this.p = p;
             this.friendship = f;
-            this.Xbtn.MouseDown += Xbtn_MouseDown;
+            this.PlayerName.Text = p.UserName;
+            this.page = page;
         }
 
-        private void Xbtn_MouseDown(object sender, MouseButtonEventArgs e)
+        
+        private void DeclineClick(object sender, MouseButtonEventArgs e)
         {
             if (page is FriendsPage)
             {
                 FriendsPage fPage = page as FriendsPage;
-                fPage.Del_Friend(this);
+                fPage.Deny_requst(this);
+            }
+        }
+
+        private void AcceptClick(object sender, MouseButtonEventArgs e)
+        {
+            if (page is FriendsPage)
+            {
+                FriendsPage fPage = page as FriendsPage;
+                fPage.Accpet_requst(this);
             }
         }
     }

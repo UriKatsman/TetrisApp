@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="TetrisApp.LoadingSign"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:TetrisApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <UserControl.Resources>
+        <local:DivideByTwoConverter x:Key="DivideByTwoConverter"/>
+        <Storyboard x:Key="SpinAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation 
+                Storyboard.TargetName="SpinnerRotate"
+                Storyboard.TargetProperty="Angle"
+                From="0" To="360" Duration="0:0:1.5" />
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource SpinAnimation}"/>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <!-- Background circle (optional) -->
+        <Ellipse x:Name="CircleBackground" 
+                 Fill="{Binding BackgroundColor, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                 Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                 Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+
+        <!-- Circle Track (background track for spinner) -->
+        <Ellipse Stroke="#20000000" 
+                 StrokeThickness="{Binding StrokeThickness, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                 Fill="Transparent"
+                 Margin="10"/>
+
+        <!-- Spinner Circle -->
+        <Grid>
+            <Grid.RenderTransform>
+                <RotateTransform x:Name="SpinnerRotate" 
+                                 CenterX="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource DivideByTwoConverter}}" 
+                                 CenterY="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource DivideByTwoConverter}}"/>
+            </Grid.RenderTransform>
+
+            <!-- This is our spinning arc -->
+            <Path x:Name="SpinnerPath" 
+                  Stroke="{Binding SpinnerColor, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  StrokeThickness="{Binding StrokeThickness, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  StrokeStartLineCap="Round"
+                  StrokeEndLineCap="Round">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure>
+                            <!-- These coordinates will be set in code-behind -->
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Grid>
+    </Grid>
+</UserControl>

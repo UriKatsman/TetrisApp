@@ -58,8 +58,8 @@ namespace ViewModel
                 string sqlStr = $"INSERT INTO Friendship ([player1],[player2],[isAccepted]) values (@player1,@player2,@isAccepted)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@player1", u.player1));
-                command.Parameters.Add(new OleDbParameter("@player2", u.player2));
+                command.Parameters.Add(new OleDbParameter("@player1", u.player1.Id));
+                command.Parameters.Add(new OleDbParameter("@player2", u.player2.Id));
                 command.Parameters.Add(new OleDbParameter("@isAccepted", u.isAccepted));
 
             }
@@ -83,8 +83,8 @@ namespace ViewModel
                                  "WHERE ID=@ID";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@player1", u.player1));
-                command.Parameters.Add(new OleDbParameter("@player2", u.player2));
+                command.Parameters.Add(new OleDbParameter("@player1", u.player1.Id));
+                command.Parameters.Add(new OleDbParameter("@player2", u.player2.Id));
                 command.Parameters.Add(new OleDbParameter("@isAccepted", u.isAccepted));
                 command.Parameters.Add(new OleDbParameter("@ID", u.Id));
             }

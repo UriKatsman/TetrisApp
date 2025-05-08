@@ -109,11 +109,11 @@ namespace TetrisApp
                 }
                 else
                 {
-                    //NavigationService nv = NavigationService.GetNavigationService(this);
-                    //nv.Navigate(new MainPage(this));
-
                     NavigationService nv = NavigationService.GetNavigationService(this);
-                    nv.Navigate(new FriendsPage());
+                    nv.Navigate(new MainPage(this));
+
+                    //NavigationService nv = NavigationService.GetNavigationService(this);
+                    //nv.Navigate(new FriendsPage());
                 }
             }
             else

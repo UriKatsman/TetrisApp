@@ -57,21 +57,13 @@ namespace TetrisApp
         {
             NavigationService nv = NavigationService.GetNavigationService(this);
             nv.Navigate(new SettingsPage(this));
-        }
-
-        private async void MoveToGame()
-        {
-            GamePage gamepage = new GamePage(this);
-            await gamepage.initiateGameConditions();
-            await gamepage.GetBoard();
-            NavigationService nv = NavigationService.GetNavigationService(this);
-            nv.Navigate(gamepage);
-        }
+        }        
 
         private void PlayBtn(object sender, RoutedEventArgs e)
         {
             this.PlayButton.IsEnabled = false;
-            MoveToGame();            
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new GamePage(this));
         }
     }
 }

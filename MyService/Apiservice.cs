@@ -1,4 +1,5 @@
 ﻿using Model;
+using System.Diagnostics;
 using System.Net.Http.Json;
 
 namespace MyService
@@ -73,7 +74,15 @@ namespace MyService
 
         public async Task<PlayerList> GetAllPlayers()
         {
-            return await client.GetFromJsonAsync<PlayerList>(uri + "/api/Values/PlayerSelector");
+            try
+            {
+                return await client.GetFromJsonAsync<PlayerList>(uri + "/api/Values/PlayerSelector");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
         }
 
         public async Task<UserList> GetAllUsers()
