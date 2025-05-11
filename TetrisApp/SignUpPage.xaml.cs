@@ -79,15 +79,7 @@ namespace TetrisApp
 
                 MessageBox.Show("Account added");
             }
-        }
-
-        private void ChooseImageBtn(object sender, RoutedEventArgs e)
-        {
-            Apiservice api = new();
-
-
-        }
-
+        }        
         private async void LanguageChosen(object sender, SelectionChangedEventArgs e)
         {
             Apiservice api = new();

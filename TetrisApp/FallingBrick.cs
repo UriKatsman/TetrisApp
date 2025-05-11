@@ -14,8 +14,6 @@ namespace TetrisApp
         public int[,] grid;
         public FallingBrick rotateRight;
         public FallingBrick rotateLeft;
-        //public int rightBorderDistance;
-        //public int leftBorderDistance;
         public int rotationAmount;
 
         public FallingBrick(int rotationAmount)
@@ -54,15 +52,11 @@ namespace TetrisApp
         {
             this.brick = this.brick.rotateRight;
             ReplaceGrid(GridToFill, ColorID);
-            //this.rightBorderDistance = this.brick.rightBorderDistance;
-            //this.leftBorderDistance = this.brick.leftBorderDistance;
         }
         public void RotateLeft(int[,] GridToFill, int ColorID)
         {
             this.brick = this.brick.rotateLeft;
             ReplaceGrid(GridToFill, ColorID);
-            //this.rightBorderDistance = this.brick.rightBorderDistance;
-            //this.leftBorderDistance = this.brick.leftBorderDistance;
         }
         private void ReplaceGrid(int[,] GridToFill, int ColorID)
         {
@@ -138,56 +132,12 @@ namespace TetrisApp
             //FinalizeBrick(plus);
             littleCube = new FallingBrick(0) { grid = new int[,] { { 1, 1 }, { 1, 1 }} };
             FinalizeBrick(littleCube);
-
         }
-
         private void FinalizeBrick(FallingBrick b)
         {
             b = CreateRotation(b);
             allBricks.Add(b);
-        }
-        
-        private static void UpdateBorderLengths(FallingBrick fb)
-        {
-            GetRightBorderDistnace(fb);
-            GetLeftBorderDistnace(fb);
-        }
-        private static void GetRightBorderDistnace(FallingBrick fb)
-        {
-            // scans right to left
-            for (int k = fb.grid.GetLength(0) - 1; k >= 0; k--)
-            {
-                // goes down the column
-                for (int i = 0; i < fb.grid.GetLength(1); i++)
-                {
-                    if (fb.grid[k, i] != 0) 
-                    {
-                        //fb.rightBorderDistance = fb.grid.GetLength(0) - k - 1;
-                        return;
-                    }
-                }
-            }
-
-            //fb.rightBorderDistance = fb.grid.GetLength(1);
-        }
-        private static void GetLeftBorderDistnace(FallingBrick fb)
-        {
-            // scans left to right
-            for (int k = 0; k < fb.grid.GetLength(0); k++)
-            {
-                // goes down the column
-                for (int i = 0; i < fb.grid.GetLength(1); i++)
-                {
-                    if (fb.grid[k, i] != 0) 
-                    {
-                        //fb.rightBorderDistance = k;
-                        return;
-                    }
-                }
-            }
-
-            //fb.rightBorderDistance = fb.grid.GetLength(1);
-        }
+        }        
         private async void ColorPalletePicker()
         {
             Apiservice api = new();
@@ -200,8 +150,7 @@ namespace TetrisApp
             //            top center bottom            
             FallingBrick current = This;
             if (current.rotationAmount > 0)
-            {
-                UpdateBorderLengths(current);
+            {                
                 CreateRotateRight(current);
             }
             else
@@ -212,15 +161,13 @@ namespace TetrisApp
 
             for (int i = 0; i < current.rotationAmount - 2; i++)
             {
-                current = current.rotateRight;
-                UpdateBorderLengths(current);
+                current = current.rotateRight;               
                 CreateRotateRight(current);
             }
 
             if (current.rotationAmount > 0)
             {
                 current = current.rotateRight;
-                UpdateBorderLengths(current);
                 current.rotateRight = This;
                 This.rotateLeft = current;
             }

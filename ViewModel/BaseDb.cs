@@ -16,9 +16,11 @@ namespace ViewModel
     {
         private static bool formated = false;
 
+        //protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\urika\Source\Repos\TetrisApp3\ViewModel\TetrisNMore.accdb";
+
         protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
             + "/../../../../../ViewModel/TetrisNMore.accdb");
-        
+
 
         protected OleDbConnection connection;
         protected OleDbCommand command;

@@ -27,15 +27,51 @@ namespace TetrisApp
         private List<FriendUserControl> FriendControls;
         private List<FriendRequestUserControl> PendingRequestControls;
 
+        private Page previous;
+
         private Player currentPlayer;
 
-        public FriendsPage()
+        public FriendsPage(Page previous)
         {
             InitializeComponent();
             this.FriendControls = new();
             this.PendingRequestControls = new();
             GetLists();
+            this.previous = previous;
+            this.Loaded += FriendsPage_Loaded;
         }
+
+        private void FriendsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (EntrancePage.SignedInUser != null)
+                TranslatePage(EntrancePage.SignedInUser.language);
+            else
+                TranslatePage(new Language() { LanguageName = "Hebrew" });
+        }
+        private void TranslatePage(Language To)
+        {
+            if (To == null)
+                return;
+            switch (To.LanguageName)
+            {
+                case "English":
+                    this.ModeTXT.Text = "Friends";
+                    this.AddButtonTXT.Text = "Add Friend";
+                    this.SwitchBtn.Content = "Go Back";
+                    break;
+                case "Hebrew":
+                    this.ModeTXT.Text = "חברים";
+                    this.AddButtonTXT.Text = "הוסף חבר";
+                    this.SwitchBtn.Content = "חזור";
+                    break;
+                case "German":
+                    this.ModeTXT.Text = "Freunde";
+                    this.AddButtonTXT.Text = "Freund hinzufügen";
+                    this.SwitchBtn.Content = "zurück";
+                    break;
+            }
+        }
+
         private async void GetLists()
         {            
             Apiservice api = new();
@@ -71,9 +107,10 @@ namespace TetrisApp
                 foreach (Friendship f in Friends)
                 {
                     if (f.player2.Id == currentPlayer.Id)
-                        this.PendingRequestControls.Add(new(f.player2,f, this));
-
-                    this.FriendControls.Last().Width = ListWidth;
+                    {
+                        this.PendingRequestControls.Add(new(f.player2, f, this));
+                        this.FriendControls.Last().Width = ListWidth;
+                    }
                 }
                 this.FriendsList.ItemsSource = null;
                 this.FriendsList.ItemsSource = this.PendingRequestControls;
@@ -82,7 +119,8 @@ namespace TetrisApp
         }
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
-
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(this.previous);
         }
 
         public void Deny_requst(FriendRequestUserControl sender)
@@ -216,6 +254,12 @@ namespace TetrisApp
             else
                 this.ModeTXT.Text = "Friend Requests";
             GetLists();
+        }
+
+        private void GoToSettings(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new SettingsPage(this));
         }
     }
 }

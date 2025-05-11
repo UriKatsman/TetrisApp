@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
 
 namespace TetrisApp
 {
@@ -35,12 +36,36 @@ namespace TetrisApp
             SetPlayer();
             this.Loaded += MainPage_Loaded;
         }
-
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.PlayButton.IsEnabled = true;
+            if (EntrancePage.SignedInUser != null)
+                TranslatePage(EntrancePage.SignedInUser.language);
+            else
+                TranslatePage(new Language() { LanguageName = "Hebrew" });
         }
-
+        private void TranslatePage(Language To)
+        {
+            if (To == null)
+                return;
+            switch (To.LanguageName)
+            {
+                case "English":
+                    this.greetingTXT.Text = "Hello ";
+                    this.PlayButtenText.Text = "Play";
+                    this.HighScoreTXT.Text = "Highest Score: ";
+                    break;
+                case "Hebrew":
+                    this.greetingTXT.Text = "שלום";
+                    this.PlayButtenText.Text = "שחק";
+                    this.HighScoreTXT.Text = "ניקוד שיא:";
+                    break;
+                case "German":
+                    this.greetingTXT.Text = "Hallo";
+                    this.PlayButtenText.Text = "Spiel";
+                    this.HighScoreTXT.Text = "Höchste Punktzahl: ";
+                    break;
+            }
+        }
         private async void SetPlayer()
         {
             Apiservice api = new Apiservice();
@@ -65,6 +90,12 @@ namespace TetrisApp
             this.PlayButton.IsEnabled = false;
             NavigationService nv = NavigationService.GetNavigationService(this);
             nv.Navigate(new GamePage(this));
+        }
+
+        private void ToFriends(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(new FriendsPage(this));
         }
     }
 }

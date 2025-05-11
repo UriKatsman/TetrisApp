@@ -99,6 +99,11 @@
         <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80" VerticalAlignment="Bottom" Opacity="0.4"/>
         <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7" Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
 
+
+        <!-- Settings Button -->
+        <Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
+            <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
+        </Border>
         <!-- Main Logo/Title -->
         <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
             <TextBlock Text="TETRIS" Style="{StaticResource TetrisTitle}" />
@@ -115,7 +120,7 @@
                 <ColumnDefinition Width="0.25*"/>
             </Grid.ColumnDefinitions>
             <Border BorderThickness="5">
-                <Button Background="White" Content="Switch" FontWeight="Bold" Click="ChangeView"/>
+                <Button x:Name="SwitchBtn" Background="White" Content="Switch" FontWeight="Bold" Click="ChangeView"/>
             </Border>
             <Border BorderThickness="5" Grid.Column="1">
                 <TextBox x:Name="AddFriendTextBox" FontWeight="Bold"/>
@@ -134,7 +139,7 @@
             </ListView>
         </Border>
         <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource IconButtonStyle}" MouseDown="GoBack">
-            <Image Source="/Back.png" Stretch="Uniform" Margin="12"/>
+            <Image Source="/Back.png" Stretch="Uniform" Margin="12" MouseDown="GoBack"/>
         </Border>
 
         <!-- Play Button -->

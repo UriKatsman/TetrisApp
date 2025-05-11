@@ -30,8 +30,8 @@ namespace ViewModel
         protected override Base CreateModel(Base entity)
         {            
             Player plr = entity as Player;
-            plr.TetrisCurrentScore = int.Parse(reader["TetrisHighScore"].ToString());
-            plr.TetrisHighScore = int.Parse(reader["TetrisCurrentScore"].ToString());
+            plr.TetrisHighScore = int.Parse(reader["TetrisHighScore"].ToString());
+            plr.TetrisCurrentScore = int.Parse(reader["TetrisCurrentScore"].ToString());
             
             base.CreateModel(entity);
             return plr;

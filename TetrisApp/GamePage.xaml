@@ -126,7 +126,7 @@
                 <Border Grid.Column="1" Grid.Row="1" Background="#2E5AA7" BorderBrush="#A2C0F7" 
                         BorderThickness="3" CornerRadius="15">
                     <StackPanel Margin="20">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="GameOverTXT"
                                    Text="Game Over!" FontSize="50" Foreground="White" 
                                    FontWeight="Bold" FontFamily="Arial" Margin="0,10,0,20">
                             <TextBlock.Effect>
@@ -140,7 +140,7 @@
 
                         <Button x:Name="GoBackBtn" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Width="200" Style="{StaticResource GameOverButtonStyle}" Click="Button_Click">
-                            <TextBlock Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
+                            <TextBlock x:Name="GameOverBtnTxt" Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
                         </Button>
                     </StackPanel>
                 </Border>

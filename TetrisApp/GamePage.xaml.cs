@@ -59,8 +59,34 @@ namespace TetrisApp
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(0.1);
             timer.Start();
+            TranslatePage(EntrancePage.SignedInUser.language);
         }
-
+        public void TranslatePage(Language To)
+        {
+            if (To == null)
+                return;
+            switch (To.LanguageName)
+            {
+                case "English":
+                    this.GameOverTXT.Text = "Game Over!";
+                    this.FinalScore.Text = "Score: ";
+                    this.GameOverBtnTxt.Text = "Back to Main Page";
+                    this.ScoreTXT.Text = "Score: ";                    
+                    break;
+                case "Hebrew":
+                    this.GameOverTXT.Text = "המשחק הסתיים!";
+                    this.FinalScore.Text = "ניקוד: ";
+                    this.GameOverBtnTxt.Text = "חזור לעמוד ראשי";
+                    this.ScoreTXT.Text = "ניקוד: ";
+                    break;
+                case "German":
+                    this.GameOverTXT.Text = "Spiel Endet";
+                    this.FinalScore.Text = "Punktzahl: ";
+                    this.GameOverBtnTxt.Text = "Zurück zur Startseite";
+                    this.ScoreTXT.Text = "Punktzahl: ";
+                    break;
+            }
+        }
         private async void initiateGame()
         {
             if (this.isInitiated)
@@ -75,7 +101,7 @@ namespace TetrisApp
             this.DrawnBoard = new int[size, (int)(size * ratio + 0.5)];
             this.BackBoard = new int[size, (int)(size * ratio + 0.5)];
             // withdrawing the stored information about the board from the last game            
-            this.ScoreTXT.Text = "Score: " + currentPlayer.TetrisCurrentScore.ToString();
+            this.ScoreTXT.Text += currentPlayer.TetrisCurrentScore.ToString();
             
             this.Brick = new GameBrick();
             CopyBrickGrid();
@@ -84,7 +110,7 @@ namespace TetrisApp
             amountOfTicksPerIteration = 3;
 
             this.GameOver = false;
-            this.GameOverScreen.Opacity = 0;
+            
             this.GoBackBtn.IsEnabled=false;
             UpdateScreen();
             this.isInitiated = true;
@@ -121,7 +147,6 @@ namespace TetrisApp
             if (RowCount > 0)
             {
                 currentPlayer.TetrisCurrentScore += RowsToScore(RowCount);
-                this.ScoreTXT.Text = "Score: " + currentPlayer.TetrisCurrentScore.ToString();
             }
         }
         private int RowsToScore(int rows)
@@ -135,7 +160,7 @@ namespace TetrisApp
                 if (this.BackBoard[i, this.BackBoard.GetLength(1) - 1] != 0)
                 {
                     currentPlayer.TetrisHighScore = Math.Max(currentPlayer.TetrisHighScore, currentPlayer.TetrisCurrentScore);
-                    this.FinalScore.Text = "Score: " + currentPlayer.TetrisCurrentScore;
+                    this.FinalScore.Text += currentPlayer.TetrisCurrentScore;
                     currentPlayer.TetrisCurrentScore = 0;
                     await api.UpdatePlayer(currentPlayer);
                     this.GameOver = true;

@@ -33,59 +33,47 @@ namespace TetrisApp
         }
 
         private void EntrancePage_Loaded(object sender, RoutedEventArgs e)
-        {
-            /*
-            if (SignedInUser != null)
-                TranslatePage(SignedInUser.language);
-            else
-                TranslatePage(new Language() {LanguageName= "Hebrew" });
-            //*/
+        {            
+            //if (SignedInUser != null)
+            //    TranslatePage(SignedInUser.language);
+            //else
+            //    TranslatePage(new Language() {LanguageName= "Hebrew" });           
         }
 
-        public void TranslatePage(Language To)
-        {
-            //var translator = new LibreTranslate();
-
-
-
-
-
-            //if (To == null)
-            //    return;
-            //switch (To.LanguageName)
-            //{
-            //    case "English":
-            //        this.UsernameTXT.Text = "Username";
-            //        this.PasswordTXT.Text = "Password";
-            //        this.LogInButton.Content = "Log in";
-            //        this.SignUpButton.Content = "Don't have an account? create one here.";
-            //        this.ErrorLoggingInText.Text = "";
-            //        break;
-            //    case "Hebrew":
-            //        this.UsernameTXT.Text = "שם משתמש";
-            //        this.PasswordTXT.Text = "סיסמא";
-            //        this.LogInButton.Content = "התחבר";
-            //        this.SignUpButton.Content = "אין משתמש? צור משתמש כאן.";
-            //        this.ErrorLoggingInText.Text = "";
-            //        break;
-            //    case "German":
-            //        this.UsernameTXT.Text = "Benutzername";
-            //        this.PasswordTXT.Text = "Passwort";
-            //        this.LogInButton.Content = "Einloggen";
-            //        this.SignUpButton.Content = "Sie haben noch kein Konto? Erstellen Sie hier eins.";
-            //        this.ErrorLoggingInText.Text = "";
-            //        break;                
-            //}
-                  
-        }
+        //public void TranslatePage(Language To)
+        //{
+        //    if (To == null)
+        //        return;
+        //    switch (To.LanguageName)
+        //    {
+        //        case "English":
+        //            this.UsernameTXT.Text = "Username";
+        //            this.PasswordTXT.Text = "Password";
+        //            this.LogInButton.Content = "Log in";
+        //            this.SignUpButton.Content = "Don't have an account? create one here.";
+        //            this.ErrorLoggingInText.Text = "";
+        //            break;
+        //        case "Hebrew":
+        //            this.UsernameTXT.Text = "שם משתמש";
+        //            this.PasswordTXT.Text = "סיסמא";
+        //            this.LogInButton.Content = "התחבר";
+        //            this.SignUpButton.Content = "אין משתמש? צור משתמש כאן.";
+        //            this.ErrorLoggingInText.Text = "";
+        //            break;
+        //        case "German":
+        //            this.UsernameTXT.Text = "Benutzername";
+        //            this.PasswordTXT.Text = "Passwort";
+        //            this.LogInButton.Content = "Einloggen";
+        //            this.SignUpButton.Content = "Sie haben noch kein Konto? Erstellen Sie hier eins.";
+        //            this.ErrorLoggingInText.Text = "";
+        //            break;
+        //    }
+        //}
         private void GoToSettings(object sender, MouseButtonEventArgs e)
-        {
-            // to be removed
+        {            
             NavigationService nv = NavigationService.GetNavigationService(this);
             nv.Navigate(new SettingsPage(this));
-            //
         }
-        //*/
 
         private async void LogIn(object sender, RoutedEventArgs e)
         {
@@ -112,8 +100,7 @@ namespace TetrisApp
                     NavigationService nv = NavigationService.GetNavigationService(this);
                     nv.Navigate(new MainPage(this));
 
-                    //NavigationService nv = NavigationService.GetNavigationService(this);
-                    //nv.Navigate(new FriendsPage());
+                    
                 }
             }
             else
