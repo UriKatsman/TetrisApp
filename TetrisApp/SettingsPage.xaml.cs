@@ -62,7 +62,6 @@ namespace TetrisApp
                 ((AdminViewListPage)this.PreviousPage).UpdateTheListView();
             //nv.Navigate(new AdminViewListPage(this.PreviousPage));
 
-
             nv.Navigate(this.PreviousPage);
         }
         private async void SaveChanges()

@@ -8,7 +8,123 @@
       d:DesignHeight="545" d:DesignWidth="860"
       Title="SettingsPage">
 
-    <Grid Background="LightBlue">
+    <Page.Resources>
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E3B70" Offset="0.0"/>
+            <GradientStop Color="#2E5AA7" Offset="0.5"/>
+            <GradientStop Color="#4B7ED4" Offset="1.0"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Background" Value="#E6F0FF"/>
+            <Setter Property="Foreground" Value="#1E3B70"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <Border x:Name="Border" 
+                                   CornerRadius="10"
+                                   Background="#E6F0FF"
+                                   BorderBrush="#A2C0F7"
+                                   BorderThickness="2">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter 
+                                        Grid.Column="0"
+                                        Content="{TemplateBinding SelectionBoxItem}"
+                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center" />
+                                    <Path 
+                                        Grid.Column="1"
+                                        x:Name="Arrow"
+                                        Fill="#1E3B70"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Data="M 0 0 L 8 8 L 16 0 Z"/>
+                                </Grid>
+                            </Border>
+                            <Popup 
+                                IsOpen="{TemplateBinding IsDropDownOpen}" 
+                                Placement="Bottom"
+                                AllowsTransparency="True" 
+                                PopupAnimation="Slide">
+                                <Border 
+                                    x:Name="DropDownBorder"
+                                    Background="#E6F0FF"
+                                    BorderBrush="#A2C0F7"
+                                    BorderThickness="2"
+                                    CornerRadius="0 0 10 10"
+                                    MinWidth="{TemplateBinding ActualWidth}">
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#D6E6FF"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#D6E6FF"/>
+                                <Setter TargetName="Arrow" Property="Data" Value="M 0 8 L 8 0 L 16 8 Z"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TetrisTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="70"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="#DCE8FF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="SettingsCategoryStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="#0A1A3F" BlurRadius="3" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconContainerStyle" TargetType="Border">
+            <Setter Property="Background" Value="#4B7ED4"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource BackgroundGradient}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
@@ -35,17 +151,48 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="8" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Center" TextWrapping="Wrap" Text="Tetris" FontSize="50" Background="Transparent" Foreground="red" FontWeight="Bold" FontFamily="Arial"/>
-        
-        <Image Grid.Row="1" Grid.Column="1" MouseDown="GoBack" Source="/Back.png"/>
 
-        <Image Grid.Column="3" Grid.Row="5" Source="/TranslateIcon.png"/>
-        <ComboBox x:Name="LanguagesComboBox" Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="2" FontSize="30"/>
+        <!-- Tetris Blocks Background Elements (Decorative) -->
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="30" Height="30" HorizontalAlignment="Left" Opacity="0.6"/>
+        <Rectangle Grid.Row="3" Grid.Column="8" Fill="#3563B3" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80" VerticalAlignment="Bottom" Opacity="0.4"/>
+        <Rectangle Grid.Row="10" Grid.Column="8" Fill="#64A7F7" Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
 
-        <!--
-        <Slider Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
-        <Image Grid.Column="3" Grid.Row="7" Source="/VolumeIcon.png"/>
-        -->
+        <!-- Main Logo/Title -->
+        <Border Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="8" HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
+            <TextBlock Text="TETRIS" Style="{StaticResource TetrisTitle}" />
+        </Border>
+
+        <!-- Back Button -->
+        <Border Grid.Row="1" Grid.Column="1" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoBack">
+            <Image Source="/Back.png" Stretch="Uniform" Margin="12"/>
+        </Border>
+
+        <!-- Settings Title -->
+        <TextBlock Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Text="Settings" Style="{StaticResource SettingsCategoryStyle}" 
+                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!-- Language Section -->
+        <TextBlock Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="Language:" Style="{StaticResource LabelStyle}" 
+                  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Border Grid.Row="7" Grid.Column="3" Style="{StaticResource IconContainerStyle}" 
+               HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="/TranslateIcon.png" Stretch="Uniform" Margin="12"/>
+        </Border>
+
+        <ComboBox Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="3" x:Name="LanguagesComboBox" 
+                 Style="{StaticResource ModernComboBox}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+        <!-- Additional Settings Could Go Here -->
+        <!-- You can add more settings sections in the same pattern -->
+
+        <!-- Animated Tetris Block (Optional - add animation code separately) -->
+        <Canvas Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="10">
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3" Canvas.Left="50" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3" Canvas.Left="70" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3" Canvas.Left="90" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3" Canvas.Left="70" Canvas.Top="0"/>
+        </Canvas>
     </Grid>
 </Page>
-

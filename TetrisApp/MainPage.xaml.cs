@@ -50,17 +50,17 @@ namespace TetrisApp
             switch (To.LanguageName)
             {
                 case "English":
-                    this.greetingTXT.Text = "Hello ";
+                    this.greetingTXT.Text = "Hello " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "Play";
                     this.HighScoreTXT.Text = "Highest Score: ";
                     break;
                 case "Hebrew":
-                    this.greetingTXT.Text = "שלום";
+                    this.greetingTXT.Text = "שלום " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "שחק";
                     this.HighScoreTXT.Text = "ניקוד שיא:";
                     break;
                 case "German":
-                    this.greetingTXT.Text = "Hallo";
+                    this.greetingTXT.Text = "Hallo " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "Spiel";
                     this.HighScoreTXT.Text = "Höchste Punktzahl: ";
                     break;
