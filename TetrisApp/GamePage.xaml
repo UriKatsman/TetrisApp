@@ -89,6 +89,7 @@
         <Border Grid.Row="0" Grid.Column="3" Background="#2E5AA7" CornerRadius="10" Margin="5" Opacity="0.9">
             <TextBlock x:Name="ScoreTXT" Text="Score: " Style="{StaticResource GameScoreText}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
+        
 
         <!-- Main Game Board -->
         <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" BorderThickness="3" BorderBrush="#A2C0F7" CornerRadius="10" Background="White" Margin="5">
@@ -127,7 +128,7 @@
                         BorderThickness="3" CornerRadius="15">
                     <StackPanel Margin="20">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="GameOverTXT"
-                                   Text="Game Over!" FontSize="50" Foreground="White" 
+                                   Text="Das spiel ist aus!" FontSize="35" Foreground="White" 
                                    FontWeight="Bold" FontFamily="Arial" Margin="0,10,0,20">
                             <TextBlock.Effect>
                                 <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>

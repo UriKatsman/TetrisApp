@@ -120,18 +120,18 @@
         </Border>
 
         <!-- Settings Button -->
-        <Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
+        <!--<Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
             <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
-        </Border>
+        </Border>-->
 
         <!-- Form Elements -->
-        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                   Text="שם משתמש" Style="{StaticResource LabelStyle}" x:Name="UsernameTXT"/>
+        <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                   Text="Username" Style="{StaticResource LabelStyle}" x:Name="UsernameTXT"/>
 
         <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource ModernTextBox}" x:Name="UsernameBox"/>
 
-        <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                   Text="סיסמא" Style="{StaticResource LabelStyle}" x:Name="PasswordTXT"/>
+        <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                   Text="Password" Style="{StaticResource LabelStyle}" x:Name="PasswordTXT"/>
 
         <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource ModernTextBox}" x:Name="PasswordBox"/>
 
@@ -140,9 +140,9 @@
                    FontFamily="Arial" FontWeight="SemiBold"/>
 
         <!-- Buttons -->
-        <Button Grid.Row="9" Content="הכנס" Grid.Column="2" Style="{StaticResource ModernButton}" Width="220" x:Name="LogInButton" Click="LogIn" FontWeight="Bold"/>
+        <Button Grid.Row="9" Content="Enter" Grid.Column="2" Style="{StaticResource ModernButton}" Width="220" x:Name="LogInButton" Click="LogIn" FontWeight="Bold"/>
 
-        <Button Grid.Row="10" Grid.Column="2" Content="אין משתמש? צור משתמש כאן." Width="420" 
+        <Button Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" Content="Don't have an account? create one here." Width="550" 
                 Style="{StaticResource ModernButton}" Background="#2E5AA7" x:Name="SignUpButton" Click="SignUp"/>
 
         <!-- Animated Tetris Block (Optional - add animation code separately) -->

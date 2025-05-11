@@ -41,6 +41,7 @@ namespace TetrisApp
         private int amountOfTicksPerIteration = 10;
         private bool isInitiated = false;
 
+        private string ScoreWord = "Score: ";
         public GamePage(Page previous)
         {
             InitializeComponent();
@@ -69,21 +70,24 @@ namespace TetrisApp
             {
                 case "English":
                     this.GameOverTXT.Text = "Game Over!";
+                    this.GameOverTXT.FontSize = 50;
                     this.FinalScore.Text = "Score: ";
                     this.GameOverBtnTxt.Text = "Back to Main Page";
-                    this.ScoreTXT.Text = "Score: ";                    
+                    this.ScoreWord = "Score: ";
                     break;
                 case "Hebrew":
-                    this.GameOverTXT.Text = "המשחק הסתיים!";
+                    this.GameOverTXT.Text = "!המשחק הסתיים";
+                    this.GameOverTXT.FontSize = 40;
                     this.FinalScore.Text = "ניקוד: ";
                     this.GameOverBtnTxt.Text = "חזור לעמוד ראשי";
-                    this.ScoreTXT.Text = "ניקוד: ";
+                    this.ScoreWord = "ניקוד: ";
                     break;
                 case "German":
-                    this.GameOverTXT.Text = "Spiel Endet";
+                    this.GameOverTXT.Text = "Das spiel ist aus!";
+                    this.GameOverTXT.FontSize = 35;
                     this.FinalScore.Text = "Punktzahl: ";
                     this.GameOverBtnTxt.Text = "Zurück zur Startseite";
-                    this.ScoreTXT.Text = "Punktzahl: ";
+                    this.ScoreWord = "Punktzahl: ";
                     break;
             }
         }
@@ -147,6 +151,7 @@ namespace TetrisApp
             if (RowCount > 0)
             {
                 currentPlayer.TetrisCurrentScore += RowsToScore(RowCount);
+                this.ScoreTXT.Text = ScoreWord + currentPlayer.TetrisCurrentScore.ToString();
             }
         }
         private int RowsToScore(int rows)

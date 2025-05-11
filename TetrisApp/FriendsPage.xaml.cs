@@ -57,17 +57,20 @@ namespace TetrisApp
                 case "English":
                     this.ModeTXT.Text = "Friends";
                     this.AddButtonTXT.Text = "Add Friend";
-                    this.SwitchBtn.Content = "Go Back";
+                    this.SwitchBtn.Content = "Switch";
+                    this.SwitchBtn.FontSize = 10;
                     break;
                 case "Hebrew":
                     this.ModeTXT.Text = "חברים";
                     this.AddButtonTXT.Text = "הוסף חבר";
-                    this.SwitchBtn.Content = "חזור";
+                    this.SwitchBtn.Content = "החלף";
+                    this.SwitchBtn.FontSize = 10;
                     break;
                 case "German":
                     this.ModeTXT.Text = "Freunde";
                     this.AddButtonTXT.Text = "Freund hinzufügen";
-                    this.SwitchBtn.Content = "zurück";
+                    this.SwitchBtn.Content = "Wechseln";
+                    this.SwitchBtn.FontSize = 7;
                     break;
             }
         }

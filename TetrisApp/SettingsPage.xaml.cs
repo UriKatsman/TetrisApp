@@ -56,13 +56,10 @@ namespace TetrisApp
         {
             if (EntrancePage.SignedInUser != null)
                 SaveChanges();
-            NavigationService nv = NavigationService.GetNavigationService(this);
+            
 
             if (this.PreviousPage is AdminViewListPage)
-                ((AdminViewListPage)this.PreviousPage).UpdateTheListView();
-            //nv.Navigate(new AdminViewListPage(this.PreviousPage));
-
-            nv.Navigate(this.PreviousPage);
+                ((AdminViewListPage)this.PreviousPage).UpdateTheListView();            
         }
         private async void SaveChanges()
         {
@@ -72,6 +69,8 @@ namespace TetrisApp
                 EntrancePage.SignedInUser.language = (Language)this.LanguagesComboBox.SelectedItem;
 
             await api.UpdateUser(EntrancePage.SignedInUser);
+            NavigationService nv = NavigationService.GetNavigationService(this);
+            nv.Navigate(this.PreviousPage);
         }
     }
 }

@@ -38,13 +38,12 @@ namespace TetrisApp
         }
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (EntrancePage.SignedInUser != null)
-                TranslatePage(EntrancePage.SignedInUser.language);
-            else
-                TranslatePage(new Language() { LanguageName = "Hebrew" });
+            TranslatePage(EntrancePage.SignedInUser.language);
         }
         private void TranslatePage(Language To)
         {
+            if (isFirstLoad)
+                return;
             if (To == null)
                 return;
             switch (To.LanguageName)
@@ -52,27 +51,28 @@ namespace TetrisApp
                 case "English":
                     this.greetingTXT.Text = "Hello " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "Play";
-                    this.HighScoreTXT.Text = "Highest Score: ";
+                    this.HighScoreTXT.Text = "Highest Score: " + GamePage.currentPlayer.TetrisHighScore;
                     break;
                 case "Hebrew":
                     this.greetingTXT.Text = "שלום " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "שחק";
-                    this.HighScoreTXT.Text = "ניקוד שיא:";
+                    this.HighScoreTXT.Text = "ניקוד שיא:" + GamePage.currentPlayer.TetrisHighScore;
                     break;
                 case "German":
                     this.greetingTXT.Text = "Hallo " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "Spiel";
-                    this.HighScoreTXT.Text = "Höchste Punktzahl: ";
+                    this.HighScoreTXT.Text = "Höchste Punktzahl: " + GamePage.currentPlayer.TetrisHighScore;
                     break;
             }
         }
+        private bool isFirstLoad = true;
         private async void SetPlayer()
         {
             Apiservice api = new Apiservice();
             GamePage.currentPlayer = (await api.GetAllPlayers()).Find(x => x.Id == EntrancePage.SignedInUser.Id);
-            this.HighScoreTXT.Text = "Highest Score: "+ GamePage.currentPlayer.TetrisHighScore.ToString();
+            isFirstLoad = false;
+            TranslatePage(EntrancePage.SignedInUser.language);            
         }
-
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
             NavigationService nv = NavigationService.GetNavigationService(this);
