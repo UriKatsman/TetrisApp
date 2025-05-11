@@ -123,7 +123,7 @@
                 <Button x:Name="SwitchBtn" Background="White" Content="Switch" FontSize="10" FontWeight="Bold" Click="ChangeView"/>
             </Border>
             <Border BorderThickness="5" Grid.Column="1">
-                <TextBox x:Name="AddFriendTextBox" FontWeight="Bold" FontSize="23" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="AddFriendTextBox" FontWeight="Bold" FontSize="15" VerticalContentAlignment="Center"/>
             </Border>
             <Border Grid.Column="2" BorderThickness="5">
                 <Button Background="White" Click="SendRequest">

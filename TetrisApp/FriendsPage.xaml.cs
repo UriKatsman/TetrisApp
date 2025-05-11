@@ -48,6 +48,11 @@ namespace TetrisApp
             else
                 TranslatePage(new Language() { LanguageName = "Hebrew" });
         }
+        private string Friends;
+        private string FriendRequests;
+        private string FriendRequestIsAlreadyPending;
+        private string YouAreAlreadyFriendsWithThisPerson;
+        private string CantSendYourselfARequest;
         private void TranslatePage(Language To)
         {
             if (To == null)
@@ -56,18 +61,33 @@ namespace TetrisApp
             {
                 case "English":
                     this.ModeTXT.Text = "Friends";
+                    this.FriendRequests = "Friend Requests";
+                    this.Friends = "Friends";
+                    this.FriendRequestIsAlreadyPending = "Friend request is already pending";
+                    this.YouAreAlreadyFriendsWithThisPerson = "You are friends already";
+                    this.CantSendYourselfARequest = "Can't send yourself a friend request";
                     this.AddButtonTXT.Text = "Add Friend";
                     this.SwitchBtn.Content = "Switch";
                     this.SwitchBtn.FontSize = 10;
                     break;
                 case "Hebrew":
                     this.ModeTXT.Text = "חברים";
+                    this.FriendRequests = "בקשות חברות";
+                    this.Friends = "חברים";
+                    this.FriendRequestIsAlreadyPending = "בקשת החברות כבר ממתינה";
+                    this.YouAreAlreadyFriendsWithThisPerson = "אתם כבר חברים";
+                    this.CantSendYourselfARequest = "לא ניתן לשלוח לעצמך בקשת חברות";
                     this.AddButtonTXT.Text = "הוסף חבר";
                     this.SwitchBtn.Content = "החלף";
                     this.SwitchBtn.FontSize = 10;
                     break;
                 case "German":
                     this.ModeTXT.Text = "Freunde";
+                    this.FriendRequests = "Freundschaftsanfrage";
+                    this.Friends = "Freunde";
+                    this.FriendRequestIsAlreadyPending = "Freundschaftsanfrage steht bereit aus";
+                    this.YouAreAlreadyFriendsWithThisPerson = "Ihr seid bereits befreundet";
+                    this.CantSendYourselfARequest = "Du kannst dir selbst keine Freundschaftsanfrage schicken";
                     this.AddButtonTXT.Text = "Freund hinzufügen";
                     this.SwitchBtn.Content = "Wechseln";
                     this.SwitchBtn.FontSize = 7;
@@ -109,11 +129,11 @@ namespace TetrisApp
                 this.PendingRequestControls = new();
                 foreach (Friendship f in Friends)
                 {
-                    if (f.player2.Id == currentPlayer.Id)
-                    {
+                    if (f.player1.Id == currentPlayer.Id)
                         this.PendingRequestControls.Add(new(f.player2, f, this));
-                        this.FriendControls.Last().Width = ListWidth;
-                    }
+                    else
+                        this.PendingRequestControls.Add(new(f.player1, f, this));
+                    this.PendingRequestControls.Last().Width = ListWidth;
                 }
                 this.FriendsList.ItemsSource = null;
                 this.FriendsList.ItemsSource = this.PendingRequestControls;
@@ -213,7 +233,7 @@ namespace TetrisApp
             // makes sure the player is not sending himself a friend request
             if (username == this.currentPlayer.UserName)
             {
-                AddFriendTextBox.Text = "Can't send yourself a friend request";
+                AddFriendTextBox.Text = this.CantSendYourselfARequest;
                 return null;
             }
 
@@ -228,11 +248,14 @@ namespace TetrisApp
             {
                 if (f.player1.UserName == username || f.player2.UserName == username)
                 {
-                    if (f.isAccepted == false)
-                        AddFriendTextBox.Text = "Friend request is already pending";
-                    else
-                        AddFriendTextBox.Text = "You are already friended with this person";
-                    return null;
+                    if (f.player1.UserName == EntrancePage.SignedInUser.UserName || f.player2.UserName == EntrancePage.SignedInUser.UserName)
+                    {
+                        if (f.isAccepted == false)
+                            AddFriendTextBox.Text = this.FriendRequestIsAlreadyPending;
+                        else
+                            AddFriendTextBox.Text = this.YouAreAlreadyFriendsWithThisPerson;
+                        return null;
+                    }
                 }
             }
 
@@ -253,9 +276,9 @@ namespace TetrisApp
         {
             this.isShowingFriends = !this.isShowingFriends;
             if (this.isShowingFriends)
-                this.ModeTXT.Text = "Friends";
+                this.ModeTXT.Text = this.Friends;
             else
-                this.ModeTXT.Text = "Friend Requests";
+                this.ModeTXT.Text = this.FriendRequests;
             GetLists();
         }
 

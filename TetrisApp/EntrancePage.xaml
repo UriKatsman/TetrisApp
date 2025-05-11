@@ -133,7 +133,7 @@
         <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                    Text="Password" Style="{StaticResource LabelStyle}" x:Name="PasswordTXT"/>
 
-        <TextBox Grid.Row="7" Grid.Column="2" Style="{StaticResource ModernTextBox}" x:Name="PasswordBox"/>
+        <PasswordBox VerticalContentAlignment="Center" FontSize="25" Grid.Row="7" Grid.Column="2" x:Name="PasswordBox" Width="400"/>
 
         <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="Hidden" 
                    HorizontalAlignment="Center" FontSize="22" Foreground="#FF6B6B" Text="שם משתמש או סיסמא שגויים" 

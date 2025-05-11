@@ -1,5 +1,4 @@
 ﻿using Model;
-using ViewModel;
 using MyService;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LibreTranslate.Net;
 
 
 namespace TetrisApp
@@ -77,7 +75,7 @@ namespace TetrisApp
 
         private async void LogIn(object sender, RoutedEventArgs e)
         {
-            User GivenUser = new User() { Password = PasswordBox.Text, UserName = UsernameBox.Text };
+            User GivenUser = new User() { Password = PasswordBox.Password, UserName = UsernameBox.Text };
 
             Apiservice APIservice = new();
             List<User> users = await APIservice.GetAllUsers();

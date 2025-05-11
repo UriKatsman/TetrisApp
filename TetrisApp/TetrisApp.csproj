@@ -23,14 +23,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LibreTranslate.Net.Enhanced" Version="1.6.4.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj" />
-    <ProjectReference Include="..\MyService\MyService.csproj" />
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+    <Reference Include="Model">
+      <HintPath>..\Model\bin\Debug\net8.0\Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MyService">
+      <HintPath>..\MyService\bin\Debug\net8.0\MyService.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
