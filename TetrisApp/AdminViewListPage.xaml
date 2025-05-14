@@ -123,7 +123,10 @@
                 <DropShadowEffect ShadowDepth="2" Direction="330" Color="#000000" Opacity="0.6" BlurRadius="4"/>
             </TextBlock.Effect>
         </TextBlock>
-
+        <!-- Settings Button -->
+        <Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
+            <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
+        </Border>
         <!-- Navigation Buttons -->
         <Border Grid.Row="1" Grid.Column="1" Width="40" Height="40" 
                 HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -177,8 +180,8 @@
              VerticalAlignment="Center">
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="ListViewDelete"/>
-                        <MenuItem Header="Update" Click="ListViewUpdate"/>
+                        <MenuItem Header="Delete" Click="ListViewDelete" x:Name="DeleteHeader"/>
+                        <MenuItem Header="Update" Click="ListViewUpdate" x:Name="UpdateHeader"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>

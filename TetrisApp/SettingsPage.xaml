@@ -104,7 +104,7 @@
                   VerticalAlignment="Center"/>
 
         <!-- Language Section - Keeping in one line as original -->
-        <TextBlock Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="Language:" Style="{StaticResource LabelStyle}" 
+        <TextBlock x:Name="LanguageTXT" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="Language:" Style="{StaticResource LabelStyle}" 
                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <Border Grid.Row="7" Grid.Column="3" Style="{StaticResource IconContainerStyle}" 

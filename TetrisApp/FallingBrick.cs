@@ -44,8 +44,6 @@ namespace TetrisApp
             else
                 this.brick = shape;
             this.grid = this.brick.grid;            
-            //this.rightBorderDistance = this.brick.rightBorderDistance;
-            //this.leftBorderDistance = this.brick.leftBorderDistance;
         }
                 
         public void RotateRight(int[,] GridToFill, int ColorID)
@@ -107,8 +105,7 @@ namespace TetrisApp
                 return;
             Singleton = true;
 
-            this.ColorPalletePicker();
-            rng = new Random();
+            this.ColorPalletePicker();            
             allBricks = new();
             //                                               Left        middle       right
             //                                       top center bottom

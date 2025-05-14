@@ -29,6 +29,29 @@ namespace TetrisApp
             
             this.PreviousPage = PreviousPage;            
             SetContentForLangugesComboBox();
+            this.Loaded += SettingsPage_Loaded;
+        }
+
+        private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.TranslatePage(EntrancePage.SignedInUser.language);
+        }
+        private void TranslatePage(Language To)
+        {
+            if (To == null)
+                return;
+            switch (To.LanguageName)
+            {
+                case "English":
+                    this.LanguageTXT.Text = "Language:";
+                    break;
+                case "Hebrew":
+                    this.LanguageTXT.Text = "שפה:";
+                    break;
+                case "German":
+                    this.LanguageTXT.Text = "Sprache:";
+                    break;
+            }
         }
         private async void SetContentForLangugesComboBox()
         {

@@ -158,7 +158,7 @@ namespace TetrisApp
         private async void Del_Requst(Friendship f)
         {
             Apiservice api = new();
-            await api.DeleteFriendship(f.Id);
+            await api.DeleteFriendship(f.Id);            
         }
 
         public void Accpet_requst(FriendRequestUserControl sender)

@@ -110,7 +110,7 @@
         <Image Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" x:Name="DownButton" MouseDown="DownBtn" Source="/DownArrow.png"/>
 
         <!-- Game Over Screen -->
-        <Grid x:Name="GameOverScreen" Visibility="Visible" Grid.ColumnSpan="7" Grid.RowSpan="4">
+        <Grid x:Name="GameOverScreen" Visibility="Collapsed" Grid.ColumnSpan="7" Grid.RowSpan="4">
             <Rectangle Fill="#1E3B70" Opacity="0.7"/>
             <Grid>
                 <Grid.ColumnDefinitions>

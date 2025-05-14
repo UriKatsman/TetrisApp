@@ -42,22 +42,9 @@ namespace TetrisApp
 
                 IsAdmin = admins.Find(x => x.Id == items.Last().user.Id) != null;
                 items.Last().AdminCheckBox.IsChecked = IsAdmin;                
-
-                if (items.Last().AdminCheckBox.IsChecked == true) 
-                    ;
             }
 
-            this.UsersListBox.ItemsSource = items;
-            
-            
-            foreach (AdminListItemControl u in this.UsersListBox.ItemsSource)
-            {                
-                if (u.AdminCheckBox.IsChecked == true)
-                    ;
-            }
-
-
-            //*/
+            this.UsersListBox.ItemsSource = items;                       
         }        
 
         public AdminViewListPage()
@@ -66,6 +53,26 @@ namespace TetrisApp
             InitializeComponent();
             
             UpdateTheListView();
+        }
+        private void TranslatePage(Language To)
+        {
+            if (To == null)
+                return;
+            switch (To.LanguageName)
+            {
+                case "English":
+                    this.DeleteHeader.Header = "Ban";
+                    this.UpdateHeader.Header = "Change";                    
+                    break;
+                case "Hebrew":
+                    this.DeleteHeader.Header = "אסור";
+                    this.UpdateHeader.Header = "עדכן";
+                    break;
+                case "German":
+                    this.DeleteHeader.Header = "verbannen";
+                    this.UpdateHeader.Header = "ändern";
+                    break;
+            }
         }
         public AdminViewListPage(Page PreviousPage)
         {
@@ -86,13 +93,13 @@ namespace TetrisApp
             nv.Navigate(this.PreviousPage);
         }        
 
-        private void ListViewDelete(object sender, RoutedEventArgs e)
+        private async void ListViewDelete(object sender, RoutedEventArgs e)
         {
             User x = ((AdminListItemControl)UsersListBox.SelectedItem).user;            
 
             Apiservice api = new();
 
-            api.DeleteUser(x.Id);
+            await api.DeleteUser(x.Id);
 
             UsersListBox.ItemsSource = null;
             UpdateTheListView();
@@ -112,7 +119,7 @@ namespace TetrisApp
             Apiservice api = new();
 
             User x = this.EditedUser;
-            //User NewUser = new User() {language = x.language, Password=this.PasswordBox.Text, Id=x.Id, ProfilePicture = x.ProfilePicture, UserName = this.UsernameBox.Text};
+            
             User NewUser = new User() { language = x.language, Password = this.PasswordBox.Text, Id = x.Id, UserName = this.UsernameBox.Text };
 
             await api.UpdateUser(NewUser);
