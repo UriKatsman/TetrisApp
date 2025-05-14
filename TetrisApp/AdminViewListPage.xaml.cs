@@ -129,7 +129,8 @@ namespace TetrisApp
 
             User x = this.EditedUser;
             
-            User NewUser = new User() { language = x.language, Password = this.PasswordBox.Text, Id = x.Id, UserName = this.UsernameBox.Text };
+            User NewUser = new User() { language = x.language, Password = this.PasswordBox.Text,
+                Id = x.Id, UserName = this.UsernameBox.Text };
 
             await api.UpdateUser(NewUser);
             UpdateTheListView();

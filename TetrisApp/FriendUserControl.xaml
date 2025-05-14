@@ -8,14 +8,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="700"
              Width="auto">
+    <Border BorderThickness="5" Background="LightGray" BorderBrush="White">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Text="FriendName" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="FriendNameTXT" FontSize="30"/>
-        <TextBlock Grid.Column="1" Text="1000" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="FriendScoreTXT" FontSize="40"/>
-        <materialDesign:PackIcon x:Name="Xbtn" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Kind="RemoveBox" Width="50" Height="50" Foreground="Red"/>
-    </Grid>
+        <TextBlock Grid.Column="0" Text="FriendName" FontWeight="Bold" HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center" x:Name="FriendNameTXT" FontSize="30"/>
+        <TextBlock Grid.Column="1" Text="1000" FontWeight="Bold" HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center" x:Name="FriendScoreTXT" FontSize="40"/>
+        <materialDesign:PackIcon x:Name="Xbtn" Grid.Column="2" HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center" Kind="RemoveBox" Width="50" Height="50"
+                                 Foreground="Red"/>
+        </Grid>
+    </Border>
 </UserControl>

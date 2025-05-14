@@ -49,7 +49,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>
+                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" 
+                                      BlurRadius="5" Opacity="0.7"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -94,25 +95,27 @@
         </Grid.RowDefinitions>
 
         <!-- Tetris Blocks Background Elements (Decorative) -->
-        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="30" Height="30" HorizontalAlignment="Left" Opacity="0.6"/>
-        <Rectangle Grid.Row="3" Grid.Column="3" Fill="#3563B3" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
-        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80" VerticalAlignment="Bottom" Opacity="0.4"/>
-        <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7" Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="30" Height="30" 
+                   HorizontalAlignment="Left" Opacity="0.6"/>
+        <Rectangle Grid.Row="3" Grid.Column="3" Fill="#3563B3" Width="40" Height="40" 
+                   HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80" 
+                   VerticalAlignment="Bottom" Opacity="0.4"/>
+        <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7" Width="60" Height="20" 
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
 
 
         <!-- Settings Button -->
-        <Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
+        <Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" 
+                Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
             <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
         </Border>
         <!-- Main Logo/Title -->
-        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" 
+                HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
             <TextBlock Text="TETRIS" Style="{StaticResource TetrisTitle}" />
         </Border>
 
-        <!-- Welcome Message -->
-        <!--<TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" 
-                   Text="Hello " Style="{StaticResource LabelStyle}"/>-->
-        
         <Grid Grid.Column="2" Grid.Row="4" x:Name="FriendAddGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"/>
@@ -120,10 +123,12 @@
                 <ColumnDefinition Width="0.25*"/>
             </Grid.ColumnDefinitions>
             <Border BorderThickness="5">
-                <Button x:Name="SwitchBtn" Background="White" Content="Switch" FontSize="10" FontWeight="Bold" Click="ChangeView"/>
+                <Button x:Name="SwitchBtn" Background="White" Content="Switch" FontSize="10" 
+                        FontWeight="Bold" Click="ChangeView"/>
             </Border>
             <Border BorderThickness="5" Grid.Column="1">
-                <TextBox x:Name="AddFriendTextBox" FontWeight="Bold" FontSize="15" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="AddFriendTextBox" FontWeight="Bold" FontSize="15" 
+                         VerticalContentAlignment="Center"/>
             </Border>
             <Border Grid.Column="2" BorderThickness="5">
                 <Button Background="White" Click="SendRequest">
@@ -132,35 +137,29 @@
             </Border>
         </Grid>
 
-        <TextBlock x:Name="ModeTXT" Grid.Column="2" Grid.Row="5" Text="Friends" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="ModeTXT" Grid.Column="2" Grid.Row="5" Text="Friends" FontWeight="Bold" 
+                   Foreground="White" HorizontalAlignment="Center"/>
         
         <Border Grid.Column="2" Grid.Row="5" Grid.RowSpan="5" BorderThickness="5,15,5,0">
             <ListView x:Name="FriendsList" HorizontalContentAlignment="Center"> 
             </ListView>
         </Border>
-        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource IconButtonStyle}" MouseDown="GoBack">
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource IconButtonStyle}" 
+                MouseDown="GoBack">
             <Image Source="/Back.png" Stretch="Uniform" Margin="12" MouseDown="GoBack"/>
         </Border>
+        
 
-        <!-- Play Button -->
-        <!--<Button Grid.Row="6" Grid.Column="2" Style="{StaticResource ModernButton}" Width="220" 
-                x:Name="PlayButton" Click="PlayBtn" FontWeight="Bold">
-            <TextBlock x:Name="PlayButtenText" Text="Play" FontWeight="Bold" FontSize="30"/>
-        </Button>-->
-
-        <!-- High Score -->
-        <!--<Border Grid.Row="9" Grid.ColumnSpan="3" Grid.Column="1" Background="#2E5AA7" 
-                CornerRadius="10" Opacity="0.7" Margin="100,5">
-            <TextBlock x:Name="HighScoreTXT" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                       Text="Highest Score: " Style="{StaticResource LabelStyle}"/>
-        </Border>-->
-
-        <!-- Animated Tetris Block (Optional - add animation code separately) -->
+        <!-- Animated Block -->
         <Canvas Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="5">
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3" Canvas.Left="50" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3" Canvas.Left="70" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3" Canvas.Left="90" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3" Canvas.Left="70" Canvas.Top="0"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3" Canvas.Left="50" 
+                     Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3" Canvas.Left="70" 
+                     Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3" Canvas.Left="90" 
+                     Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3" Canvas.Left="70" 
+                     Canvas.Top="0"/>
         </Canvas>
     </Grid>
 </Page>

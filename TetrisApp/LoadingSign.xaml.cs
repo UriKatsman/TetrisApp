@@ -61,7 +61,7 @@ namespace TetrisApp
             SpinnerPath.Data = pathGeometry;
         }
 
-        #region Dependency Properties
+        
 
         public static readonly DependencyProperty SpinnerColorProperty =
             DependencyProperty.Register("SpinnerColor", typeof(Brush), typeof(LoadingSign),
@@ -75,7 +75,8 @@ namespace TetrisApp
             DependencyProperty.Register("StrokeThickness", typeof(double), typeof(LoadingSign),
                 new PropertyMetadata(5.0, OnSpinnerPropertyChanged));
 
-        private static void OnSpinnerPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnSpinnerPropertyChanged(DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
         {
             if (d is LoadingSign control)
             {
@@ -99,24 +100,6 @@ namespace TetrisApp
         {
             get { return (double)GetValue(StrokeThicknessProperty); }
             set { SetValue(StrokeThicknessProperty, value); }
-        }
-
-        #endregion
-    }
-
-    // Helper converter to divide a value by 2
-    public class DivideByTwoConverter : System.Windows.Data.IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is double doubleValue)
-                return doubleValue / 2;
-            return 0;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+        }       
+    }    
 }

@@ -51,7 +51,8 @@ namespace TetrisApp
                 case "English":
                     this.greetingTXT.Text = "Hello " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "Play";
-                    this.HighScoreTXT.Text = "Highest Score: " + GamePage.currentPlayer.TetrisHighScore;
+                    this.HighScoreTXT.Text = "Highest Score: " +
+                        GamePage.currentPlayer.TetrisHighScore;
                     break;
                 case "Hebrew":
                     this.greetingTXT.Text = "שלום " + EntrancePage.SignedInUser.UserName;
@@ -61,7 +62,8 @@ namespace TetrisApp
                 case "German":
                     this.greetingTXT.Text = "Hallo " + EntrancePage.SignedInUser.UserName;
                     this.PlayButtenText.Text = "Spiel";
-                    this.HighScoreTXT.Text = "Höchste Punktzahl: " + GamePage.currentPlayer.TetrisHighScore;
+                    this.HighScoreTXT.Text = "Höchste Punktzahl: " + 
+                        GamePage.currentPlayer.TetrisHighScore;
                     break;
             }
         }
@@ -69,7 +71,8 @@ namespace TetrisApp
         private async void SetPlayer()
         {
             Apiservice api = new Apiservice();
-            GamePage.currentPlayer = (await api.GetAllPlayers()).Find(x => x.Id == EntrancePage.SignedInUser.Id);
+            GamePage.currentPlayer = (await api.GetAllPlayers()).Find(x => x.Id == 
+            EntrancePage.SignedInUser.Id);
             isFirstLoad = false;
             TranslatePage(EntrancePage.SignedInUser.language);            
         }

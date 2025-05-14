@@ -87,7 +87,8 @@ namespace TetrisApp
                     this.Friends = "Freunde";
                     this.FriendRequestIsAlreadyPending = "Freundschaftsanfrage steht bereit aus";
                     this.YouAreAlreadyFriendsWithThisPerson = "Ihr seid bereits befreundet";
-                    this.CantSendYourselfARequest = "Du kannst dir selbst keine Freundschaftsanfrage schicken";
+                    this.CantSendYourselfARequest = "Du kannst dir selbst keine Freundschaftsanfrage " +
+                        "schicken";
                     this.AddButtonTXT.Text = "Freund hinzufügen";
                     this.SwitchBtn.Content = "Wechseln";
                     this.SwitchBtn.FontSize = 7;
@@ -103,13 +104,15 @@ namespace TetrisApp
             ls.Height = 100;
             this.FriendsList.ItemsSource = new List<LoadingSign>() { ls };
             if (currentPlayer == null)
-                currentPlayer = (await api.GetAllPlayers()).Find(x=> x.Id == EntrancePage.SignedInUser.Id);
+                currentPlayer = (await api.GetAllPlayers()).Find(x=> x.Id ==
+                EntrancePage.SignedInUser.Id);
             List <Friendship> Friendships = await api.GetAllFriendships();
 
             double ListWidth = this.FriendsList.Width;
             if (this.isShowingFriends)
             {
-                List<Friendship> Friends = Friendships.FindAll(x => (x.player1.Id == currentPlayer.Id || x.player2.Id == currentPlayer.Id) && x.isAccepted == true);
+                List<Friendship> Friends = Friendships.FindAll(x => (x.player1.Id == currentPlayer.Id 
+                || x.player2.Id == currentPlayer.Id) && x.isAccepted == true);
                 this.FriendControls = new();
                 foreach (Friendship f in Friends)
                 {
@@ -125,7 +128,8 @@ namespace TetrisApp
             }
             else
             {
-                List<Friendship> Friends = Friendships.FindAll(x => (x.player1.Id == currentPlayer.Id || x.player2.Id == currentPlayer.Id) && x.isAccepted == false);
+                List<Friendship> Friends = Friendships.FindAll(x => (x.player1.Id == currentPlayer.Id
+                || x.player2.Id == currentPlayer.Id) && x.isAccepted == false);
                 this.PendingRequestControls = new();
                 foreach (Friendship f in Friends)
                 {
@@ -151,7 +155,8 @@ namespace TetrisApp
             Player friend = sender.p;
 
             Del_Requst(sender.friendship);
-            this.PendingRequestControls.Remove(this.PendingRequestControls.Find(x => x.p.Id == friend.Id));
+            this.PendingRequestControls.Remove(this.PendingRequestControls.Find(x => x.p.Id 
+            == friend.Id));
             this.FriendsList.ItemsSource = null;
             this.FriendsList.ItemsSource = this.PendingRequestControls;
         }
@@ -166,7 +171,8 @@ namespace TetrisApp
             Player friend = sender.p;
 
             Update_Requst(sender.friendship);
-            this.PendingRequestControls.Remove(this.PendingRequestControls.Find(x => x.p.Id == friend.Id));            
+            this.PendingRequestControls.Remove(this.PendingRequestControls.Find(x => x.p.Id
+            == friend.Id));            
             this.FriendsList.ItemsSource = null;
             this.FriendsList.ItemsSource = this.PendingRequestControls;
         }
@@ -197,9 +203,11 @@ namespace TetrisApp
 
             removeFriend(sender.friendship);
             if (FriendIsOne)
-                this.FriendControls.Remove(this.FriendControls.Find(x => x.friendship.player1 == friend));
+                this.FriendControls.Remove(this.FriendControls.Find(x => x.friendship.player1
+                == friend));
             else
-                this.FriendControls.Remove(this.FriendControls.Find(x => x.friendship.player2 == friend));
+                this.FriendControls.Remove(this.FriendControls.Find(x => x.friendship.player2 
+                == friend));
             this.FriendsList.ItemsSource = null;
             this.FriendsList.ItemsSource = this.FriendControls;
         }
@@ -220,7 +228,8 @@ namespace TetrisApp
             Player PotentionalFriend = await DoesFriendExist(FriendName);
             if (PotentionalFriend != null)
             {
-                Friendship f = new Friendship() { player1 = currentPlayer, player2 = PotentionalFriend, isAccepted = false };
+                Friendship f = new Friendship() { player1 = currentPlayer, player2 
+                    = PotentionalFriend, isAccepted = false };
                 Apiservice api = new();
                 await api.InsertFriendship(f);
             }
@@ -229,26 +238,24 @@ namespace TetrisApp
 
         private async Task<Player> DoesFriendExist(string username)
         {
-
             // makes sure the player is not sending himself a friend request
             if (username == this.currentPlayer.UserName)
             {
                 AddFriendTextBox.Text = this.CantSendYourselfARequest;
                 return null;
             }
-
-
             
             Apiservice api = new();
 
-
-            // makes sure the player is not sending a friend request to someone who already is a friend or has a request            
+            // makes sure the player is not sending a friend request to someone who already
+            // is a friend or has a request            
             List<Friendship> AllFriendships = await api.GetAllFriendships();
             foreach (Friendship f in AllFriendships)
             {
                 if (f.player1.UserName == username || f.player2.UserName == username)
                 {
-                    if (f.player1.UserName == EntrancePage.SignedInUser.UserName || f.player2.UserName == EntrancePage.SignedInUser.UserName)
+                    if (f.player1.UserName == EntrancePage.SignedInUser.UserName || 
+                        f.player2.UserName == EntrancePage.SignedInUser.UserName)
                     {
                         if (f.isAccepted == false)
                             AddFriendTextBox.Text = this.FriendRequestIsAlreadyPending;

@@ -25,13 +25,17 @@
 
         <!-- Background circle (optional) -->
         <Ellipse x:Name="CircleBackground" 
-                 Fill="{Binding BackgroundColor, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                 Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                 Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                 Fill="{Binding BackgroundColor, 
+            RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                 Width="{Binding ActualWidth, 
+            RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                 Height="{Binding ActualHeight, 
+            RelativeSource={RelativeSource AncestorType=UserControl}}"/>
 
         <!-- Circle Track (background track for spinner) -->
         <Ellipse Stroke="#20000000" 
-                 StrokeThickness="{Binding StrokeThickness, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                 StrokeThickness="{Binding StrokeThickness, 
+            RelativeSource={RelativeSource AncestorType=UserControl}}"
                  Fill="Transparent"
                  Margin="10"/>
 
@@ -39,23 +43,22 @@
         <Grid>
             <Grid.RenderTransform>
                 <RotateTransform x:Name="SpinnerRotate" 
-                                 CenterX="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource DivideByTwoConverter}}" 
-                                 CenterY="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource DivideByTwoConverter}}"/>
+                                 CenterX="{Binding ActualWidth, 
+                    RelativeSource={RelativeSource AncestorType=UserControl}, 
+                    Converter={StaticResource DivideByTwoConverter}}" 
+                                 CenterY="{Binding ActualHeight, 
+                    RelativeSource={RelativeSource AncestorType=UserControl}, 
+                    Converter={StaticResource DivideByTwoConverter}}"/>
             </Grid.RenderTransform>
 
             <!-- This is our spinning arc -->
             <Path x:Name="SpinnerPath" 
-                  Stroke="{Binding SpinnerColor, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                  StrokeThickness="{Binding StrokeThickness, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  Stroke="{Binding SpinnerColor, 
+                RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  StrokeThickness="{Binding StrokeThickness, 
+                RelativeSource={RelativeSource AncestorType=UserControl}}"
                   StrokeStartLineCap="Round"
                   StrokeEndLineCap="Round">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathFigure>
-                            <!-- These coordinates will be set in code-behind -->
-                        </PathFigure>
-                    </PathGeometry>
-                </Path.Data>
             </Path>
         </Grid>
     </Grid>
