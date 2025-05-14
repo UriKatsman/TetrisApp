@@ -72,7 +72,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>
+                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" 
+                                      BlurRadius="5" Opacity="0.7"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -109,48 +110,58 @@
         </Grid.RowDefinitions>
 
         <!-- Tetris Blocks Background Elements (Decorative) -->
-        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="30" Height="30" HorizontalAlignment="Left" Opacity="0.6"/>
-        <Rectangle Grid.Row="3" Grid.Column="3" Fill="#3563B3" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
-        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80" VerticalAlignment="Bottom" Opacity="0.4"/>
-        <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7" Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7"
+                   Width="30" Height="30" HorizontalAlignment="Left" Opacity="0.6"/>
+        <Rectangle Grid.Row="3" Grid.Column="3" Fill="#3563B3"
+                   Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7"
+                   Width="20" Height="80" VerticalAlignment="Bottom" Opacity="0.4"/>
+        <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7"
+                   Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
 
         <!-- Main Logo/Title -->
-        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                Grid.RowSpan="2" HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
             <TextBlock Text="TETRIS" Style="{StaticResource TetrisTitle}" />
         </Border>
-
-        <!-- Settings Button -->
-        <!--<Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
-            <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
-        </Border>-->
 
         <!-- Form Elements -->
         <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                    Text="Username" Style="{StaticResource LabelStyle}" x:Name="UsernameTXT"/>
 
-        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource ModernTextBox}" x:Name="UsernameBox"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource ModernTextBox}"
+                 x:Name="UsernameBox"/>
 
         <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                    Text="Password" Style="{StaticResource LabelStyle}" x:Name="PasswordTXT"/>
 
-        <PasswordBox VerticalContentAlignment="Center" FontSize="25" Grid.Row="7" Grid.Column="2" x:Name="PasswordBox" Width="400"/>
+        <PasswordBox VerticalContentAlignment="Center" FontSize="25" Grid.Row="7" Grid.Column="2"
+                     x:Name="PasswordBox" Width="400"/>
 
         <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="Hidden" 
-                   HorizontalAlignment="Center" FontSize="22" Foreground="#FF6B6B" Text="שם משתמש או סיסמא שגויים" 
+                   HorizontalAlignment="Center" FontSize="22" Foreground="#FF6B6B"
+                   Text="שם משתמש או סיסמא שגויים" 
                    FontFamily="Arial" FontWeight="SemiBold"/>
 
         <!-- Buttons -->
-        <Button Grid.Row="9" Content="Enter" Grid.Column="2" Style="{StaticResource ModernButton}" Width="220" x:Name="LogInButton" Click="LogIn" FontWeight="Bold"/>
+        <Button Grid.Row="9" Content="Enter" Grid.Column="2" Style="{StaticResource ModernButton}"
+                Width="220" x:Name="LogInButton" Click="LogIn" FontWeight="Bold"/>
 
-        <Button Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" Content="Don't have an account? create one here." Width="550" 
-                Style="{StaticResource ModernButton}" Background="#2E5AA7" x:Name="SignUpButton" Click="SignUp"/>
+        <Button Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center"
+                Content="Don't have an account? create one here." Width="550" 
+                Style="{StaticResource ModernButton}" Background="#2E5AA7" x:Name="SignUpButton"
+                Click="SignUp"/>
 
         <!-- Animated Tetris Block (Optional - add animation code separately) -->
         <Canvas Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="5">
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3" Canvas.Left="50" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3" Canvas.Left="70" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3" Canvas.Left="90" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3" Canvas.Left="70" Canvas.Top="0"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3"
+                     Canvas.Left="50" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3"
+                     Canvas.Left="70" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3"
+                     Canvas.Left="90" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3"
+                     Canvas.Left="70" Canvas.Top="0"/>
         </Canvas>
     </Grid>
 </Page>

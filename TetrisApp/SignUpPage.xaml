@@ -95,7 +95,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>
+                    <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F"
+                                      BlurRadius="5" Opacity="0.7"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -122,13 +123,15 @@
                             <ToggleButton x:Name="ToggleButton" 
                                         ClickMode="Press" 
                                         Focusable="false"
-                                        IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                        IsChecked="{Binding IsDropDownOpen, 
+                                Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                         Template="{StaticResource ComboBoxToggleButton}"/>
                             <ContentPresenter x:Name="ContentSite" 
                                             IsHitTestVisible="False"  
                                             Content="{TemplateBinding SelectionBoxItem}"
                                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                            ContentTemplateSelector=
+                                              "{TemplateBinding ItemTemplateSelector}"
                                             HorizontalAlignment="Left"
                                             Margin="10,3,23,3"
                                             VerticalAlignment="Center"/>
@@ -148,7 +151,8 @@
                                         CornerRadius="0 0 10 10"
                                         BorderBrush="#A2C0F7"/>
                                     <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        <StackPanel IsItemsHost="True" 
+                                                    KeyboardNavigation.DirectionalNavigation="Contained" />
                                     </ScrollViewer>
                                 </Grid>
                             </Popup>
@@ -219,23 +223,24 @@
         </Grid.RowDefinitions>
 
         <!-- Tetris Blocks Background Elements (Decorative) -->
-        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="30" Height="30" HorizontalAlignment="Left" Opacity="0.6"/>
-        <Rectangle Grid.Row="3" Grid.Column="3" Fill="#3563B3" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
-        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80" VerticalAlignment="Bottom" Opacity="0.4"/>
-        <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7" Width="60" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="30" Height="30"
+                   HorizontalAlignment="Left" Opacity="0.6"/>
+        <Rectangle Grid.Row="3" Grid.Column="3" Fill="#3563B3" Width="40" Height="40"
+                   HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="7" Grid.Column="1" Fill="#A2C0F7" Width="20" Height="80"
+                   VerticalAlignment="Bottom" Opacity="0.4"/>
+        <Rectangle Grid.Row="10" Grid.Column="3" Fill="#64A7F7" Width="60" Height="20"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
 
         <!-- Main Logo/Title -->
-        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
+        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"
+                HorizontalAlignment="Center" CornerRadius="15" Padding="30,5">
             <TextBlock Text="TETRIS" Style="{StaticResource TetrisTitle}" />
         </Border>
 
-        <!-- Settings Button -->
-        <!--<Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
-            <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
-        </Border>-->
-
         <!-- Back Button -->
-        <Border Grid.Row="1" Grid.Column="1" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoBack">
+        <Border Grid.Row="1" Grid.Column="1" Width="50" Height="50" CornerRadius="25"
+                Background="#64A7F7" Opacity="0.9" MouseDown="GoBack">
             <Image Source="/Back.png" Stretch="Uniform" Margin="12"/>
         </Border>
 
@@ -243,12 +248,14 @@
         <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                    Text="Username:" Style="{StaticResource LabelStyle}" x:Name="UsernameTXT"/>
 
-        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource ModernTextBox}" x:Name="UsernameBox" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Style="{StaticResource ModernTextBox}"
+                 x:Name="UsernameBox" HorizontalAlignment="Left"/>
 
         <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                    Text="Password:" Style="{StaticResource LabelStyle}" x:Name="PasswordTXT"/>
 
-        <PasswordBox Grid.Row="7" Grid.Column="2" Style="{StaticResource ModernPasswordBox}" x:Name="PasswordBox" HorizontalAlignment="Left"/>
+        <PasswordBox Grid.Row="7" Grid.Column="2" Style="{StaticResource ModernPasswordBox}"
+                     x:Name="PasswordBox" HorizontalAlignment="Left"/>
 
         <!-- Language Selection -->
         <TextBlock Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" 
@@ -262,7 +269,8 @@
 
         <!-- Error Message -->
         <TextBlock Grid.Row="9" Grid.Column="2" x:Name="ErrorSigningUpText" Visibility="Hidden" 
-                   HorizontalAlignment="Center" FontSize="22" Foreground="#FF6B6B" Text="Username is already taken" 
+                   HorizontalAlignment="Center" FontSize="22" Foreground="#FF6B6B"
+                   Text="Username is already taken" 
                    FontFamily="Arial" FontWeight="SemiBold"/>
 
         <!-- Buttons -->
@@ -272,10 +280,14 @@
 
         <!-- Animated Tetris Block (Optional - add animation code separately) -->
         <Canvas Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="5">
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3" Canvas.Left="650" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3" Canvas.Left="670" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3" Canvas.Left="690" Canvas.Top="20"/>
-            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3" Canvas.Left="670" Canvas.Top="0"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#64A7F7" Opacity="0.3"
+                     Canvas.Left="650" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#A2C0F7" Opacity="0.3"
+                     Canvas.Left="670" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#4B7ED4" Opacity="0.3"
+                     Canvas.Left="690" Canvas.Top="20"/>
+            <Polygon Points="0,0 20,0 20,20 0,20" Fill="#1E3B70" Opacity="0.3"
+                     Canvas.Left="670" Canvas.Top="0"/>
         </Canvas>
     </Grid>
 </Page>

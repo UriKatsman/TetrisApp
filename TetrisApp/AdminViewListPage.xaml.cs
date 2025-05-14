@@ -50,9 +50,9 @@ namespace TetrisApp
         public AdminViewListPage()
         {
             this.PreviousPage = new EntrancePage();
-            InitializeComponent();
-            
+            InitializeComponent();            
             UpdateTheListView();
+            this.Loaded += AdminViewListPage_Loaded;
         }
         private void TranslatePage(Language To)
         {
@@ -62,15 +62,18 @@ namespace TetrisApp
             {
                 case "English":
                     this.DeleteHeader.Header = "Ban";
-                    this.UpdateHeader.Header = "Change";                    
+                    this.UpdateHeader.Header = "Change";    
+                    this.ApplyBtn.Content = "Apply";
                     break;
                 case "Hebrew":
                     this.DeleteHeader.Header = "אסור";
                     this.UpdateHeader.Header = "עדכן";
+                    this.ApplyBtn.Content = "שמור";
                     break;
                 case "German":
                     this.DeleteHeader.Header = "verbannen";
                     this.UpdateHeader.Header = "ändern";
+                    this.ApplyBtn.Content = "übertragen";
                     break;
             }
         }
@@ -79,6 +82,12 @@ namespace TetrisApp
             this.PreviousPage = PreviousPage;
             InitializeComponent();
             UpdateTheListView();
+            this.Loaded += AdminViewListPage_Loaded;
+        }
+
+        private void AdminViewListPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.TranslatePage(EntrancePage.SignedInUser.language);
         }
 
         private void GoToSettings(object sender, MouseButtonEventArgs e)

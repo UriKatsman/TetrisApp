@@ -76,7 +76,8 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="6">
-                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Margin="{TemplateBinding Padding}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -120,11 +121,13 @@
                    Text="TETRIS" FontSize="50" 
                    Foreground="#FFFFFF" FontWeight="Bold" FontFamily="Segoe UI">
             <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="2" Direction="330" Color="#000000" Opacity="0.6" BlurRadius="4"/>
+                <DropShadowEffect ShadowDepth="2" Direction="330" Color="#000000" 
+                                  Opacity="0.6" BlurRadius="4"/>
             </TextBlock.Effect>
         </TextBlock>
         <!-- Settings Button -->
-        <Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
+        <Border Grid.Row="1" Grid.Column="3" Width="50" Height="50" CornerRadius="25" 
+                Background="#64A7F7" Opacity="0.9" MouseDown="GoToSettings">
             <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="12"/>
         </Border>
         <!-- Navigation Buttons -->
@@ -134,17 +137,10 @@
                 MouseDown="GoBack">
             <Image Source="/Back.png" Stretch="Uniform" Margin="10"/>
         </Border>
-        <!--
-        <Border Grid.Row="1" Grid.Column="3" Width="40" Height="40" 
-                HorizontalAlignment="Right" VerticalAlignment="Center"
-                Background="#2242B8" CornerRadius="20" Cursor="Hand"
-                MouseDown="GoToSettings">
-            <Image Source="/SettingsButton.png" Stretch="Uniform" Margin="10"/>
-        </Border>
-        -->
 
         <!-- Content Area -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" 
+                    Grid.Column="1" Grid.ColumnSpan="3"
     Background="#E6F0FF">
             <!-- User Edit Panel -->
             <Border  
