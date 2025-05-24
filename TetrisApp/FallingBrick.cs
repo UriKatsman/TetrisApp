@@ -97,14 +97,14 @@ namespace TetrisApp
         //        <---Color IDs--->
         //        <---Random Number Generator--->
         public static Random rng;
-        //        <---Random Number Generator--->
-
+        //        <---Random Number Generator--->        
         public BricksGets()
         {
             if (Singleton == true)
                 return;
             Singleton = true;
 
+            rng = new Random();
             this.ColorPalletePicker();            
             allBricks = new();
             //                                               Left        middle       right

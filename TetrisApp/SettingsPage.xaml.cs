@@ -68,7 +68,8 @@ namespace TetrisApp
             else
                 for (int i = this.LanguagesComboBox.Items.Count - 1; i >= 0; i--)
                 {
-                    if (EntrancePage.SignedInUser.language.Id == ((Language)this.LanguagesComboBox.Items[i]).Id)
+                    if (EntrancePage.SignedInUser.language.Id == 
+                        ((Language)this.LanguagesComboBox.Items[i]).Id)
                         index = i;
                 }
             

@@ -25,7 +25,7 @@ namespace TetrisApp
         private Page PreviousPage;
         public async void UpdateTheListView()
         {// מציב נתונים בListView
-            
+
             Apiservice api = new();
 
             List<User> users = await api.GetAllUsers();
@@ -34,26 +34,28 @@ namespace TetrisApp
             List<AdminListItemControl> items = new List<AdminListItemControl>();
 
             foreach (User u in users)
-            {                
+            {
                 items.Add(new AdminListItemControl(u));
 
                 items.Last().Width = this.UsersListBox.Width - 15;
-                items.Last().HorizontalAlignment = HorizontalAlignment.Center;                
+                items.Last().HorizontalAlignment = HorizontalAlignment.Center;
 
                 IsAdmin = admins.Find(x => x.Id == items.Last().user.Id) != null;
-                items.Last().AdminCheckBox.IsChecked = IsAdmin;                
+                items.Last().AdminCheckBox.IsChecked = IsAdmin;
             }
 
-            this.UsersListBox.ItemsSource = items;                       
-        }        
+            this.UsersListBox.ItemsSource = items;
+        }
 
         public AdminViewListPage()
         {
             this.PreviousPage = new EntrancePage();
-            InitializeComponent();            
+            InitializeComponent();
             UpdateTheListView();
             this.Loaded += AdminViewListPage_Loaded;
         }
+        private string AdminDeleteErrorMessage;
+        private string UsernameTakenErrorMessage;
         private void TranslatePage(Language To)
         {
             if (To == null)
@@ -62,18 +64,24 @@ namespace TetrisApp
             {
                 case "English":
                     this.DeleteHeader.Header = "Ban";
-                    this.UpdateHeader.Header = "Change";    
+                    this.UpdateHeader.Header = "Change";
                     this.ApplyBtn.Content = "Apply";
+                    this.AdminDeleteErrorMessage = "You cannot ban an admin!";
+                    this.UsernameTakenErrorMessage = "This username is already taken!";
                     break;
                 case "Hebrew":
                     this.DeleteHeader.Header = "אסור";
                     this.UpdateHeader.Header = "עדכן";
                     this.ApplyBtn.Content = "שמור";
+                    this.AdminDeleteErrorMessage = "לא ניתן לאסור מנהל";
+                    this.UsernameTakenErrorMessage = "שם המשתמש הזה כבר תפוס!";
                     break;
                 case "German":
                     this.DeleteHeader.Header = "verbannen";
                     this.UpdateHeader.Header = "ändern";
                     this.ApplyBtn.Content = "übertragen";
+                    this.AdminDeleteErrorMessage = "Sie können einen Administrator nicht verbannen!";
+                    this.UsernameTakenErrorMessage = "Dieser Benutzername ist bereits vergeben!";
                     break;
             }
         }
@@ -100,16 +108,30 @@ namespace TetrisApp
         {
             NavigationService nv = NavigationService.GetNavigationService(this);
             nv.Navigate(this.PreviousPage);
-        }        
+        }
 
         private async void ListViewDelete(object sender, RoutedEventArgs e)
         {
-            User x = ((AdminListItemControl)UsersListBox.SelectedItem).user;            
-
+            User u = ((AdminListItemControl)UsersListBox.SelectedItem).user;
             Apiservice api = new();
 
-            await api.DeleteUser(x.Id);
+            List<Player> players = await api.GetAllPlayers();
 
+            if (players.Find(x => x.Id == u.Id) != null)
+            {
+                await api.DeletePlayer(u.Id);
+                UsersListBox.ItemsSource = null;
+                UpdateTheListView();
+                return;
+            }
+            List<Admin> admins = await api.GetAllAdmins();
+
+            if (admins.Find(x => x.Id == u.Id) != null)
+            {
+                MessageBox.Show(this.AdminDeleteErrorMessage);
+                return;
+            }
+            await api.DeleteUser(u.Id);
             UsersListBox.ItemsSource = null;
             UpdateTheListView();
         }
@@ -128,14 +150,32 @@ namespace TetrisApp
             Apiservice api = new();
 
             User x = this.EditedUser;
-            
-            User NewUser = new User() { language = x.language, Password = this.PasswordBox.Text,
-                Id = x.Id, UserName = this.UsernameBox.Text };
 
-            await api.UpdateUser(NewUser);
-            UpdateTheListView();
+            User NewUser = new User()
+            {
+                language = x.language,
+                Password = this.PasswordBox.Text,
+                Id = x.Id,
+                UserName = this.UsernameBox.Text
+            };
 
-            this.UserEditPanel.Visibility = Visibility.Collapsed;
+            List<User> users = await api.GetAllUsers();
+            if (NewUser.UserName == x.UserName)
+            {
+                await api.UpdateUser(NewUser);
+                UpdateTheListView();
+                this.UserEditPanel.Visibility = Visibility.Collapsed;
+            }
+            else if (users.Find(y => y.UserName == NewUser.UserName) != null)
+            { 
+                MessageBox.Show(this.UsernameTakenErrorMessage);
+            }
+            else
+            {
+                await api.UpdateUser(NewUser);
+                UpdateTheListView();
+                this.UserEditPanel.Visibility = Visibility.Collapsed;
+            }            
         }
     }
 }

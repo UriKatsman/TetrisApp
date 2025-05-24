@@ -26,16 +26,7 @@ namespace TetrisApp
         public AdminListItemControl()
         {
             InitializeComponent();
-        }
-        public AdminListItemControl(AdminListItem ALI)
-        {
-            InitializeComponent();
-            this.user = ALI.user;
-            this.DataContext = ALI;
-            this.AdminCheckBox = this.IsAdminCheckBox;             
-            this.userUserName.Text = ALI.user.UserName;
-            this.userPassword.Text = ALI.user.Password;
-        }
+        }        
         public AdminListItemControl(User u)
         {
             InitializeComponent();
@@ -45,6 +36,7 @@ namespace TetrisApp
             this.AdminCheckBox = this.IsAdminCheckBox;
             this.userUserName.Text = ALI.user.UserName;
             this.userPassword.Text = ALI.user.Password;
+            this.userLanguage.Text = ALI.user.language.LanguageName;
         }
     }
 }

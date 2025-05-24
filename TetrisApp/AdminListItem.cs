@@ -18,10 +18,7 @@ namespace TetrisApp
         {// constructor for the class
             this.checkbox = new CheckBox();
             this.user = u;            
-        }
-        
-        
-
+        }                
         public CheckBox CheckBox { get; }        
     }
 }

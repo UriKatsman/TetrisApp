@@ -140,7 +140,7 @@
 
         <TextBlock Grid.Row="8" Grid.Column="2" x:Name="ErrorLoggingInText" Visibility="Hidden" 
                    HorizontalAlignment="Center" FontSize="22" Foreground="#FF6B6B"
-                   Text="שם משתמש או סיסמא שגויים" 
+                   Text="Either Username or Password is wrong." 
                    FontFamily="Arial" FontWeight="SemiBold"/>
 
         <!-- Buttons -->

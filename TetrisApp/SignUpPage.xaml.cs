@@ -48,12 +48,7 @@ namespace TetrisApp
         {
             NavigationService nv = NavigationService.GetNavigationService(this);
             nv.Navigate(this.PreviousPage);
-        }
-        private void GoToSettings(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
+        }        
         private async void SignUp(object sender, RoutedEventArgs e)
         {            
             Apiservice api = new();

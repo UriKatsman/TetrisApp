@@ -22,8 +22,8 @@
                        FontSize="20" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="3" Text="PlaceHolderPass" x:Name="userPassword"
                        FontSize="20" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="5" Text="PlaceHolderLang" x:Name="userLanguage
-                       " FontSize="20" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="5" Text="PlaceHolderLang" x:Name="userLanguage"
+                       FontSize="20" VerticalAlignment="Center"/>
             <CheckBox Grid.Column="6" x:Name="IsAdminCheckBox" HorizontalAlignment="Center"
                       VerticalAlignment="Center" IsEnabled="False"/>
         </Grid>

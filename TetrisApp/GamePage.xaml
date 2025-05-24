@@ -22,7 +22,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="#0A1A3F" BlurRadius="3" Opacity="0.7"/>
+                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="#0A1A3F" BlurRadius="3" 
+                                      Opacity="0.7"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -35,7 +36,8 @@
             <Setter Property="Opacity" Value="0.9"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="#0A1A3F" BlurRadius="3" Opacity="0.5"/>
+                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="#0A1A3F" BlurRadius="3" 
+                                      Opacity="0.5"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -86,28 +88,36 @@
         </Grid.ColumnDefinitions>
 
         <!-- Score Display -->
-        <Border Grid.Row="0" Grid.Column="3" Background="#2E5AA7" CornerRadius="10" Margin="5" Opacity="0.9">
-            <TextBlock x:Name="ScoreTXT" Text="Score: " Style="{StaticResource GameScoreText}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Border Grid.Row="0" Grid.Column="3" Background="#2E5AA7" CornerRadius="10" Margin="5" 
+                Opacity="0.9">
+            <TextBlock x:Name="ScoreTXT" Text="Score: " Style="{StaticResource GameScoreText}" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
         
 
         <!-- Main Game Board -->
-        <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" BorderThickness="3" BorderBrush="#A2C0F7" CornerRadius="10" Background="White" Margin="5">
+        <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" BorderThickness="3" BorderBrush="#A2C0F7" 
+                CornerRadius="10" Background="White" Margin="5">
             <Canvas x:Name="MainCanvas" Width="Auto" Height="Auto"/>
         </Border>
 
         <!-- Game Controls -->
         <!-- Rotate Left Button -->        
-        <Image Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" MouseDown="LRBtn" Source="/RotateLeft.png"/>
+        <Image Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" MouseDown="LRBtn"
+               Source="/RotateLeft.png"/>
         <!-- Rotate Right Button -->        
-        <Image Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" MouseDown="RRBtn" Source="/RotateRight.png"/>
+        <Image Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" MouseDown="RRBtn" 
+               Source="/RotateRight.png"/>
         <!-- Left Button -->        
-        <Image Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" MouseDown="LeftBtn" Source="/LeftArrow.png"/>
+        <Image Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" MouseDown="LeftBtn" 
+               Source="/LeftArrow.png"/>
         <!-- Right Button -->        
-        <Image Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" MouseDown="RightBtn" Source="/RightArrow.png"/>
+        <Image Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" MouseDown="RightBtn"
+               Source="/RightArrow.png"/>
 
         <!-- Down Button -->        
-        <Image Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" x:Name="DownButton" MouseDown="DownBtn" Source="/DownArrow.png"/>
+        <Image Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" x:Name="DownButton" 
+               MouseDown="DownBtn" Source="/DownArrow.png"/>
 
         <!-- Game Over Screen -->
         <Grid x:Name="GameOverScreen" Visibility="Collapsed" Grid.ColumnSpan="7" Grid.RowSpan="4">
@@ -127,11 +137,13 @@
                 <Border Grid.Column="1" Grid.Row="1" Background="#2E5AA7" BorderBrush="#A2C0F7" 
                         BorderThickness="3" CornerRadius="15">
                     <StackPanel Margin="20">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="GameOverTXT"
-                                   Text="Das spiel ist aus!" FontSize="35" Foreground="White" 
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   x:Name="GameOverTXT"
+                                   Text="Game Over!" FontSize="35" Foreground="White" 
                                    FontWeight="Bold" FontFamily="Arial" Margin="0,10,0,20">
                             <TextBlock.Effect>
-                                <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" BlurRadius="5" Opacity="0.7"/>
+                                <DropShadowEffect ShadowDepth="3" Direction="320" Color="#0A1A3F" 
+                                                  BlurRadius="5" Opacity="0.7"/>
                             </TextBlock.Effect>
                         </TextBlock>
 
@@ -140,8 +152,10 @@
                                    Foreground="#DCE8FF" Margin="0,0,0,30"/>
 
                         <Button x:Name="GoBackBtn" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Width="200" Style="{StaticResource GameOverButtonStyle}" Click="Button_Click">
-                            <TextBlock x:Name="GameOverBtnTxt" Text="Back to Main Page" FontWeight="Bold" FontSize="18"/>
+                                Width="200" Style="{StaticResource GameOverButtonStyle}"
+                                Click="Button_Click">
+                            <TextBlock x:Name="GameOverBtnTxt" Text="Back to Main Page" FontWeight="Bold" 
+                                       FontSize="18"/>
                         </Button>
                     </StackPanel>
                 </Border>
@@ -149,9 +163,13 @@
         </Grid>
 
         <!-- Decorative Elements -->
-        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.6"/>
-        <Rectangle Grid.Row="1" Grid.Column="5" Fill="#3563B3" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
-        <Rectangle Grid.Row="2" Grid.Column="6" Fill="#A2C0F7" Width="15" Height="60" VerticalAlignment="Bottom" Opacity="0.4"/>
-        <Rectangle Grid.Row="3" Grid.Column="0" Fill="#64A7F7" Width="40" Height="15" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
+        <Rectangle Grid.Row="1" Grid.Column="1" Fill="#64A7F7" Width="20" Height="20"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="1" Grid.Column="5" Fill="#3563B3" Width="30" Height="30"
+                   HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.6"/>
+        <Rectangle Grid.Row="2" Grid.Column="6" Fill="#A2C0F7" Width="15" Height="60" 
+                   VerticalAlignment="Bottom" Opacity="0.4"/>
+        <Rectangle Grid.Row="3" Grid.Column="0" Fill="#64A7F7" Width="40" Height="15" 
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5"/>
     </Grid>
 </Page>
