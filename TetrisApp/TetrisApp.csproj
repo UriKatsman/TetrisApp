@@ -31,7 +31,7 @@
       <HintPath>..\Model\bin\Debug\net8.0\Model.dll</HintPath>
     </Reference>
     <Reference Include="MyService">
-      <HintPath>..\MyService\bin\Debug\net8.0\MyService.dll</HintPath>
+      <HintPath>..\..\TetrisAppAPI2\MyService\bin\Debug\net8.0\MyService.dll</HintPath>
     </Reference>
   </ItemGroup>
 
