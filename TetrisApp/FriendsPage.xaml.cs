@@ -104,8 +104,7 @@ namespace TetrisApp
             ls.Height = 100;
             this.FriendsList.ItemsSource = new List<LoadingSign>() { ls };
             if (currentPlayer == null)
-                currentPlayer = (await api.GetAllPlayers()).Find(x=> x.Id ==
-                EntrancePage.SignedInUser.Id);
+                currentPlayer = (await api.GetAllPlayers()).Find(x=> x.Id == EntrancePage.SignedInUser.Id);
             List <Friendship> Friendships = await api.GetAllFriendships();
 
             double ListWidth = this.FriendsList.Width;
@@ -128,8 +127,8 @@ namespace TetrisApp
             }
             else
             {
-                List<Friendship> Friends = Friendships.FindAll(x => (x.player1.Id == currentPlayer.Id
-                || x.player2.Id == currentPlayer.Id) && x.isAccepted == false);
+                List<Friendship> Friends = Friendships.FindAll(x => x.player2.Id == currentPlayer.Id 
+                && x.isAccepted == false);
                 this.PendingRequestControls = new();
                 foreach (Friendship f in Friends)
                 {
@@ -182,11 +181,6 @@ namespace TetrisApp
             f.isAccepted = true;
             await api.UpdateFriendship(f);
         }
-
-
-
-
-
 
         public void Del_Friend(FriendUserControl sender)
         {
@@ -266,13 +260,8 @@ namespace TetrisApp
                 }
             }
 
-
-
-
-
             List<Player> players = new();
             players = await api.GetAllPlayers();
-
 
 
             Player person = players.Find(x=> x.UserName == username);
